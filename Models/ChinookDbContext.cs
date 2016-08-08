@@ -1,16 +1,16 @@
-﻿using System;
+﻿
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Configuration;
 
 namespace TestProject.Models
 {
     public partial class ChinookDbContext : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-            optionsBuilder.UseSqlite(@"Datasource=C:\data\knowledge_base\dotNet\Core\TestProject\Data\Chinook_Sqlite_AutoIncrementPKs.sqlite");
-        }
+
+        public ChinookDbContext(DbContextOptions<ChinookDbContext> options) : base(options)
+        { }
+
+        public IConfigurationRoot Configuration { get; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
