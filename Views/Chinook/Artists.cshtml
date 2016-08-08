@@ -1,0 +1,14 @@
+@model IEnumerable<TestProject.Models.Artist>
+@{
+    ViewData["Title"] = "Artists";
+}
+<h2>@ViewData["Title"].</h2>
+<h3>@ViewData["Message"]</h3>
+
+<p>Here are the coolest artists ever.</p>
+
+
+@foreach(var artist in Model)
+{
+   <div> @artist.Name </div>
+}
