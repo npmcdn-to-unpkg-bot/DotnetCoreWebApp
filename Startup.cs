@@ -43,6 +43,9 @@ namespace WebApplication
                 services.AddDbContext<ChinookDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("ChinookConnection")));
 
+                services.AddDbContext<ChinookSqlServerDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("ChinookConnectionLocalDb")));
+
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();

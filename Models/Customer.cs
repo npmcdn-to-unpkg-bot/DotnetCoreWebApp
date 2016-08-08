@@ -12,33 +12,33 @@ namespace TestProject.Models
             Invoice = new HashSet<Invoice>();
         }
 
-        public long CustomerId { get; set; }
+        public int CustomerId { get; set; }
         [Required]
-        [Column(TypeName = "NVARCHAR(40)")]
+        [MaxLength(40)]
         public string FirstName { get; set; }
         [Required]
-        [Column(TypeName = "NVARCHAR(20)")]
+        [MaxLength(20)]
         public string LastName { get; set; }
-        [Column(TypeName = "NVARCHAR(80)")]
+        [MaxLength(80)]
         public string Company { get; set; }
-        [Column(TypeName = "NVARCHAR(70)")]
+        [MaxLength(70)]
         public string Address { get; set; }
-        [Column(TypeName = "NVARCHAR(40)")]
+        [MaxLength(40)]
         public string City { get; set; }
-        [Column(TypeName = "NVARCHAR(40)")]
+        [MaxLength(40)]
         public string State { get; set; }
-        [Column(TypeName = "NVARCHAR(40)")]
+        [MaxLength(40)]
         public string Country { get; set; }
-        [Column(TypeName = "NVARCHAR(10)")]
+        [MaxLength(10)]
         public string PostalCode { get; set; }
-        [Column(TypeName = "NVARCHAR(24)")]
+        [MaxLength(24)]
         public string Phone { get; set; }
-        [Column(TypeName = "NVARCHAR(24)")]
+        [MaxLength(24)]
         public string Fax { get; set; }
         [Required]
-        [Column(TypeName = "NVARCHAR(60)")]
+        [MaxLength(60)]
         public string Email { get; set; }
-        public long? SupportRepId { get; set; }
+        public int? SupportRepId { get; set; }
 
         [InverseProperty("Customer")]
         public virtual ICollection<Invoice> Invoice { get; set; }

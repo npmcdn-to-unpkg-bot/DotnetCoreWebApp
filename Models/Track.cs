@@ -13,20 +13,19 @@ namespace TestProject.Models
             PlaylistTrack = new HashSet<PlaylistTrack>();
         }
 
-        public long TrackId { get; set; }
+        public int TrackId { get; set; }
         [Required]
-        [Column(TypeName = "NVARCHAR(200)")]
+        [MaxLength(200)]
         public string Name { get; set; }
-        public long? AlbumId { get; set; }
-        public long MediaTypeId { get; set; }
-        public long? GenreId { get; set; }
-        [Column(TypeName = "NVARCHAR(220)")]
+        public int? AlbumId { get; set; }
+        public int MediaTypeId { get; set; }
+        public int? GenreId { get; set; }
+        [MaxLength(220)]
         public string Composer { get; set; }
-        public long Milliseconds { get; set; }
-        public long? Bytes { get; set; }
-        [Required]
-        [Column(TypeName = "NUMERIC(10,2)")]
-        public string UnitPrice { get; set; }
+        public int Milliseconds { get; set; }
+        public int? Bytes { get; set; }
+        [Column(TypeName = "numeric")]
+        public decimal UnitPrice { get; set; }
 
         [InverseProperty("Track")]
         public virtual ICollection<InvoiceLine> InvoiceLine { get; set; }

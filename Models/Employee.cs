@@ -12,35 +12,35 @@ namespace TestProject.Models
             Customer = new HashSet<Customer>();
         }
 
-        public long EmployeeId { get; set; }
+        public int EmployeeId { get; set; }
         [Required]
-        [Column(TypeName = "NVARCHAR(20)")]
+        [MaxLength(20)]
         public string LastName { get; set; }
         [Required]
-        [Column(TypeName = "NVARCHAR(20)")]
+        [MaxLength(20)]
         public string FirstName { get; set; }
-        [Column(TypeName = "NVARCHAR(30)")]
+        [MaxLength(30)]
         public string Title { get; set; }
-        public long? ReportsTo { get; set; }
-        [Column(TypeName = "DATETIME")]
-        public string BirthDate { get; set; }
-        [Column(TypeName = "DATETIME")]
-        public string HireDate { get; set; }
-        [Column(TypeName = "NVARCHAR(70)")]
+        public int? ReportsTo { get; set; }
+        [Column(TypeName = "datetime")]
+        public DateTime? BirthDate { get; set; }
+        [Column(TypeName = "datetime")]
+        public DateTime? HireDate { get; set; }
+        [MaxLength(70)]
         public string Address { get; set; }
-        [Column(TypeName = "NVARCHAR(40)")]
+        [MaxLength(40)]
         public string City { get; set; }
-        [Column(TypeName = "NVARCHAR(40)")]
+        [MaxLength(40)]
         public string State { get; set; }
-        [Column(TypeName = "NVARCHAR(40)")]
+        [MaxLength(40)]
         public string Country { get; set; }
-        [Column(TypeName = "NVARCHAR(10)")]
+        [MaxLength(10)]
         public string PostalCode { get; set; }
-        [Column(TypeName = "NVARCHAR(24)")]
+        [MaxLength(24)]
         public string Phone { get; set; }
-        [Column(TypeName = "NVARCHAR(24)")]
+        [MaxLength(24)]
         public string Fax { get; set; }
-        [Column(TypeName = "NVARCHAR(60)")]
+        [MaxLength(60)]
         public string Email { get; set; }
 
         [InverseProperty("SupportRep")]

@@ -7,8 +7,8 @@ namespace TestProject.Models
 {
     public partial class PlaylistTrack
     {
-        public long PlaylistId { get; set; }
-        public long TrackId { get; set; }
+        public int PlaylistId { get; set; }
+        public int TrackId { get; set; }
 
         [ForeignKey("PlaylistId")]
         [InverseProperty("PlaylistTrack")]

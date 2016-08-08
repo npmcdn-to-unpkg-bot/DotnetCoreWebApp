@@ -8,9 +8,10 @@ namespace WebApplication.Controllers
 
     public class ChinookController : Controller
     {
-        private ChinookDbContext _chinookContext;
+        //private ChinookDbContext _chinookContext;
+        private ChinookSqlServerDbContext _chinookContext;
 
-        public ChinookController(ChinookDbContext chinookContext)
+        public ChinookController(ChinookSqlServerDbContext chinookContext)
         {
             _chinookContext = chinookContext;
         }

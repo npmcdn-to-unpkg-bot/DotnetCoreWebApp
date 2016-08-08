@@ -12,8 +12,8 @@ namespace TestProject.Models
             Track = new HashSet<Track>();
         }
 
-        public long GenreId { get; set; }
-        [Column(TypeName = "NVARCHAR(120)")]
+        public int GenreId { get; set; }
+        [MaxLength(120)]
         public string Name { get; set; }
 
         [InverseProperty("Genre")]

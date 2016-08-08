@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -11,11 +12,11 @@ namespace TestProject.Models
             Track = new HashSet<Track>();
         }
 
-        public long AlbumId { get; set; }
+        public int AlbumId { get; set; }
         [Required]
-        [Column(TypeName = "NVARCHAR(160)")]
+        [MaxLength(160)]
         public string Title { get; set; }
-        public long ArtistId { get; set; }
+        public int ArtistId { get; set; }
 
         [InverseProperty("Album")]
         public virtual ICollection<Track> Track { get; set; }

@@ -7,13 +7,12 @@ namespace TestProject.Models
 {
     public partial class InvoiceLine
     {
-        public long InvoiceLineId { get; set; }
-        public long InvoiceId { get; set; }
-        public long TrackId { get; set; }
-        [Required]
-        [Column(TypeName = "NUMERIC(10,2)")]
-        public string UnitPrice { get; set; }
-        public long Quantity { get; set; }
+        public int InvoiceLineId { get; set; }
+        public int InvoiceId { get; set; }
+        public int TrackId { get; set; }
+        [Column(TypeName = "numeric")]
+        public decimal UnitPrice { get; set; }
+        public int Quantity { get; set; }
 
         [ForeignKey("InvoiceId")]
         [InverseProperty("InvoiceLine")]

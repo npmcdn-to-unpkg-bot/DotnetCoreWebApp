@@ -12,8 +12,8 @@ namespace TestProject.Models
             PlaylistTrack = new HashSet<PlaylistTrack>();
         }
 
-        public long PlaylistId { get; set; }
-        [Column(TypeName = "NVARCHAR(120)")]
+        public int PlaylistId { get; set; }
+        [MaxLength(120)]
         public string Name { get; set; }
 
         [InverseProperty("Playlist")]
