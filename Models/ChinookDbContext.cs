@@ -1,6 +1,5 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace TestProject.Models
 {
@@ -9,8 +8,6 @@ namespace TestProject.Models
 
         public ChinookDbContext(DbContextOptions<ChinookDbContext> options) : base(options)
         { }
-
-        public IConfigurationRoot Configuration { get; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
