@@ -1,13 +1,27 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace TestProject.Models
 {
     public partial class ChinookSqlServer2008DbContext : DbContext
     {
-         public ChinookSqlServer2008DbContext(DbContextOptions<ChinookSqlServer2008DbContext> options) : base(options)
+
+        public ChinookSqlServer2008DbContext()
+        { }
+        public ChinookSqlServer2008DbContext(DbContextOptions<ChinookSqlServer2008DbContext> options) : base(options)
         { }
 
+
+        protected override void OnConfiguring(DbContextOptionsBuilder builder)
+        {
+            var connStringBuilder = new SqlConnectionStringBuilder();
+    
+            connStringBuilder.DataSource = "Server=10.2.10.54;Initial Catalog=Chinook;User Id=1054dev;Password=1054dev";
+
+
+            builder.UseSqlServer(connStringBuilder.ConnectionString);
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -32,6 +46,13 @@ namespace TestProject.Models
             modelBuilder.Entity<Artist>(entity =>
             {
                 entity.Property(e => e.ArtistId).ValueGeneratedNever();
+                entity.Ignore(a => a.Id);
+                entity.Ignore(a => a.Guid);
+                entity.Ignore(a => a.DateCreated);
+                entity.Ignore(a => a.DateModified);
+                entity.Ignore(a => a.ObjectState);
+                entity.Ignore(a => a.Deleted);
+                entity.Ignore(a => a.RowVersion);
 
                 entity.Property(e => e.Name).HasMaxLength(120);
             });
