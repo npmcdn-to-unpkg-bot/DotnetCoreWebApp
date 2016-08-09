@@ -40,11 +40,11 @@ namespace WebApplication
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
-                services.AddDbContext<ChinookDbContext>(options =>
-                options.UseSqlite(Configuration.GetConnectionString("ChinookConnection")));
+            services.AddDbContext<ChinookDbContext>(options =>
+            options.UseSqlite(Configuration.GetConnectionString("ChinookConnection")));
 
-                services.AddDbContext<ChinookSqlServerDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("ChinookConnectionLocalDb")));
+            services.AddDbContext<ChinookSqlServer2008DbContext>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("ChinookConnectionSqlServer2008"), b => b.UseRowNumberForPaging()));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()

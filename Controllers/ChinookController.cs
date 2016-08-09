@@ -8,10 +8,9 @@ namespace WebApplication.Controllers
 
     public class ChinookController : Controller
     {
-        //private ChinookDbContext _chinookContext;
-        private ChinookSqlServerDbContext _chinookContext;
+        private ChinookSqlServer2008DbContext _chinookContext;
 
-        public ChinookController(ChinookSqlServerDbContext chinookContext)
+        public ChinookController(ChinookSqlServer2008DbContext chinookContext)
         {
             _chinookContext = chinookContext;
         }
@@ -28,8 +27,8 @@ namespace WebApplication.Controllers
             int totalRecords = _chinookContext.Artist.Count();
             int totalNumberOfPages = (int)Math.Ceiling((double)totalRecords / sizeOfPage);
 
-            int offset = (int)((pageNumber - 1) * pageSize + 1);
-            int offsetUpperBound = offset + (pageSize.Value - 1);
+            int offset = (int)((pageIndex - 1) * sizeOfPage + 1);
+            int offsetUpperBound = offset + (sizeOfPage - 1);
             if (offsetUpperBound > totalRecords) offsetUpperBound = totalRecords;
 
             ViewBag.totalRecords = totalRecords;

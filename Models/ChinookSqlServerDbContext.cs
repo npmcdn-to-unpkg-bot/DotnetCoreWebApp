@@ -5,7 +5,7 @@ namespace TestProject.Models
     public partial class ChinookSqlServerDbContext : DbContext
     {
 
-         public ChinookSqlServerDbContext(DbContextOptions<ChinookSqlServerDbContext> options) : base(options)
+        public ChinookSqlServerDbContext(DbContextOptions<ChinookSqlServerDbContext> options) : base(options)
         { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
