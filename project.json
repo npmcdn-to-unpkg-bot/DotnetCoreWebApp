@@ -6,6 +6,7 @@
       "version": "1.0.0",
       "type": "platform"
     },
+    "LinqKit": "1.1.7.1",
     "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
     "Microsoft.AspNetCore.Diagnostics": "1.0.0",
     "Microsoft.EntityFrameworkCore.SqlServer": "1.0.0",
