@@ -57,6 +57,7 @@ namespace WebApplication
             services.AddTransient<ISmsSender, AuthMessageSender>();
 
             services.AddScoped<IArtistsRepository, ArtistsRepository>();
+            services.AddScoped<ChinookSqlServer2008DbContext, ChinookSqlServer2008DbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

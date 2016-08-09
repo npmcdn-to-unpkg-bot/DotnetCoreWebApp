@@ -21,7 +21,7 @@ namespace WebApplication.Controllers
             _artistsRepository = artistsRepository;
         }
 
-        public IActionResult Performers(int? pageNumber, int? pageSize, string keywords)
+        public IActionResult Performers(int? pageNumber, int? pageSize, params string[] keywords)
         {
             if (!pageNumber.HasValue) pageNumber = 1;
             if (!pageSize.HasValue) pageSize = 10;

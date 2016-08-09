@@ -1,5 +1,4 @@
-﻿using System.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace TestProject.Models
@@ -11,17 +10,6 @@ namespace TestProject.Models
         { }
         public ChinookSqlServer2008DbContext(DbContextOptions<ChinookSqlServer2008DbContext> options) : base(options)
         { }
-
-
-        protected override void OnConfiguring(DbContextOptionsBuilder builder)
-        {
-            var connStringBuilder = new SqlConnectionStringBuilder();
-    
-            connStringBuilder.DataSource = "Server=10.2.10.54;Initial Catalog=Chinook;User Id=1054dev;Password=1054dev";
-
-
-            builder.UseSqlServer(connStringBuilder.ConnectionString);
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

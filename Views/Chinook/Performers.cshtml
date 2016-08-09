@@ -1,6 +1,6 @@
 @model IEnumerable<TestProject.Models.Artist>
 @{
-    ViewData["Title"] = "Artists";
+    ViewData["Title"] = "Performers";
 }
 <h2>@ViewData["Title"].</h2>
 <h3>@ViewData["Message"]</h3>
@@ -30,6 +30,6 @@
 <div>
     Go to page: 
     @for(int i = 1; i < ViewBag.totalNumberOfPages; i++) {
-        <a href="/Chinook/Artists?pageNumber=@i&pageSize=@ViewBag.sizeOfPage">@i</a>
+        <a href="/Chinook/Performers?pageNumber=@i&pageSize=@ViewBag.sizeOfPage">@i</a>
     }
 </div>

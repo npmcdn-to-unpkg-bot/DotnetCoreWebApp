@@ -9,8 +9,15 @@ namespace WebApplication.Data
 {
     public class ArtistsRepository : EfDataRepositoryBase<Artist, ChinookSqlServer2008DbContext>, IArtistsRepository
     {
+
+        private ChinookSqlServer2008DbContext _context;
         public ArtistsRepository()
         { }
+
+        public ArtistsRepository(ChinookSqlServer2008DbContext context)
+        {
+            _context = context;
+        }
 
         override protected IEnumerable<Artist> FindAllEntitiesByCriteria(
             ChinookSqlServer2008DbContext entityContext,
@@ -31,37 +38,36 @@ namespace WebApplication.Data
             int offset = (int)((pageIndex - 1) * sizeOfPage + 1);
             int offsetUpperBound = offset + (sizeOfPage - 1);
 
-            using (var ctx = new ChinookSqlServer2008DbContext())
+
+            var predicate = PredicateBuilder.True<Artist>();
+            bool isFilteredQuery = keywords.Any();
+
+            if (isFilteredQuery)
             {
-                var predicate = PredicateBuilder.True<Artist>();
-                bool isFilteredQuery = keywords.Any();
-
-                if (isFilteredQuery)
+                predicate = PredicateBuilder.False<Artist>();
+                foreach (var keyword in keywords)
                 {
-                    predicate = PredicateBuilder.False<Artist>();
-                    foreach (var keyword in keywords)
-                    {
-                        var temp = keyword;
-                        if (temp == null) continue;
-                        predicate = predicate.Or(p => p.Name.ToLower().Contains(temp.ToLower()));
-                    }
+                    var temp = keyword;
+                    if (temp == null) continue;
+                    predicate = predicate.Or(p => p.Name.ToLower().Contains(temp.ToLower()));
                 }
-
-                totalRecords =
-                   ctx.Artist.AsExpandable().Where(predicate).OrderBy(am => am.Name).Count();
-                offsetUpperBound = (totalRecords > offsetUpperBound ? offsetUpperBound : totalRecords);
-
-                int totalNumberOfPages = (int)Math.Ceiling((double)totalRecords / sizeOfPage);
-                var artists =
-                    ctx.Artist.AsExpandable()
-                        .Where(predicate)
-                        .OrderBy(am => am.Name)
-                        .Skip(skipValue)
-                        .Take(sizeOfPage)
-                        .ToList();
-                return artists;
-
             }
+
+            totalRecords =
+               _context.Artist.AsExpandable().Where(predicate).OrderBy(am => am.Name).Count();
+            offsetUpperBound = (totalRecords > offsetUpperBound ? offsetUpperBound : totalRecords);
+
+            int totalNumberOfPages = (int)Math.Ceiling((double)totalRecords / sizeOfPage);
+            var artists =
+                _context.Artist.AsExpandable()
+                    .Where(predicate)
+                    .OrderBy(am => am.Name)
+                    .Skip(skipValue)
+                    .Take(sizeOfPage)
+                    .ToList();
+            return artists;
+
+
         }
 
 
