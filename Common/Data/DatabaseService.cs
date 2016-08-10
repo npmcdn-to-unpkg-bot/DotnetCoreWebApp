@@ -8,9 +8,6 @@ namespace Core.Common.Data
     public sealed partial class DatabaseService<T> : IDatabaseService<T>
      where T : BaseObjectWithState, IObjectWithState, new()
     {
-
-
-
         public IEnumerable<T> FindAllByCriteria(
                     IDataRepository<T> repository,
                     int? pageNumber,
