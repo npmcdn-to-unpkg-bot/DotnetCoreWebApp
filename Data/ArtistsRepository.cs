@@ -37,9 +37,6 @@ namespace WebApplication.Data
             if (sizeOfPage < 1) sizeOfPage = 5;
             int skipValue = (sizeOfPage * (pageIndex - 1));
 
-            int offset = (int)((pageIndex - 1) * sizeOfPage + 1);
-            int offsetUpperBound = offset + (sizeOfPage - 1);
-
             Expression<System.Func<Artist, bool>> filterExpression = a => true;
             var predicate = PredicateBuilder.New(filterExpression);
             bool isFilteredQuery = keywords.Any();
@@ -57,9 +54,6 @@ namespace WebApplication.Data
 
             totalRecords =
                _context.Artist.AsExpandable().Where(predicate).OrderBy(am => am.Name).Count();
-            offsetUpperBound = (totalRecords > offsetUpperBound ? offsetUpperBound : totalRecords);
-
-            int totalNumberOfPages = (int)Math.Ceiling((double)totalRecords / sizeOfPage);
 
             var artists =
                 _context.Artist.AsExpandable()
