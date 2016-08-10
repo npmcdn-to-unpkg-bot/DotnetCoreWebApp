@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Dynamic.Core;
 using Common.Data.EntityFramework;
 using LinqKit;
 using TestProject.Models;
@@ -58,18 +59,16 @@ namespace WebApplication.Data
             offsetUpperBound = (totalRecords > offsetUpperBound ? offsetUpperBound : totalRecords);
 
             int totalNumberOfPages = (int)Math.Ceiling((double)totalRecords / sizeOfPage);
+           
             var artists =
                 _context.Artist.AsExpandable()
                     .Where(predicate)
-                    .OrderBy(am => am.Name)
+                    .OrderBy("Name DESC")
                     .Skip(skipValue)
                     .Take(sizeOfPage)
                     .ToList();
             return artists;
 
-
         }
-
-
     }
 }

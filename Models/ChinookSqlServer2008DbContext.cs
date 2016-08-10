@@ -8,7 +8,8 @@ namespace TestProject.Models
 
         public ChinookSqlServer2008DbContext()
         { }
-        public ChinookSqlServer2008DbContext(DbContextOptions<ChinookSqlServer2008DbContext> options) : base(options)
+        public ChinookSqlServer2008DbContext(DbContextOptions<ChinookSqlServer2008DbContext> options) 
+        : base(options)
         { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
