@@ -2,8 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using TestProject.Models;
 using WebApplication.Data;
 using Core.Common.Data;
-using Core.Common.Extensions;
-using System;
 
 namespace WebApplication.Controllers
 {
@@ -13,10 +11,9 @@ namespace WebApplication.Controllers
         private readonly IArtistsRepository _artistsRepository;
         private readonly IDatabaseService<Artist> _artistsDbService;
 
-        public ChinookController(
-            ChinookSqlServer2008DbContext chinookContext,
+        public ChinookController(            
             IArtistsRepository artistsRepository,
-            IDatabaseService<Artist> artistsDbService) : base(chinookContext)
+            IDatabaseService<Artist> artistsDbService) 
         {
             _artistsRepository = artistsRepository;
             _artistsDbService = artistsDbService;

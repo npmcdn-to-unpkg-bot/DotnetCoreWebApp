@@ -58,7 +58,6 @@ namespace WebApplication
             services.AddTransient<ISmsSender, AuthMessageSender>();
 
             services.AddScoped<IArtistsRepository, ArtistsRepository>();
-            services.AddScoped<ChinookSqlServer2008DbContext, ChinookSqlServer2008DbContext>();
             services.AddScoped<IDatabaseService<Artist>, DatabaseService<Artist>>();
         }
 

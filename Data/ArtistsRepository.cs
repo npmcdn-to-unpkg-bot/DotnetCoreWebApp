@@ -9,7 +9,8 @@ using TestProject.Models;
 
 namespace WebApplication.Data
 {
-    public class ArtistsRepository : EfDataRepositoryBase<Artist, ChinookSqlServer2008DbContext>, IArtistsRepository
+    public class ArtistsRepository : EfDataRepositoryBase<Artist, ChinookSqlServer2008DbContext>,
+     IArtistsRepository
     {
 
         private ChinookSqlServer2008DbContext _context;
@@ -21,7 +22,7 @@ namespace WebApplication.Data
             _context = context;
         }
 
-        override protected IEnumerable<Artist> FindAllEntitiesByCriteria(
+        protected override IEnumerable<Artist> FindAllEntitiesByCriteria(
             ChinookSqlServer2008DbContext entityContext,
             int? pageNumber,
             int? pageSize,
