@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using TestProject.Models;
 using System;
 using WebApplication.Data;
+using  Core.Common.Data;
 
 namespace WebApplication.Controllers
 {
@@ -10,12 +11,14 @@ namespace WebApplication.Controllers
     {
         private ChinookSqlServer2008DbContext _chinookContext;
         private readonly IArtistsRepository _artistsRepository;
+        private readonly IDatabaseService<Artist> _artistsDbService;
 
         public ChinookController(ChinookSqlServer2008DbContext chinookContext,
-        IArtistsRepository artistsRepository)
+        IArtistsRepository artistsRepository,IDatabaseService<Artist> artistsDbService)
         {
             _chinookContext = chinookContext;
             _artistsRepository = artistsRepository;
+            _artistsDbService = artistsDbService;
         }
 
         public IActionResult Performers(
@@ -24,22 +27,16 @@ namespace WebApplication.Controllers
         {
             int pageIndex =  pageNumber ?? 1;
             int sizeOfPage = pageSize ?? 10;
-
             string sortCol = sortColumn ?? "Name";
             string sortDir = sortDirection ?? "ASC";
 
-            int totalNumberOfRecords;
-            int totalNumberOfPages;
-            int offset;
-            int offsetUpperBound;
-            var artists = _artistsRepository.FindAllByCriteria(
-                 pageIndex, sizeOfPage, out totalNumberOfRecords, sortCol, sortDir, keywords);
-
-            totalNumberOfPages = (int)Math.Ceiling((double)totalNumberOfRecords /sizeOfPage);
-
-            offset = (int)((pageIndex - 1) * sizeOfPage + 1);
-            offsetUpperBound = offset + (sizeOfPage - 1);
-            if (offsetUpperBound > totalNumberOfRecords) offsetUpperBound = totalNumberOfRecords;
+            int totalNumberOfRecords = 0;
+            int totalNumberOfPages = 0;
+            int offset = 0;
+            int offsetUpperBound = 0;
+            var artists = _artistsDbService.FindAllByCriteria(_artistsRepository,
+                 pageIndex, sizeOfPage, out totalNumberOfRecords, sortCol, sortDir, out offset, 
+                 out offsetUpperBound, out totalNumberOfPages, keywords);
 
             ViewBag.offset = offset;
             ViewBag.pageIndex = pageIndex;

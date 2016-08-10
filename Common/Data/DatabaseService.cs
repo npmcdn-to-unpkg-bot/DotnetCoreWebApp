@@ -5,29 +5,32 @@ using Core.Common.Utilities;
 
 namespace Core.Common.Data
 {
-    public abstract class BaseDatabaseService<T> : IDatabaseService<T>
+    public sealed partial class DatabaseService<T> : IDatabaseService<T>
      where T : BaseObjectWithState, IObjectWithState, new()
     {
-        private IDataRepository<T> _repository;
+
+
 
         public IEnumerable<T> FindAllByCriteria(
+                    IDataRepository<T> repository,
                     int? pageNumber,
                     int? pageSize,
                     out int totalRecords,
                     string sortColumn,
                     string sortDirection,
+                     out int offset,
+                    out int offsetUpperBound,
+                    out int totalNumberOfPages,
                     params string[] keywords)
         {
-            if(_repository == null) throw new Exception(nameof(_repository));
+            if (repository == null) throw new Exception(nameof(repository));
             if (sortColumn.IsNullOrWhiteSpace()) Error.ArgumentNull(nameof(sortColumn));
             if (sortDirection.IsNullOrWhiteSpace()) Error.ArgumentNull(nameof(sortDirection));
 
             int pageIndex = pageNumber ?? 1;
             int sizeOfPage = pageSize ?? 10;
-            int totalNumberOfPages;
-            int offset;
-            int offsetUpperBound;
-            var items = _repository.FindAllByCriteria(
+
+            var items = repository.FindAllByCriteria(
                  pageIndex, sizeOfPage, out totalRecords, sortColumn, sortDirection, keywords);
             totalNumberOfPages = (int)Math.Ceiling((double)totalRecords / sizeOfPage);
 
