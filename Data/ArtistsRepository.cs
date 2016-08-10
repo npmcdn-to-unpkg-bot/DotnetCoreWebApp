@@ -40,8 +40,6 @@ namespace WebApplication.Data
             int offset = (int)((pageIndex - 1) * sizeOfPage + 1);
             int offsetUpperBound = offset + (sizeOfPage - 1);
 
-
-            // var predicate = PredicateBuilder.True<Artist>();
             Expression<System.Func<Artist, bool>> filterExpression = a => true;
             var predicate = PredicateBuilder.New(filterExpression);
             bool isFilteredQuery = keywords.Any();
