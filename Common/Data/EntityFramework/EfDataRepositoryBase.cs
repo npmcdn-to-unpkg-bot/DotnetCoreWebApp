@@ -94,15 +94,12 @@ namespace Common.Data.EntityFramework
             {
                 return FindAllEntities(entityContext).ToList();
             }
-        }       
+        }
 
         public IEnumerable<T> FindAllByCriteria(int? pageNumber, int? pageSize, out int totalRecords, string sortColumn,
             string sortDirection, params string[] keywords)
         {
-            using (var entityContext = new TContext())
-            {
-                return FindAllEntitiesByCriteria(entityContext, pageNumber, pageSize, out totalRecords, sortColumn, sortDirection, keywords);
-            }
+            return FindAllEntitiesByCriteria(pageNumber, pageSize, out totalRecords, sortColumn, sortDirection, keywords);
         }
 
         /// <summary>
@@ -217,7 +214,6 @@ namespace Common.Data.EntityFramework
         }
 
         protected virtual IEnumerable<T> FindAllEntitiesByCriteria(
-            TContext entityContext,
             int? pageNumber,
             int? pageSize,
             out int totalRecords,

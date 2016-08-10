@@ -22,8 +22,7 @@ namespace WebApplication.Data
             _context = context;
         }
 
-        protected override IEnumerable<Artist> FindAllEntitiesByCriteria(
-            ChinookSqlServer2008DbContext entityContext,
+        protected override IEnumerable<Artist> FindAllEntitiesByCriteria(            
             int? pageNumber,
             int? pageSize,
             out int totalRecords,
