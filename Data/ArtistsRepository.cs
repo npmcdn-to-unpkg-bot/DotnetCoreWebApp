@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
+using System.Linq.Expressions;
 using Common.Data.EntityFramework;
 using LinqKit;
 using TestProject.Models;
@@ -40,12 +41,14 @@ namespace WebApplication.Data
             int offsetUpperBound = offset + (sizeOfPage - 1);
 
 
-            var predicate = PredicateBuilder.True<Artist>();
+            // var predicate = PredicateBuilder.True<Artist>();
+            Expression<System.Func<Artist, bool>> filterExpression = a => true;
+            var predicate = PredicateBuilder.New(filterExpression);
             bool isFilteredQuery = keywords.Any();
 
             if (isFilteredQuery)
             {
-                predicate = PredicateBuilder.False<Artist>();
+                predicate = filterExpression = a => false;
                 foreach (var keyword in keywords)
                 {
                     var temp = keyword;
@@ -59,11 +62,11 @@ namespace WebApplication.Data
             offsetUpperBound = (totalRecords > offsetUpperBound ? offsetUpperBound : totalRecords);
 
             int totalNumberOfPages = (int)Math.Ceiling((double)totalRecords / sizeOfPage);
-           
+
             var artists =
                 _context.Artist.AsExpandable()
                     .Where(predicate)
-                    .OrderBy("Name DESC")
+                    .OrderBy($"{sortColumn} {sortDirection}")
                     .Skip(skipValue)
                     .Take(sizeOfPage)
                     .ToList();
