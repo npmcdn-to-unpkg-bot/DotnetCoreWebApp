@@ -1,3 +1,6 @@
+using System;
+using System.Text;
+using Core.Common.Utilities;
 using Microsoft.AspNetCore.Mvc;
 using TestProject.Models;
 
@@ -10,5 +13,22 @@ namespace WebApplication.Controllers
         {
              _chinookContext = chinookContext;
         }
+
+
+        ///Accepts a delegate of type IActionResult and invokes it. A IAction result is then returned.
+        ///Sibbling Controller classes which return a IActionResult should wrap all their body code in this method so that all controller exceptions can be handled in one central place: here. There should not                       
+        protected IActionResult ExecuteExceptionHandledActionResult(Func<IActionResult> codeToExecute)
+        {
+            IActionResult result = null;
+            try
+            {
+                result = codeToExecute.Invoke();
+            }catch(Exception ex)
+            {                
+                string error = Error.BuildExceptionDetail(ex, new StringBuilder()).ToString();
+                //Log it
+            }
+            return View();
+        } 
     }
 }

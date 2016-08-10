@@ -30,7 +30,6 @@ namespace WebApplication.Data
             string sortDirection,
             params string[] keywords)
         {
-
             int pageIndex = pageNumber ?? 1;
             int sizeOfPage = pageSize ?? 10;
             if (pageIndex < 1) pageIndex = 1;

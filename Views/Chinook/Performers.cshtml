@@ -7,15 +7,24 @@
 
 
 
-<table class="table">
+
+@if(Model == null)
+{
+    <div>Sorry there was a probleam loading data from the database.</div>
+} else
+{
+    <table class="table">
     <tr>
+        <th>Artist Id</th>
         <th>Name</th>
         <th>Albums count</th>
     </tr>
-
     @foreach (var artist in Model)
     {
         <tr>
+            <td>
+               @artist.ArtistId
+            </td>
             <td>
                @artist.Name
             </td>
@@ -33,3 +42,8 @@
         <a href="/Chinook/Performers?pageNumber=@i&pageSize=@ViewBag.sizeOfPage">@i</a>
     }
 </div>
+}
+
+
+
+    
