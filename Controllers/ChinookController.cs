@@ -18,27 +18,32 @@ namespace WebApplication.Controllers
             _artistsRepository = artistsRepository;
         }
 
-        public IActionResult Performers(int? pageNumber, int? pageSize, params string[] keywords)
+        public IActionResult Performers(
+            int? pageNumber, int? pageSize, string sortColumn, 
+            string sortDirection, params string[] keywords)
         {
-            if (!pageNumber.HasValue) pageNumber = 1;
-            if (!pageSize.HasValue) pageSize = 10;
+            int pageIndex =  pageNumber ?? 1;
+            int sizeOfPage = pageSize ?? 10;
+
+            string sortCol = sortColumn ?? "Name";
+            string sortDir = sortDirection ?? "ASC";
 
             int totalNumberOfRecords;
             int totalNumberOfPages;
             int offset;
             int offsetUpperBound;
             var artists = _artistsRepository.FindAllByCriteria(
-                 pageNumber, pageSize, out totalNumberOfRecords, "Name", "DESC", keywords);
+                 pageIndex, sizeOfPage, out totalNumberOfRecords, sortCol, sortDir, keywords);
 
-            totalNumberOfPages = (int)Math.Ceiling((double)totalNumberOfRecords / pageSize.Value);
+            totalNumberOfPages = (int)Math.Ceiling((double)totalNumberOfRecords /sizeOfPage);
 
-            offset = (int)((pageNumber - 1) * pageSize + 1);
-            offsetUpperBound = offset + (pageSize.Value - 1);
+            offset = (int)((pageIndex - 1) * sizeOfPage + 1);
+            offsetUpperBound = offset + (sizeOfPage - 1);
             if (offsetUpperBound > totalNumberOfRecords) offsetUpperBound = totalNumberOfRecords;
 
             ViewBag.offset = offset;
-            ViewBag.pageIndex = pageNumber ?? 1;
-            ViewBag.sizeOfPage = pageSize ?? 10;
+            ViewBag.pageIndex = pageIndex;
+            ViewBag.sizeOfPage = sizeOfPage;
             ViewBag.offsetUpperBound = offsetUpperBound;
             ViewBag.totalRecords = totalNumberOfRecords;
             ViewBag.totalNumberOfPages = totalNumberOfPages;
