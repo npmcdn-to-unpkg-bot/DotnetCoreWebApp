@@ -1,0 +1,9 @@
+<div>Showing @ViewBag.offset to @ViewBag.offsetUpperBound records of @ViewBag.totalRecords. This is page @ViewBag.pageIndex of @ViewBag.totalNumberOfPages.</div>
+<div>
+    <ul class="pagination pagination-sm">
+    @for(int i = 1; i < ViewBag.totalNumberOfPages; i++) 
+    {
+        <li><a href="@ViewBag.url?pageNumber=@i&pageSize=@ViewBag.sizeOfPage">@i</a></li>
+    }  
+    </ul>
+</div>

@@ -35,13 +35,17 @@
     }
 
 </table>
-<div>Showing @ViewBag.offset to @ViewBag.offsetUpperBound records of @ViewBag.totalRecords. This is page @ViewBag.pageIndex of @ViewBag.totalNumberOfPages.</div>
-<div>
-    Go to page: 
-    @for(int i = 1; i < ViewBag.totalNumberOfPages; i++) {
-        <a href="/Chinook/Performers?pageNumber=@i&pageSize=@ViewBag.sizeOfPage">@i</a>
-    }
-</div>
+
+
+ @await Component.InvokeAsync("ListPager", 
+    new {url = "/Chinook/Performers", 
+    totalNumberOfItems = @ViewBag.totalRecords, 
+    pageNumber = @ViewBag.pageIndex,
+    pageSize = @ViewBag.sizeOfPage, 
+    totalNumberOfPages = @ViewBag.totalNumberOfPages, 
+    offset =  @ViewBag.offset,
+    offsetUpperBound = @ViewBag.offsetUpperBound   
+  })
 }
 
 

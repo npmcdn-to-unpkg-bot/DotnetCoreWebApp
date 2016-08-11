@@ -1,7 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using TestProject.Models;
-using WebApplication.Data;
-using Core.Common.Data;
 using WebApplication.Data.Services;
 using WebApplication.Data.Repositories;
 
