@@ -19,8 +19,7 @@ namespace WebApplication.ViewComponents
             ViewBag.pageSize = pageSize;
             ViewBag.offsetUpperBound = offsetUpperBound;
             ViewBag.totalRecords = totalNumberOfItems;
-            ViewBag.url = url;
-
+            
             return await Task.FromResult(View());
         }
     }
