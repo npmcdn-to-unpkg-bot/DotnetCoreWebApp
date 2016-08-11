@@ -5,11 +5,22 @@
     int lastPage = (int) ViewBag.totalNumberOfPages;
     int countInitialValue = 0;
     int rightPageCount = 0;
-    int pagesToAdd = 0;
-    
+    int pagesToAdd = 0;    
 }
 <div>Showing @ViewBag.offset to @ViewBag.offsetUpperBound records of @ViewBag.totalRecords. This is page @ViewBag.pageIndex of @ViewBag.totalNumberOfPages.</div>
 <ul class="pagination pagination-sm">
+@if( ViewBag.totalRecords > ViewBag.pageSize)
+{
+    if(pageNumber == 1)
+    {
+        <li><a href="#">&lt;&lt; First  &lt; Prev&nbsp; </a></li>
+    } else 
+    {
+         <li><a  href="@ViewBag.url?pageNumber=1&pageSize=@ViewBag.sizeOfPage">&lt;&lt; First</a></li>
+    }
+}
+
+
 <!--Display the pages on the left of the page that is currently being displayed : START -->
 @if((pageNumber - 4) > 0) 
 {
