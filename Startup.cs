@@ -10,6 +10,7 @@ using WebApplication.Models;
 using WebApplication.Services;
 using TestProject.Models;
 using Core.Common.Data;
+using WebApplication.Data.Services;
 
 namespace WebApplication
 {
@@ -58,7 +59,7 @@ namespace WebApplication
             services.AddTransient<ISmsSender, AuthMessageSender>();
 
             services.AddScoped<IArtistsRepository, ArtistsRepository>();
-            services.AddScoped<IDatabaseService<Artist>, DatabaseService<Artist>>();
+            services.AddScoped<IArtistEntityService, ArtistEntityService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

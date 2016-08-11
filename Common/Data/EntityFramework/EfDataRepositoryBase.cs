@@ -17,16 +17,16 @@ namespace Common.Data.EntityFramework
     ///  should extend this class and customise the already provided functionality, e.g. they should override all virtual methods to suite their needs.
     /// The <see cref="FindAllEntitiesByCriteria"/> method must be overriden in the extending repository class because it currently returns an empty collection.
     /// </summary>
-    /// <typeparam name="T">The actual entity type to save into the repository</typeparam>
+    /// <typeparam name="TEntity">The actual entity type to save into the repository</typeparam>
     /// <typeparam name="TContext">A class that extends Entity Framework DbContext class.</typeparam>
-    public abstract class EfDataRepositoryBase<T, TContext> : IDataRepository<T>
-        where T : BaseObjectWithState, IObjectWithState, new()
+    public abstract class EfDataRepositoryBase<TEntity, TContext> : IDataRepository<TEntity>
+        where TEntity : BaseObjectWithState, IObjectWithState, new()
         where TContext : DbContext, new()
     {
         public short QueriesMaxTimeoutInSeconds { get; set; }
 
 
-        public OperationResult Persist(T entity)
+        public OperationResult Persist(TEntity entity)
         {
             return ExecuteExceptionHandledOperation(() =>
            {
@@ -48,7 +48,7 @@ namespace Common.Data.EntityFramework
            });
         }
 
-        public T FindById(int id)
+        public TEntity FindById(int id)
         {
             using (var entityContext = new TContext())
             {
@@ -56,23 +56,23 @@ namespace Common.Data.EntityFramework
             }
         }
 
-        public virtual T FindBy(Expression<Func<T, bool>> predicate)
+        public virtual TEntity FindBy(Expression<Func<TEntity, bool>> predicate)
         {
             using (var entityContext = new TContext())
             {
-                return entityContext.Set<T>().SingleOrDefault(predicate);
+                return entityContext.Set<TEntity>().SingleOrDefault(predicate);
             }
         }
 
-        public virtual IEnumerable<T> FindAllBy(Expression<Func<T, bool>> predicate)
+        public virtual IEnumerable<TEntity> FindAllBy(Expression<Func<TEntity, bool>> predicate)
         {
             using (var entityContext = new TContext())
             {
-                return entityContext.Set<T>().Where(predicate).ToList();
+                return entityContext.Set<TEntity>().Where(predicate).ToList();
             }
         }
 
-        public bool Exists(T entity)
+        public bool Exists(TEntity entity)
         {
             using (var entityContext = new TContext())
             {
@@ -88,7 +88,7 @@ namespace Common.Data.EntityFramework
             }
         }
 
-        public IEnumerable<T> FindAll()
+        public IEnumerable<TEntity> FindAll()
         {
             using (var entityContext = new TContext())
             {
@@ -96,7 +96,7 @@ namespace Common.Data.EntityFramework
             }
         }
 
-        public IEnumerable<T> FindAllByCriteria(int? pageNumber, int? pageSize, out int totalRecords, string sortColumn,
+        public IEnumerable<TEntity> FindAllByCriteria(int? pageNumber, int? pageSize, out int totalRecords, string sortColumn,
             string sortDirection, params string[] keywords)
         {
             return FindAllEntitiesByCriteria(pageNumber, pageSize, out totalRecords, sortColumn, sortDirection, keywords);
@@ -183,37 +183,37 @@ namespace Common.Data.EntityFramework
             return sanitisedList;
         }
 
-        protected virtual EntityEntry AttachEntity(TContext entityContext, T entity)
+        protected virtual EntityEntry AttachEntity(TContext entityContext, TEntity entity)
         {
             EntityEntry entityEntry = null;
             if (entity.Id < 1 && entity.ObjectState == ObjectState.Added)
             {
-                entityEntry = entityContext.Set<T>().Add(entity);
+                entityEntry = entityContext.Set<TEntity>().Add(entity);
             }
-            entityEntry = entityContext.Set<T>().Attach(entity);
+            entityEntry = entityContext.Set<TEntity>().Attach(entity);
             return entityEntry;
         }
-        protected virtual T FindEntityById(TContext entityContext, int id)
+        protected virtual TEntity FindEntityById(TContext entityContext, int id)
         {
-            return entityContext.Set<T>().SingleOrDefault(x => x.Id == id);
+            return entityContext.Set<TEntity>().SingleOrDefault(x => x.Id == id);
         }
 
-        protected virtual bool EntityExists(TContext entityContext, T entity)
+        protected virtual bool EntityExists(TContext entityContext, TEntity entity)
         {
-            return entityContext.Set<T>().Any(x => x.Id == entity.Id);
+            return entityContext.Set<TEntity>().Any(x => x.Id == entity.Id);
         }
 
         protected virtual bool EntityExists(TContext entityContext, int entityId)
         {
-            return entityContext.Set<T>().Any(x => x.Id == entityId);
+            return entityContext.Set<TEntity>().Any(x => x.Id == entityId);
         }
 
-        protected virtual IEnumerable<T> FindAllEntities(TContext entityContext)
+        protected virtual IEnumerable<TEntity> FindAllEntities(TContext entityContext)
         {
-            return entityContext.Set<T>().ToList();
+            return entityContext.Set<TEntity>().ToList();
         }
 
-        protected virtual IEnumerable<T> FindAllEntitiesByCriteria(
+        protected virtual IEnumerable<TEntity> FindAllEntitiesByCriteria(
             int? pageNumber,
             int? pageSize,
             out int totalRecords,
@@ -222,7 +222,7 @@ namespace Common.Data.EntityFramework
             params string[] keywords)
         {
             totalRecords = 0;
-            return new List<T>();
+            return new List<TEntity>();
         }
 
     }

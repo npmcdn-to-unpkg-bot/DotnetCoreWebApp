@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using Core.Common.Extensions;
 using Core.Common.Utilities;
 
-namespace Core.Common.Data
+namespace Core.Common.Data.Services
 {
-    public sealed partial class DatabaseService<T> : IDatabaseService<T>
-     where T : BaseObjectWithState, IObjectWithState, new()
+    public abstract partial class BaseEntityService<TEntity> : IEntityService<TEntity>
+     where TEntity : BaseObjectWithState, IObjectWithState, new()
     {
-        public IEnumerable<T> FindAllByCriteria(
-                    IDataRepository<T> repository,
+        public virtual IEnumerable<TEntity> FindAllByCriteria(
+                    IDataRepository<TEntity> repository,
                     int? pageNumber,
                     int? pageSize,
                     out int totalRecords,
@@ -37,5 +37,7 @@ namespace Core.Common.Data
 
             return items;
         }
+
+       
     }
 }

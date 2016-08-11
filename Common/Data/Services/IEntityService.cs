@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 
-namespace Core.Common.Data
+namespace Core.Common.Data.Services
 {
-    public interface IDatabaseService<T>
-        where T : BaseObjectWithState, IObjectWithState, new()
+    public interface IEntityService<TEntity>
+        where TEntity : BaseObjectWithState, IObjectWithState, new()
     {
 
-        IEnumerable<T> FindAllByCriteria(
-                    IDataRepository<T> repository,
+        IEnumerable<TEntity> FindAllByCriteria(
+                    IDataRepository<TEntity> repository,
                     int? pageNumber,
                     int? pageSize,
                     out int totalRecords,

@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using TestProject.Models;
 using WebApplication.Data;
 using Core.Common.Data;
+using WebApplication.Data.Services;
 
 namespace WebApplication.Controllers
 {
@@ -9,14 +10,14 @@ namespace WebApplication.Controllers
     public class ChinookController : BaseController
     {
         private readonly IArtistsRepository _artistsRepository;
-        private readonly IDatabaseService<Artist> _artistsDbService;
+        private readonly IArtistEntityService _artistService;
 
         public ChinookController(            
             IArtistsRepository artistsRepository,
-            IDatabaseService<Artist> artistsDbService) 
+            IArtistEntityService artistService) 
         {
             _artistsRepository = artistsRepository;
-            _artistsDbService = artistsDbService;
+            _artistService = artistService;
 
         }
 
@@ -36,7 +37,7 @@ namespace WebApplication.Controllers
                 int totalNumberOfPages = 0;
                 int offset = 0;
                 int offsetUpperBound = 0;
-                var artists = _artistsDbService.FindAllByCriteria(_artistsRepository,
+                var artists = _artistService.FindAllByCriteria(_artistsRepository,
                      pageIndex, sizeOfPage, out totalNumberOfRecords, sortCol, sortDir, out offset,
                      out offsetUpperBound, out totalNumberOfPages, keywords);
 
