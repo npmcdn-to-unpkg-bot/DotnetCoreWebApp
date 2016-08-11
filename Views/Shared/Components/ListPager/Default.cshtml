@@ -6,6 +6,7 @@
     int countInitialValue = 0;
     int rightPageCount = 0;
     int pagesToAdd = 0;    
+    int previousPage = (pageNumber -1);
 }
 <div>Showing @ViewBag.offset to @ViewBag.offsetUpperBound records of @ViewBag.totalRecords. This is page @ViewBag.pageIndex of @ViewBag.totalNumberOfPages.</div>
 <ul class="pagination pagination-sm">
@@ -17,11 +18,12 @@
     } else 
     {
          <li><a  href="@ViewBag.url?pageNumber=1&pageSize=@ViewBag.sizeOfPage">&lt;&lt; First</a></li>
+         <li><a  href="@ViewBag.url?pageNumber=@previousPage&pageSize=@ViewBag.sizeOfPage">&lt;&lt; Prev</a></li>
     }
 }
 @if( ViewBag.totalRecords > ViewBag.pageSize)
 {
-    <!--Display the pages on the left of the page that is currently being displayed : START -->
+    //Display the pages on the left of the page that is currently being displayed : START 
     @if((pageNumber - 4) > 0) 
     {
         countInitialValue = (pageNumber -4);
@@ -51,7 +53,7 @@
             <li class="@currentPageClass"><a  href="@ViewBag.url?pageNumber=@i&pageSize=@ViewBag.sizeOfPage">@i</a></li>
         }
     }
-    <!--Display the pages on the left of the page that is currently being displayed : END -->
+    //Display the pages on the left of the page that is currently being displayed : END 
 
     
 
@@ -79,7 +81,7 @@
         }
     }
 
-    <!--Display the pages on the right of the page that is currently being displayed : END -->
+    //Display the pages on the right of the page that is currently being displayed : END 
 
     if(ViewBag.totalRecords > ViewBag.sizeOfPage)
     {
@@ -89,8 +91,8 @@
         } else 
         {
             int nextPage = pageNumber + 1;           
-            <li><a href="@ViewBag.url?pageNumber=@nextPage&pageSize=@ViewBag.sizeOfPage">&nbsp;Next &gt;</a></li>
-           
+            <li><a href="@ViewBag.url?pageNumber=@nextPage&pageSize=@ViewBag.sizeOfPage">&nbsp;Next &gt;</a></li>    
+            <li><a href="@ViewBag.url?pageNumber=@lastPage&pageSize=@ViewBag.sizeOfPage">&nbsp;Last &gt;</a></li>       
         }
     }
    
