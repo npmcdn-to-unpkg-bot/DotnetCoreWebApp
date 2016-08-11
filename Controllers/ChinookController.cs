@@ -24,7 +24,7 @@ namespace WebApplication.Controllers
 
         public IActionResult Performers(
             int? pageNumber, int? pageSize, string sortCol,
-            string sortDir, params string[] searchTerms)
+            string sortDir, string searchTerms)
         {
 
             return ExecuteExceptionHandledActionResult(() =>
@@ -38,9 +38,10 @@ namespace WebApplication.Controllers
                 int totalNumberOfPages = 0;
                 int offset = 0;
                 int offsetUpperBound = 0;
+                var keywordsList = !string.IsNullOrWhiteSpace(searchTerms) ? searchTerms.Split(',') : new string[] { };
                 IEnumerable<Artist> artists = _artistService.FindAllByCriteria(_artistsRepository,
                      pageIndex, sizeOfPage, out totalNumberOfRecords, sortCol, sortDir, out offset,
-                     out offsetUpperBound, out totalNumberOfPages, searchTerms);
+                     out offsetUpperBound, out totalNumberOfPages, keywordsList);
 
                 ViewBag.offset = offset;
                 ViewBag.pageIndex = pageIndex;
