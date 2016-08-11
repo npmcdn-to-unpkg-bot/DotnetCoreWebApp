@@ -10,6 +10,6 @@ namespace WebApplication.ViewModels
             ArtistsList = new List<Artist>();
         }
         public IEnumerable<Artist> ArtistsList { get; set; }
-        public string SearchTerms { get; set; }
+        
     }
 }

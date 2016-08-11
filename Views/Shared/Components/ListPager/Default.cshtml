@@ -8,7 +8,10 @@
     int pagesToAdd = 0;    
     int previousPage = (pageNumber -1);
 }
-<div>Showing @ViewBag.offset to @ViewBag.offsetUpperBound records of @ViewBag.totalRecords. This is page @ViewBag.pageIndex of @ViewBag.totalNumberOfPages.</div>
+@if( ViewBag.totalRecords > 0)
+{
+    <div>Showing @ViewBag.offset to @ViewBag.offsetUpperBound records of @ViewBag.totalRecords. This is page @ViewBag.pageIndex of @ViewBag.totalNumberOfPages.</div>
+}
 <ul class="pagination pagination-sm">
 @if( ViewBag.totalRecords > ViewBag.pageSize)
 {

@@ -14,6 +14,8 @@
     <div>Sorry there was a probleam loading data from the database.</div>
 } else
 {
+    if(Model.ArtistsList.Count() > 0)
+    {
     <table class="table">
     <tr>
         <th>Artist Id</th>
@@ -37,14 +39,24 @@
 
 </table>
 
+
+
+
+
+    }
+    else 
+    {
+        <div>Sorry, there is nothing to show!</div>
+    }
 <form asp-controller="Chinook" asp-action="Performers" method="GET">
     <label asp-for="@Model.SearchTerms">Search terms (separated by comma)</label>
     <input asp-for="@Model.SearchTerms" />
     <input type="submit" value="Search" />
+    @if(Model.SearchTermsExist) {
+        
+    }
 </form>
-
-
- @await Component.InvokeAsync("ListPager", 
+     @await Component.InvokeAsync("ListPager", 
     new {url = "/Chinook/Performers", 
     totalNumberOfItems = @ViewBag.totalRecords, 
     pageNumber = @ViewBag.pageIndex,
