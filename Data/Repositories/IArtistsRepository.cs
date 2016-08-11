@@ -1,7 +1,7 @@
 using Core.Common.Data;
 using TestProject.Models;
 
-namespace WebApplication.Data
+namespace WebApplication.Data.Repositories
 {
     public interface IArtistsRepository : IDataRepository<Artist> {
 

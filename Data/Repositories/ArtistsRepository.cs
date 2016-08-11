@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
@@ -7,7 +6,7 @@ using Common.Data.EntityFramework;
 using LinqKit;
 using TestProject.Models;
 
-namespace WebApplication.Data
+namespace WebApplication.Data.Repositories
 {
     public class ArtistsRepository : EfDataRepositoryBase<Artist, ChinookSqlServer2008DbContext>,
      IArtistsRepository

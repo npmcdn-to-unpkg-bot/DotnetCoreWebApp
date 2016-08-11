@@ -9,8 +9,8 @@ using WebApplication.Data;
 using WebApplication.Models;
 using WebApplication.Services;
 using TestProject.Models;
-using Core.Common.Data;
 using WebApplication.Data.Services;
+using WebApplication.Data.Repositories;
 
 namespace WebApplication
 {
