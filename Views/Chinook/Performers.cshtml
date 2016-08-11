@@ -1,4 +1,5 @@
-@model IEnumerable<TestProject.Models.Artist>
+@model WebApplication.ViewModels.ArtistViewModel
+
 @{
     ViewData["Title"] = "Items";
 }
@@ -19,7 +20,7 @@
         <th>Name</th>
         <th>Albums count</th>
     </tr>
-    @foreach (var artist in Model)
+    @foreach (var artist in Model.ArtistsList)
     {
         <tr>
             <td>
@@ -35,6 +36,12 @@
     }
 
 </table>
+
+<form asp-controller="Chinook" asp-action="Performers" method="GET">
+    <label asp-for="@Model.SearchTerms">Search terms (separated by comma)</label>
+    <input asp-for="@Model.SearchTerms" />
+    <input type="submit" value="Search" />
+</form>
 
 
  @await Component.InvokeAsync("ListPager", 

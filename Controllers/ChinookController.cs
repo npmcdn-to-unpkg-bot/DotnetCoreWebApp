@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using WebApplication.Data.Services;
 using WebApplication.Data.Repositories;
+using System.Collections.Generic;
+using TestProject.Models;
+using WebApplication.ViewModels;
 
 namespace WebApplication.Controllers
 {
@@ -21,7 +24,7 @@ namespace WebApplication.Controllers
 
         public IActionResult Performers(
             int? pageNumber, int? pageSize, string sortCol,
-            string sortDir, params string[] keywords)
+            string sortDir, params string[] searchTerms)
         {
 
             return ExecuteExceptionHandledActionResult(() =>
@@ -35,18 +38,21 @@ namespace WebApplication.Controllers
                 int totalNumberOfPages = 0;
                 int offset = 0;
                 int offsetUpperBound = 0;
-                var artists = _artistService.FindAllByCriteria(_artistsRepository,
+                IEnumerable<Artist> artists = _artistService.FindAllByCriteria(_artistsRepository,
                      pageIndex, sizeOfPage, out totalNumberOfRecords, sortCol, sortDir, out offset,
-                     out offsetUpperBound, out totalNumberOfPages, keywords);
+                     out offsetUpperBound, out totalNumberOfPages, searchTerms);
 
                 ViewBag.offset = offset;
                 ViewBag.pageIndex = pageIndex;
                 ViewBag.sizeOfPage = sizeOfPage;
                 ViewBag.offsetUpperBound = offsetUpperBound;
                 ViewBag.totalRecords = totalNumberOfRecords;
-                ViewBag.totalNumberOfPages = totalNumberOfPages;                
+                ViewBag.totalNumberOfPages = totalNumberOfPages;   
 
-                return View(artists);
+                var model = new ArtistViewModel();  
+                model.ArtistsList = artists;           
+
+                return View(model);
             });
         }
 
