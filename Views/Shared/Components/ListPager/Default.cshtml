@@ -19,63 +19,80 @@
          <li><a  href="@ViewBag.url?pageNumber=1&pageSize=@ViewBag.sizeOfPage">&lt;&lt; First</a></li>
     }
 }
-
-
-<!--Display the pages on the left of the page that is currently being displayed : START -->
-@if((pageNumber - 4) > 0) 
+@if( ViewBag.totalRecords > ViewBag.pageSize)
 {
-    countInitialValue = (pageNumber -4);
-    if((lastPage - pageNumber) < 3)
+    <!--Display the pages on the left of the page that is currently being displayed : START -->
+    @if((pageNumber - 4) > 0) 
     {
-        rightPageCount = (lastPage - pageNumber);
-        pagesToAdd = (maxNavigationPagesToDisplay - rightPageCount);
-        countInitialValue = (lastPage - pagesToAdd);
-        if((lastPage == pageNumber) || ( rightPageCount == 2) )
+        countInitialValue = (pageNumber -4);
+        if((lastPage - pageNumber) < 3)
         {
-            countInitialValue = (lastPage - (maxNavigationPagesToDisplay-1));
+            rightPageCount = (lastPage - pageNumber);
+            pagesToAdd = (maxNavigationPagesToDisplay - rightPageCount);
+            countInitialValue = (lastPage - pagesToAdd);
+            if((lastPage == pageNumber) || ( rightPageCount == 2) )
+            {
+                countInitialValue = (lastPage - (maxNavigationPagesToDisplay-1));
+            }
+        }
+        
+        @for(int i = countInitialValue; i <= pageNumber; i++)
+        {
+            string currentPageClass1 = ((int)ViewBag.pageNumber == i) ? "active" : "inactive";
+            <li class="@currentPageClass1"><a  href="@ViewBag.url?pageNumber=@i&pageSize=@ViewBag.sizeOfPage">@i</a></li>
+        }    
+
+    } 
+    else if((pageNumber -4 ) < 2 )
+    {
+        @for(int i = 1; i <= pageNumber; i++)
+        {
+            string currentPageClass = ((int)ViewBag.pageNumber == i) ? "active" : "inactive";
+            <li class="@currentPageClass"><a  href="@ViewBag.url?pageNumber=@i&pageSize=@ViewBag.sizeOfPage">@i</a></li>
         }
     }
-     
-    @for(int i = countInitialValue; i <= pageNumber; i++)
-    {
-         string currentPageClass1 = ((int)ViewBag.pageNumber == i) ? "active" : "inactive";
-        <li class="@currentPageClass1"><a  href="@ViewBag.url?pageNumber=@i&pageSize=@ViewBag.sizeOfPage">@i</a></li>
-    }    
+    <!--Display the pages on the left of the page that is currently being displayed : END -->
 
-} 
-else if((pageNumber -4 ) < 2 )
-{
-    @for(int i = 1; i <= pageNumber; i++)
+    
+
+    //Display the pages on the right of the page that is currently being displayed : START 
+    @if((lastPage - pageNumber) <= 4 )
     {
-         string currentPageClass = ((int)ViewBag.pageNumber == i) ? "active" : "inactive";
-        <li class="@currentPageClass"><a  href="@ViewBag.url?pageNumber=@i&pageSize=@ViewBag.sizeOfPage">@i</a></li>
+        @for(int i = pageNumber +1; i <= lastPage; i++)
+        {
+            string currentPageClass = ((int)ViewBag.pageNumber == i) ? "active" : "inactive";
+            <li class="@currentPageClass"><a  href="@ViewBag.url?pageNumber=@i&pageSize=@ViewBag.sizeOfPage">@i</a></li>
+        }
+    } else if(((lastPage - pageNumber) > 4) && (pageNumber > 5) )
+    {
+        @for(int i = pageNumber +1; i <= (pageNumber + 3); i++)
+        {
+            string currentPageClass = ((int)ViewBag.pageNumber == i) ? "active" : "inactive";
+            <li class="@currentPageClass"><a  href="@ViewBag.url?pageNumber=@i&pageSize=@ViewBag.sizeOfPage">@i</a></li>
+        }
+    } else if(pageNumber < 6)
+    {
+        @for(int i = pageNumber +1; i < (maxNavigationPagesToDisplay + 1); i++)
+        {
+            string currentPageClass = ((int)ViewBag.pageNumber == i) ? "active" : "inactive";
+            <li class="@currentPageClass"><a  href="@ViewBag.url?pageNumber=@i&pageSize=@ViewBag.sizeOfPage">@i</a></li>
+        }
     }
+
+    <!--Display the pages on the right of the page that is currently being displayed : END -->
+
+    if(ViewBag.totalRecords > ViewBag.sizeOfPage)
+    {
+        if(pageNumber == lastPage)
+        {
+            <li><a href="#"> &nbsp;Next > &nbsp; Last</a></li>
+        } else 
+        {
+            int nextPage = pageNumber + 1;           
+            <li><a href="@ViewBag.url?pageNumber=@nextPage&pageSize=@ViewBag.sizeOfPage">&nbsp;Next &gt;</a></li>
+           
+        }
+    }
+   
 }
-<!--Display the pages on the left of the page that is currently being displayed : END -->
-
-<!--Display the pages on the right of the page that is currently being displayed : START -->
-@if((lastPage - pageNumber) <= 4 )
-{
-    @for(int i = pageNumber +1; i <= lastPage; i++)
-    {
-         string currentPageClass = ((int)ViewBag.pageNumber == i) ? "active" : "inactive";
-        <li class="@currentPageClass"><a  href="@ViewBag.url?pageNumber=@i&pageSize=@ViewBag.sizeOfPage">@i</a></li>
-    }
-} else if(((lastPage - pageNumber) > 4) && (pageNumber > 5) )
-{
-    @for(int i = pageNumber +1; i <= (pageNumber + 3); i++)
-    {
-         string currentPageClass = ((int)ViewBag.pageNumber == i) ? "active" : "inactive";
-        <li class="@currentPageClass"><a  href="@ViewBag.url?pageNumber=@i&pageSize=@ViewBag.sizeOfPage">@i</a></li>
-    }
-} else if(pageNumber < 6)
-{
-    @for(int i = pageNumber +1; i < (maxNavigationPagesToDisplay + 1); i++)
-    {
-         string currentPageClass = ((int)ViewBag.pageNumber == i) ? "active" : "inactive";
-        <li class="@currentPageClass"><a  href="@ViewBag.url?pageNumber=@i&pageSize=@ViewBag.sizeOfPage">@i</a></li>
-    }
-}
-
-<!--Display the pages on the right of the page that is currently being displayed : END -->
-</ul>
+ </ul>
