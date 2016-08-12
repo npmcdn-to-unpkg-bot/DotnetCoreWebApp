@@ -12,13 +12,19 @@ namespace WebApplication.ViewComponents
             int pageSize,
             int totalNumberOfPages,
             int offset, 
-            int offsetUpperBound)
+            int offsetUpperBound,
+            string sortColumn,
+            string sortDirection,
+            string searchTerms)
         {
             ViewBag.offset = offset;
             ViewBag.pageNumber = pageNumber;
             ViewBag.pageSize = pageSize;
             ViewBag.offsetUpperBound = offsetUpperBound;
             ViewBag.totalRecords = totalNumberOfItems;
+            ViewBag.sortColumn = sortColumn;
+            ViewBag.sorDirection = sortDirection;
+            ViewBag.searchTerms = searchTerms;
             
             return await Task.FromResult(View());
         }

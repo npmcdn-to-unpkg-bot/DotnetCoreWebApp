@@ -7,6 +7,9 @@
     int rightPageCount = 0;
     int pagesToAdd = 0;    
     int previousPage = (pageNumber -1);
+    string searchTerms = ViewBag.SearchTerms;
+    string sortCol = ViewBag.sortColumn;
+    string sortDir = ViewBag.sortDirection;
 }
 @if( ViewBag.totalRecords > 0)
 {
@@ -20,8 +23,8 @@
         <li><a href="#">&lt;&lt; First  &lt; Prev&nbsp; </a></li>
     } else 
     {
-         <li><a  href="@ViewBag.url?pageNumber=1&pageSize=@ViewBag.sizeOfPage">&lt;&lt; First</a></li>
-         <li><a  href="@ViewBag.url?pageNumber=@previousPage&pageSize=@ViewBag.sizeOfPage">&lt;&lt; Prev</a></li>
+         <li><a  href="@ViewBag.url?pageNumber=1&pageSize=@ViewBag.sizeOfPage&searchTerms=@searchTerms&sortCol=@sortCol&sortDir=@sortDir">&lt;&lt; First</a></li>
+         <li><a  href="@ViewBag.url?pageNumber=@previousPage&pageSize=@ViewBag.sizeOfPage&searchTerms=@searchTerms&sortCol=@sortCol&sortDir=@sortDir">&lt;&lt; Prev</a></li>
     }
 }
 @if( ViewBag.totalRecords > ViewBag.pageSize)
@@ -44,7 +47,7 @@
         @for(int i = countInitialValue; i <= pageNumber; i++)
         {
             string currentPageClass1 = ((int)ViewBag.pageNumber == i) ? "active" : "inactive";
-            <li class="@currentPageClass1"><a  href="@ViewBag.url?pageNumber=@i&pageSize=@ViewBag.sizeOfPage">@i</a></li>
+            <li class="@currentPageClass1"><a  href="@ViewBag.url?pageNumber=@i&pageSize=@ViewBag.sizeOfPage&searchTerms=@searchTerms&sortCol=@sortCol&sortDir=@sortDir">@i</a></li>
         }    
 
     } 
@@ -53,7 +56,7 @@
         @for(int i = 1; i <= pageNumber; i++)
         {
             string currentPageClass = ((int)ViewBag.pageNumber == i) ? "active" : "inactive";
-            <li class="@currentPageClass"><a  href="@ViewBag.url?pageNumber=@i&pageSize=@ViewBag.sizeOfPage">@i</a></li>
+            <li class="@currentPageClass"><a  href="@ViewBag.url?pageNumber=@i&pageSize=@ViewBag.sizeOfPage&searchTerms=@searchTerms&sortCol=@sortCol&sortDir=@sortDir">@i</a></li>
         }
     }
     //Display the pages on the left of the page that is currently being displayed : END 
@@ -66,21 +69,21 @@
         @for(int i = pageNumber +1; i <= lastPage; i++)
         {
             string currentPageClass = ((int)ViewBag.pageNumber == i) ? "active" : "inactive";
-            <li class="@currentPageClass"><a  href="@ViewBag.url?pageNumber=@i&pageSize=@ViewBag.sizeOfPage">@i</a></li>
+            <li class="@currentPageClass"><a  href="@ViewBag.url?pageNumber=@i&pageSize=@ViewBag.sizeOfPage&searchTerms=@searchTerms&sortCol=@sortCol&sortDir=@sortDir">@i</a></li>
         }
     } else if(((lastPage - pageNumber) > 4) && (pageNumber > 5) )
     {
         @for(int i = pageNumber +1; i <= (pageNumber + 3); i++)
         {
             string currentPageClass = ((int)ViewBag.pageNumber == i) ? "active" : "inactive";
-            <li class="@currentPageClass"><a  href="@ViewBag.url?pageNumber=@i&pageSize=@ViewBag.sizeOfPage">@i</a></li>
+            <li class="@currentPageClass"><a  href="@ViewBag.url?pageNumber=@i&pageSize=@ViewBag.sizeOfPage&searchTerms=@searchTerms&sortCol=@sortCol&sortDir=@sortDir">@i</a></li>
         }
     } else if(pageNumber < 6)
     {
         @for(int i = pageNumber +1; i < (maxNavigationPagesToDisplay + 1); i++)
         {
             string currentPageClass = ((int)ViewBag.pageNumber == i) ? "active" : "inactive";
-            <li class="@currentPageClass"><a  href="@ViewBag.url?pageNumber=@i&pageSize=@ViewBag.sizeOfPage">@i</a></li>
+            <li class="@currentPageClass"><a  href="@ViewBag.url?pageNumber=@i&pageSize=@ViewBag.sizeOfPage&searchTerms=@searchTerms&sortCol=@sortCol&sortDir=@sortDir">@i</a></li>
         }
     }
 
@@ -94,8 +97,8 @@
         } else 
         {
             int nextPage = pageNumber + 1;           
-            <li><a href="@ViewBag.url?pageNumber=@nextPage&pageSize=@ViewBag.sizeOfPage">&nbsp;Next &gt;</a></li>    
-            <li><a href="@ViewBag.url?pageNumber=@lastPage&pageSize=@ViewBag.sizeOfPage">&nbsp;Last &gt;</a></li>       
+            <li><a href="@ViewBag.url?pageNumber=@nextPage&pageSize=@ViewBag.sizeOfPage&searchTerms=@searchTerms&sortCol=@sortCol&sortDir=@sortDir">&nbsp;Next &gt;</a></li>    
+            <li><a href="@ViewBag.url?pageNumber=@lastPage&pageSize=@ViewBag.sizeOfPage&searchTerms=@searchTerms&sortCol=@sortCol&sortDir=@sortDir">&nbsp;Last &gt;</a></li>       
         }
     }
    

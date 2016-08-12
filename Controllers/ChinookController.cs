@@ -38,7 +38,7 @@ namespace WebApplication.Controllers
                 int totalNumberOfPages = 0;
                 int offset = 0;
                 int offsetUpperBound = 0;
-                var keywordsList = !string.IsNullOrWhiteSpace(searchTerms) ? searchTerms.Split(',') : new string[] { };
+                string[] keywordsList = !string.IsNullOrWhiteSpace(searchTerms) ? searchTerms.Split(',') : new string[] { };
                 IEnumerable<Artist> artists = _artistService.FindAllByCriteria(_artistsRepository,
                      pageIndex, sizeOfPage, out totalNumberOfRecords, sortCol, sortDir, out offset,
                      out offsetUpperBound, out totalNumberOfPages, keywordsList);
@@ -49,6 +49,9 @@ namespace WebApplication.Controllers
                 ViewBag.offsetUpperBound = offsetUpperBound;
                 ViewBag.totalRecords = totalNumberOfRecords;
                 ViewBag.totalNumberOfPages = totalNumberOfPages;   
+                ViewBag.searchTerms = searchTerms;
+                ViewBag.sortCol = sortCol;
+                ViewBag.sorDir = sortDir;
 
                 var model = new ArtistViewModel();  
                 model.ArtistsList = artists;           
