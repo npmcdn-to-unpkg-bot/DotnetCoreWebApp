@@ -6,7 +6,8 @@ namespace WebApplication.ViewComponents
     public class ListPagerViewComponent : ViewComponent
     {
         public async Task<IViewComponentResult> InvokeAsync(
-            string url,            
+            string controllerName,
+            string controllerAction,            
             int totalNumberOfItems, 
             int pageNumber, 
             int pageSize,
@@ -25,7 +26,8 @@ namespace WebApplication.ViewComponents
             ViewBag.sortCol = sortCol;
             ViewBag.sorDir = sortDir;
             ViewBag.searchTerms = searchTerms;
-            
+            ViewBag.url = $"{Url.Content("~/")}{controllerName}/{controllerAction}";
+                        
             return await Task.FromResult(View());
         }
     }

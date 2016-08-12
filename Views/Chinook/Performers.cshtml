@@ -37,12 +37,7 @@
         </tr>
     }
 
-</table>
-
-
-
-
-
+    </table>
     }
     else 
     {
@@ -60,17 +55,19 @@
     <input type="submit" value="Search" />    
     
 </form>
-     @await Component.InvokeAsync("ListPager", 
-    new {url = "/Chinook/Performers", 
-    totalNumberOfItems = @ViewBag.totalRecords, 
-    pageNumber = @ViewBag.pageIndex,
-    pageSize = @ViewBag.sizeOfPage, 
-    totalNumberOfPages = @ViewBag.totalNumberOfPages, 
-    offset =  @ViewBag.offset,
-    offsetUpperBound = @ViewBag.offsetUpperBound,
-    searchTerms = @ViewBag.searchTerms,   
-    sortCol = @ViewBag.sortCol,
-    sortDir = @ViewBag.sortDir
+    @await Component.InvokeAsync("ListPager", 
+            new {
+                controllerName = "Chinook", 
+                controllerAction = "Performers", 
+                totalNumberOfItems = @ViewBag.totalRecords, 
+                pageNumber = @ViewBag.pageIndex,
+                pageSize = @ViewBag.sizeOfPage, 
+                totalNumberOfPages = @ViewBag.totalNumberOfPages, 
+                offset =  @ViewBag.offset,
+                offsetUpperBound = @ViewBag.offsetUpperBound,
+                searchTerms = @ViewBag.searchTerms,   
+                sortCol = @ViewBag.sortCol,
+                sortDir = @ViewBag.sortDir
   })
 }
 
