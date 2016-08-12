@@ -51,7 +51,14 @@
 <form asp-controller="Chinook" asp-action="Performers" method="GET">
     <label asp-for="@Model.SearchTerms">Search terms (separated by comma)</label>
     <input asp-for="@Model.SearchTerms" />
+    
+
+    <label asp-for="@Model.SortCol">Sort column</label>
+    <input asp-for="@Model.SortCol" />
+    <label asp-for="@Model.SortDir">Sort Direction</label>
+    <input asp-for="@Model.SortDir" />
     <input type="submit" value="Search" />    
+    
 </form>
      @await Component.InvokeAsync("ListPager", 
     new {url = "/Chinook/Performers", 

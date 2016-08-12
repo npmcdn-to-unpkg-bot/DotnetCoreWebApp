@@ -51,7 +51,7 @@ namespace WebApplication.Controllers
                 ViewBag.totalNumberOfPages = totalNumberOfPages;   
                 ViewBag.searchTerms = searchTerms;
                 ViewBag.sortCol = sortCol;
-                ViewBag.sorDir = sortDir;
+                ViewBag.sortDir = sortDir;
 
                 var model = new ArtistViewModel();  
                 model.ArtistsList = artists;           
