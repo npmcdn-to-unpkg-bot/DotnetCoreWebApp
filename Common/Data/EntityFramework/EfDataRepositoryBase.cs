@@ -30,7 +30,8 @@ namespace Common.Data.EntityFramework
         {
             var result = new OperationResult();
             entity.DateModified = DateTime.Now;
-            AttachEntity(entity);
+           // _context.Add(entity);
+            EntityEntry enityentry = AttachEntity(entity);
             _context.ApplyStateChanges();
             await _context.SaveChangesAsync();
             entity.ObjectState = EfExtensions.ConvertState(_context.Entry(entity).State);

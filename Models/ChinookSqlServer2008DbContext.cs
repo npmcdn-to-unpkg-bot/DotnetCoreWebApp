@@ -14,6 +14,8 @@ namespace TestProject.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Artist>().HasKey(k => k.ArtistId);
+
             modelBuilder.Entity<Album>(entity =>
             {
                 entity.HasIndex(e => e.ArtistId)
@@ -34,7 +36,8 @@ namespace TestProject.Models
 
             modelBuilder.Entity<Artist>(entity =>
             {
-                entity.Property(e => e.ArtistId).ValueGeneratedNever();
+                entity.Property(e => e.ArtistId).ValueGeneratedOnAdd();
+                
                 entity.Ignore(a => a.Id);
                 entity.Ignore(a => a.Guid);
                 entity.Ignore(a => a.DateCreated);

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using TestProject.Models;
 using WebApplication.ViewModels;
 using System.Threading.Tasks;
+using Core.Common.Data;
 
 namespace WebApplication.Controllers
 {
@@ -78,7 +79,7 @@ namespace WebApplication.Controllers
 
             return await ExecuteExceptionsHandledAsyncActionResult(async () =>
             {
-                var artist = new Artist { Name = model.Name };
+                var artist = new Artist { Name = model.Name , ObjectState = ObjectState.Added };
                 await _artistService.Persist(artist);
                 return View(model);
             });
