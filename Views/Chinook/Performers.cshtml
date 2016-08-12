@@ -49,9 +49,10 @@
     
 
     <label asp-for="@Model.SortCol">Sort column</label>
-    <input asp-for="@Model.SortCol" />
+    <select asp-for="SortCol" asp-items="Model.SortColumns" > </select>
     <label asp-for="@Model.SortDir">Sort Direction</label>
-    <input asp-for="@Model.SortDir" />
+    <select asp-for="SortDir" asp-items="Model.SortDirections" > </select>
+
     <input type="submit" value="Search" />    
     
 </form>
@@ -68,7 +69,7 @@
                 searchTerms = @ViewBag.searchTerms,   
                 sortCol = @ViewBag.sortCol,
                 sortDir = @ViewBag.sortDir
-  })
+            })
 }
 
 
