@@ -44,13 +44,13 @@
         <div>Sorry, there is nothing to show!</div>
     }
 <form asp-controller="Chinook" asp-action="Performers" method="GET">
-    <label asp-for="@Model.SearchTerms">Search terms (separated by comma)</label>
-    <input asp-for="@Model.SearchTerms" />
+    <label asp-for="SearchTerms">Search terms (separated by comma)</label>
+    <input asp-for="SearchTerms" />
     
 
-    <label asp-for="@Model.SortCol">Sort column</label>
+    <label asp-for="SortCol">Sort column</label>
     <select asp-for="SortCol" asp-items="Model.SortColumns" > </select>
-    <label asp-for="@Model.SortDir">Sort Direction</label>
+    <label asp-for="SortDir">Sort Direction</label>
     <select asp-for="SortDir" asp-items="Model.SortDirections" > </select>
 
     <input type="submit" value="Search" />    
@@ -60,15 +60,15 @@
             new {
                 controllerName = "Chinook", 
                 controllerAction = "Performers", 
-                totalNumberOfItems = @ViewBag.totalRecords, 
-                pageNumber = @ViewBag.pageIndex,
-                pageSize = @ViewBag.sizeOfPage, 
-                totalNumberOfPages = @ViewBag.totalNumberOfPages, 
-                offset =  @ViewBag.offset,
-                offsetUpperBound = @ViewBag.offsetUpperBound,
-                searchTerms = @ViewBag.searchTerms,   
-                sortCol = @ViewBag.sortCol,
-                sortDir = @ViewBag.sortDir
+                totalNumberOfItems = ViewBag.totalRecords, 
+                pageNumber = ViewBag.pageIndex,
+                pageSize = ViewBag.sizeOfPage, 
+                totalNumberOfPages = ViewBag.totalNumberOfPages, 
+                offset =  ViewBag.offset,
+                offsetUpperBound = ViewBag.offsetUpperBound,
+                searchTerms = ViewBag.searchTerms,   
+                sortCol = ViewBag.sortCol,
+                sortDir = ViewBag.sortDir
             })
 }
 
