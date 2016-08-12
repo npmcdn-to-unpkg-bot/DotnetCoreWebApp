@@ -11,8 +11,6 @@ namespace WebApplication.Data.Repositories
     public class ArtistsRepository : EfDataRepositoryBase<Artist, ChinookSqlServer2008DbContext>,
      IArtistsRepository
     {
-
-        private ChinookSqlServer2008DbContext _context;
         public ArtistsRepository()
         { }
 

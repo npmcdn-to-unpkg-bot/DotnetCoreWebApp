@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Core.Common.Utilities;
 
 namespace Core.Common.Data.Services
 {
@@ -6,8 +8,9 @@ namespace Core.Common.Data.Services
         where TEntity : BaseObjectWithState, IObjectWithState, new()
     {
 
-        IEnumerable<TEntity> FindAllByCriteria(
-                    IDataRepository<TEntity> repository,
+        Task<OperationResult> Persist(TEntity entity);
+
+        IEnumerable<TEntity> FindAllByCriteria(                   
                     int? pageNumber,
                     int? pageSize,
                     out int totalRecords,
@@ -17,5 +20,8 @@ namespace Core.Common.Data.Services
                     out int offsetUpperBound,
                     out int totalNumberOfPages,
                     params string[] keywords);
+    
+        
+
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Core.Common.Extensions;
 using Core.Common.Utilities;
 
@@ -8,8 +9,8 @@ namespace Core.Common.Data.Services
     public abstract partial class BaseEntityService<TEntity> : IEntityService<TEntity>
      where TEntity : BaseObjectWithState, IObjectWithState, new()
     {
-        public virtual IEnumerable<TEntity> FindAllByCriteria(
-                    IDataRepository<TEntity> repository,
+        protected IDataRepository<TEntity> _repository;
+        public virtual IEnumerable<TEntity> FindAllByCriteria(                    
                     int? pageNumber,
                     int? pageSize,
                     out int totalRecords,
@@ -20,14 +21,14 @@ namespace Core.Common.Data.Services
                     out int totalNumberOfPages,
                     params string[] keywords)
         {
-            if (repository == null) throw new Exception(nameof(repository));
+            if (_repository == null) throw new Exception(nameof(_repository));
             if (sortColumn.IsNullOrWhiteSpace()) Error.ArgumentNull(nameof(sortColumn));
             if (sortDirection.IsNullOrWhiteSpace()) Error.ArgumentNull(nameof(sortDirection));
 
             int pageIndex = pageNumber ?? 1;
             int sizeOfPage = pageSize ?? 10;
 
-            var items = repository.FindAllByCriteria(
+            var items = _repository.FindAllByCriteria(
                  pageIndex, sizeOfPage, out totalRecords, sortColumn, sortDirection, keywords);
             totalNumberOfPages = (int)Math.Ceiling((double)totalRecords / sizeOfPage);
 
@@ -38,6 +39,9 @@ namespace Core.Common.Data.Services
             return items;
         }
 
-       
+        public async Task<OperationResult> Persist(TEntity entity)
+        {
+            return await _repository.Persist(entity);
+        }
     }
 }

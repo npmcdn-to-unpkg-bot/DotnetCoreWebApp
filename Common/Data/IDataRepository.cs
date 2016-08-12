@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Core.Common.Utilities;
 
 namespace Core.Common.Data
@@ -19,7 +20,7 @@ namespace Core.Common.Data
         /// <returns>OperationResult object indicating the outcome of the operation. Note, if you want to return the object which 
         /// was saved you can add it to the MessagesDictionary property of the OperationResult object.
         /// </returns>
-        OperationResult Persist(TEntity entity);
+        Task<OperationResult> Persist(TEntity entity);
 
         /// <summary>
         /// Finds an entity by its id.

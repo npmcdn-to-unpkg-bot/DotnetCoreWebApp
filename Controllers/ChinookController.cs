@@ -4,6 +4,7 @@ using WebApplication.Data.Repositories;
 using System.Collections.Generic;
 using TestProject.Models;
 using WebApplication.ViewModels;
+using System.Threading.Tasks;
 
 namespace WebApplication.Controllers
 {
@@ -13,9 +14,9 @@ namespace WebApplication.Controllers
         private readonly IArtistsRepository _artistsRepository;
         private readonly IArtistEntityService _artistService;
 
-        public ChinookController(            
+        public ChinookController(
             IArtistsRepository artistsRepository,
-            IArtistEntityService artistService) 
+            IArtistEntityService artistService)
         {
             _artistsRepository = artistsRepository;
             _artistService = artistService;
@@ -27,7 +28,7 @@ namespace WebApplication.Controllers
             string sortDir, string searchTerms)
         {
 
-            return ExecuteExceptionHandledActionResult(() =>
+            return ExecuteExceptionsHandledActionResult(() =>
             {
                 int pageIndex = pageNumber ?? 1;
                 int sizeOfPage = pageSize ?? 10;
@@ -39,7 +40,7 @@ namespace WebApplication.Controllers
                 int offset = 0;
                 int offsetUpperBound = 0;
                 string[] keywordsList = !string.IsNullOrWhiteSpace(searchTerms) ? searchTerms.Split(',') : new string[] { };
-                IEnumerable<Artist> artists = _artistService.FindAllByCriteria(_artistsRepository,
+                IEnumerable<Artist> artists = _artistService.FindAllByCriteria(
                      pageIndex, sizeOfPage, out totalNumberOfRecords, sortCol, sortDir, out offset,
                      out offsetUpperBound, out totalNumberOfPages, keywordsList);
 
@@ -48,17 +49,39 @@ namespace WebApplication.Controllers
                 ViewBag.sizeOfPage = sizeOfPage;
                 ViewBag.offsetUpperBound = offsetUpperBound;
                 ViewBag.totalRecords = totalNumberOfRecords;
-                ViewBag.totalNumberOfPages = totalNumberOfPages;   
+                ViewBag.totalNumberOfPages = totalNumberOfPages;
                 ViewBag.searchTerms = searchTerms;
                 ViewBag.sortCol = sortCol;
                 ViewBag.sortDir = sortDir;
 
-                var model = new ArtistViewModel();  
-                model.ArtistsList = artists;           
+                var model = new ArtistViewModel();
+                model.ArtistsList = artists;
 
                 return View(model);
             });
         }
 
+
+        public IActionResult AddArtist()
+        {
+            return  ExecuteExceptionsHandledActionResult( () =>
+            {
+                return View();
+            });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddArtist(ArtistEditModel model)
+        {
+            if (model == null) return View();
+
+            return await ExecuteExceptionsHandledAsyncActionResult(async () =>
+            {
+                var artist = new Artist { Name = model.Name };
+                await _artistService.Persist(artist);
+                return View(model);
+            });
+        }
     }
 }
