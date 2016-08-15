@@ -1,15 +1,16 @@
 ﻿using System.Collections.Generic;
+using Core.Common.Data;
 
-namespace TestProject.Models
+namespace DotNetCoreTestWebProject.Models
 {
-    public partial class Album
+    public partial class Album  : BaseObjectWithState, IObjectWithState
     {
         public Album()
         {
             Track = new HashSet<Track>();
         }
 
-        public int AlbumId { get; set; }
+
         public string Title { get; set; }
         public int ArtistId { get; set; }
 

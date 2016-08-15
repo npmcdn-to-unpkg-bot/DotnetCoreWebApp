@@ -1,8 +1,8 @@
 using Core.Common.Data.Services;
-using TestProject.Models;
-using WebApplication.Data.Repositories;
+using DotNetCoreTestWebProject.Models;
+using DotNetCoreTestWebProject.Data.Repositories;
 
-namespace WebApplication.Data.Services
+namespace DotNetCoreTestWebProject.Data.Services
 {
     public class ArtistEntityService : BaseEntityService<Artist>, IArtistEntityService
     {

@@ -1,13 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
-using WebApplication.Data.Services;
-using WebApplication.Data.Repositories;
+using DotNetCoreTestWebProject.Data.Services;
+using DotNetCoreTestWebProject.Data.Repositories;
 using System.Collections.Generic;
-using TestProject.Models;
-using WebApplication.ViewModels;
+using DotNetCoreTestWebProject.Models;
+using DotNetCoreTestWebProject.ViewModels;
 using System.Threading.Tasks;
 using Core.Common.Data;
 
-namespace WebApplication.Controllers
+namespace DotNetCoreTestWebProject.Controllers
 {
 
     public class ChinookController : BaseController

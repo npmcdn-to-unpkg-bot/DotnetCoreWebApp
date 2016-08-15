@@ -6,11 +6,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
-using WebApplication.Models;
-using WebApplication.Models.AccountViewModels;
-using WebApplication.Services;
+using DotNetCoreTestWebProject.Models;
+using DotNetCoreTestWebProject.Models.AccountViewModels;
+using DotNetCoreTestWebProject.Services;
 
-namespace WebApplication.Controllers
+namespace DotNetCoreTestWebProject.Controllers
 {
     [Authorize]
     public class AccountController : Controller

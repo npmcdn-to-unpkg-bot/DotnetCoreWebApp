@@ -31,7 +31,7 @@ namespace Common.Data.EntityFramework
             var result = new OperationResult();
             entity.DateModified = DateTime.Now;
            // _context.Add(entity);
-            EntityEntry enityentry = AttachEntity(entity);
+            EntityEntry enityentry = AddOrUpdate(entity);
             _context.ApplyStateChanges();
             await _context.SaveChangesAsync();
             entity.ObjectState = EfExtensions.ConvertState(_context.Entry(entity).State);
@@ -76,10 +76,10 @@ namespace Common.Data.EntityFramework
         }
 
 
-        protected virtual EntityEntry AttachEntity(TEntity entity)
+        protected virtual EntityEntry AddOrUpdate(TEntity entity)
         {
             EntityEntry entityEntry = null;
-            if (entity.Id < 1 && entity.ObjectState == ObjectState.Added)
+            if (entity.Id == default(int))
             {
                 entityEntry = _context.Set<TEntity>().Add(entity);
             }

@@ -1,7 +1,7 @@
 using Core.Common.Data.Services;
-using TestProject.Models;
+using DotNetCoreTestWebProject.Models;
 
-namespace WebApplication.Data.Services
+namespace DotNetCoreTestWebProject.Data.Services
 {
     public interface IArtistEntityService : IEntityService<Artist>
     {

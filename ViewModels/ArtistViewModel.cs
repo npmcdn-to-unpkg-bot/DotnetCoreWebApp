@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using TestProject.Models;
+using DotNetCoreTestWebProject.Models;
 
-namespace WebApplication.ViewModels
+namespace DotNetCoreTestWebProject.ViewModels
 {
     public  class ArtistViewModel : BaseViewModel
     {

@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using Core.Common.Data;
 
-namespace TestProject.Models
+namespace DotNetCoreTestWebProject.Models
 {
-    public partial class Invoice
+    public partial class Invoice  : BaseObjectWithState, IObjectWithState
     {
         public Invoice()
         {
             InvoiceLine = new HashSet<InvoiceLine>();
         }
 
-        public int InvoiceId { get; set; }
         public int CustomerId { get; set; }
         public DateTime InvoiceDate { get; set; }
         public string BillingAddress { get; set; }

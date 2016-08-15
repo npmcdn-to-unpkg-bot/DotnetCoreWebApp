@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Core.Common.Data;
 
-namespace TestProject.Models
+namespace DotNetCoreTestWebProject.Models
 {
-    public partial class Genre
+    public partial class Genre  : BaseObjectWithState, IObjectWithState
     {
         public Genre()
         {
             Track = new HashSet<Track>();
         }
 
-        public int GenreId { get; set; }
         public string Name { get; set; }
 
         public virtual ICollection<Track> Track { get; set; }

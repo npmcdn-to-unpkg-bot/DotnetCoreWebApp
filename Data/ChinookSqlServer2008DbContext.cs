@@ -1,27 +1,26 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using DotNetCoreTestWebProject.Models;
+using System;
 
-namespace TestProject.Models
+namespace DotNetCoreTestWebProject.Data
 {
     public partial class ChinookSqlServer2008DbContext : DbContext
     {
-
         public ChinookSqlServer2008DbContext()
         { }
-        public ChinookSqlServer2008DbContext(DbContextOptions<ChinookSqlServer2008DbContext> options) 
+        public ChinookSqlServer2008DbContext(DbContextOptions<ChinookSqlServer2008DbContext> options)
         : base(options)
         { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Artist>().HasKey(k => k.ArtistId);
-
             modelBuilder.Entity<Album>(entity =>
             {
                 entity.HasIndex(e => e.ArtistId)
                     .HasName("IFK_AlbumArtistId");
 
-                entity.Property(e => e.AlbumId).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.Title)
                     .IsRequired()
@@ -32,21 +31,23 @@ namespace TestProject.Models
                     .HasForeignKey(d => d.ArtistId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("FK_AlbumArtistId");
+
+                entity.Property(e => e.Guid).HasMaxLength(32).IsRequired(false);
+                entity.Property(e => e.DateCreated).IsRequired().HasDefaultValue(DateTime.Now);
+                entity.Property(e => e.DateModified).IsRequired().HasDefaultValue(DateTime.Now);
+                entity.Ignore(e => e.ObjectState);
+                entity.Property(e => e.RowVersion).IsConcurrencyToken();
             });
 
             modelBuilder.Entity<Artist>(entity =>
             {
-                entity.Property(e => e.ArtistId).ValueGeneratedOnAdd();
-                
-                entity.Ignore(a => a.Id);
-                entity.Ignore(a => a.Guid);
-                entity.Ignore(a => a.DateCreated);
-                entity.Ignore(a => a.DateModified);
-                entity.Ignore(a => a.ObjectState);
-                entity.Ignore(a => a.Deleted);
-                entity.Ignore(a => a.RowVersion);
-
+                entity.Property(e => e.Id).ValueGeneratedNever();
                 entity.Property(e => e.Name).HasMaxLength(120);
+                entity.Property(e => e.Guid).HasMaxLength(32).IsRequired(false);
+                entity.Property(e => e.DateCreated).IsRequired().HasDefaultValue(DateTime.Now);
+                entity.Property(e => e.DateModified).IsRequired().HasDefaultValue(DateTime.Now);
+                entity.Ignore(e => e.ObjectState);
+                entity.Property(e => e.RowVersion).IsConcurrencyToken();
             });
 
             modelBuilder.Entity<Customer>(entity =>
@@ -54,7 +55,7 @@ namespace TestProject.Models
                 entity.HasIndex(e => e.SupportRepId)
                     .HasName("IFK_CustomerSupportRepId");
 
-                entity.Property(e => e.CustomerId).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.Address).HasMaxLength(70);
 
@@ -88,6 +89,11 @@ namespace TestProject.Models
                     .WithMany(p => p.Customer)
                     .HasForeignKey(d => d.SupportRepId)
                     .HasConstraintName("FK_CustomerSupportRepId");
+                entity.Property(e => e.Guid).HasMaxLength(32).IsRequired(false);
+                entity.Property(e => e.DateCreated).IsRequired().HasDefaultValue(DateTime.Now);
+                entity.Property(e => e.DateModified).IsRequired().HasDefaultValue(DateTime.Now);
+                entity.Ignore(e => e.ObjectState);
+                entity.Property(e => e.RowVersion).IsConcurrencyToken();
             });
 
             modelBuilder.Entity<Employee>(entity =>
@@ -95,7 +101,7 @@ namespace TestProject.Models
                 entity.HasIndex(e => e.ReportsTo)
                     .HasName("IFK_EmployeeReportsTo");
 
-                entity.Property(e => e.EmployeeId).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.Address).HasMaxLength(70);
 
@@ -131,13 +137,23 @@ namespace TestProject.Models
                     .WithMany(p => p.InverseReportsToNavigation)
                     .HasForeignKey(d => d.ReportsTo)
                     .HasConstraintName("FK_EmployeeReportsTo");
+                entity.Property(e => e.Guid).HasMaxLength(32).IsRequired(false);
+                entity.Property(e => e.DateCreated).IsRequired().HasDefaultValue(DateTime.Now);
+                entity.Property(e => e.DateModified).IsRequired().HasDefaultValue(DateTime.Now);
+                entity.Ignore(e => e.ObjectState);
+                entity.Property(e => e.RowVersion).IsConcurrencyToken();
             });
 
             modelBuilder.Entity<Genre>(entity =>
             {
-                entity.Property(e => e.GenreId).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.Name).HasMaxLength(120);
+                entity.Property(e => e.Guid).HasMaxLength(32).IsRequired(false);
+                entity.Property(e => e.DateCreated).IsRequired().HasDefaultValue(DateTime.Now);
+                entity.Property(e => e.DateModified).IsRequired().HasDefaultValue(DateTime.Now);
+                entity.Ignore(e => e.ObjectState);
+                entity.Property(e => e.RowVersion).IsConcurrencyToken();
             });
 
             modelBuilder.Entity<Invoice>(entity =>
@@ -145,7 +161,7 @@ namespace TestProject.Models
                 entity.HasIndex(e => e.CustomerId)
                     .HasName("IFK_InvoiceCustomerId");
 
-                entity.Property(e => e.InvoiceId).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.BillingAddress).HasMaxLength(70);
 
@@ -166,6 +182,11 @@ namespace TestProject.Models
                     .HasForeignKey(d => d.CustomerId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("FK_InvoiceCustomerId");
+                entity.Property(e => e.Guid).HasMaxLength(32).IsRequired(false);
+                entity.Property(e => e.DateCreated).IsRequired().HasDefaultValue(DateTime.Now);
+                entity.Property(e => e.DateModified).IsRequired().HasDefaultValue(DateTime.Now);
+                entity.Ignore(e => e.ObjectState);
+                entity.Property(e => e.RowVersion).IsConcurrencyToken();
             });
 
             modelBuilder.Entity<InvoiceLine>(entity =>
@@ -176,7 +197,7 @@ namespace TestProject.Models
                 entity.HasIndex(e => e.TrackId)
                     .HasName("IFK_InvoiceLineTrackId");
 
-                entity.Property(e => e.InvoiceLineId).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.UnitPrice).HasColumnType("numeric");
 
@@ -191,33 +212,48 @@ namespace TestProject.Models
                     .HasForeignKey(d => d.TrackId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("FK_InvoiceLineTrackId");
+                entity.Property(e => e.Guid).HasMaxLength(32).IsRequired(false);
+                entity.Property(e => e.DateCreated).IsRequired().HasDefaultValue(DateTime.Now);
+                entity.Property(e => e.DateModified).IsRequired().HasDefaultValue(DateTime.Now);
+                entity.Ignore(e => e.ObjectState);
+                entity.Property(e => e.RowVersion).IsConcurrencyToken();
             });
 
             modelBuilder.Entity<MediaType>(entity =>
             {
-                entity.Property(e => e.MediaTypeId).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.Name).HasMaxLength(120);
+                entity.Property(e => e.Guid).HasMaxLength(32).IsRequired(false);
+                entity.Property(e => e.DateCreated).IsRequired().HasDefaultValue(DateTime.Now);
+                entity.Property(e => e.DateModified).IsRequired().HasDefaultValue(DateTime.Now);
+                entity.Ignore(e => e.ObjectState);
+                entity.Property(e => e.RowVersion).IsConcurrencyToken();
             });
 
             modelBuilder.Entity<Playlist>(entity =>
             {
-                entity.Property(e => e.PlaylistId).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.Name).HasMaxLength(120);
+                entity.Property(e => e.Guid).HasMaxLength(32).IsRequired(false);
+                entity.Property(e => e.DateCreated).IsRequired().HasDefaultValue(DateTime.Now);
+                entity.Property(e => e.DateModified).IsRequired().HasDefaultValue(DateTime.Now);
+                entity.Ignore(e => e.ObjectState);
+                entity.Property(e => e.RowVersion).IsConcurrencyToken();
             });
 
             modelBuilder.Entity<PlaylistTrack>(entity =>
             {
-                entity.HasKey(e => new { e.PlaylistId, e.TrackId })
+                entity.HasKey(e => new { e.Id, e.TrackId })
                     .HasName("PK_PlaylistTrack");
 
                 entity.HasIndex(e => e.TrackId)
                     .HasName("IFK_PlaylistTrackTrackId");
 
-                entity.HasOne(d => d.Playlist)
+                entity.HasOne(d => d.IdNavigation)
                     .WithMany(p => p.PlaylistTrack)
-                    .HasForeignKey(d => d.PlaylistId)
+                    .HasForeignKey(d => d.Id)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("FK_PlaylistTrackPlaylistId");
 
@@ -226,6 +262,11 @@ namespace TestProject.Models
                     .HasForeignKey(d => d.TrackId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("FK_PlaylistTrackTrackId");
+                entity.Property(e => e.Guid).HasMaxLength(32).IsRequired(false);
+                entity.Property(e => e.DateCreated).IsRequired().HasDefaultValue(DateTime.Now);
+                entity.Property(e => e.DateModified).IsRequired().HasDefaultValue(DateTime.Now);
+                entity.Ignore(e => e.ObjectState);
+                entity.Property(e => e.RowVersion).IsConcurrencyToken();
             });
 
             modelBuilder.Entity<Track>(entity =>
@@ -239,7 +280,7 @@ namespace TestProject.Models
                 entity.HasIndex(e => e.MediaTypeId)
                     .HasName("IFK_TrackMediaTypeId");
 
-                entity.Property(e => e.TrackId).ValueGeneratedNever();
+                entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.Composer).HasMaxLength(220);
 
@@ -264,6 +305,11 @@ namespace TestProject.Models
                     .HasForeignKey(d => d.MediaTypeId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("FK_TrackMediaTypeId");
+                entity.Property(e => e.Guid).HasMaxLength(32).IsRequired(false);
+                entity.Property(e => e.DateCreated).IsRequired().HasDefaultValue(DateTime.Now);
+                entity.Property(e => e.DateModified).IsRequired().HasDefaultValue(DateTime.Now);
+                entity.Ignore(e => e.ObjectState);
+                entity.Property(e => e.RowVersion).IsConcurrencyToken();
             });
         }
 

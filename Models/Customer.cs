@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Core.Common.Data;
 
-namespace TestProject.Models
+namespace DotNetCoreTestWebProject.Models
 {
-    public partial class Customer
+    public partial class Customer  : BaseObjectWithState, IObjectWithState
     {
         public Customer()
         {
             Invoice = new HashSet<Invoice>();
         }
 
-        public int CustomerId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Company { get; set; }

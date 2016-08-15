@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Core.Common.Utilities;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebApplication.Controllers
+namespace DotNetCoreTestWebProject.Controllers
 {
     public abstract class BaseController : Controller
     {

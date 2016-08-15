@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using Core.Common.Data;
 
-namespace TestProject.Models
+namespace DotNetCoreTestWebProject.Models
 {
-    public partial class Employee
+    public partial class Employee  : BaseObjectWithState, IObjectWithState
     {
         public Employee()
         {
             Customer = new HashSet<Customer>();
         }
 
-        public int EmployeeId { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
         public string Title { get; set; }

@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Core.Common.Data;
 
-namespace TestProject.Models
+namespace DotNetCoreTestWebProject.Models
 {
-    public partial class Track
+    public partial class Track  : BaseObjectWithState, IObjectWithState
     {
         public Track()
         {
@@ -11,7 +11,6 @@ namespace TestProject.Models
             PlaylistTrack = new HashSet<PlaylistTrack>();
         }
 
-        public int TrackId { get; set; }
         public string Name { get; set; }
         public int? AlbumId { get; set; }
         public int MediaTypeId { get; set; }

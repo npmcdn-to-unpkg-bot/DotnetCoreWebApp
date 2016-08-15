@@ -1,5 +1,5 @@
 {
-  "userSecretsId": "aspnet-WebApplication-0799fe3e-6eaf-4c5f-b40e-7c6bfd5dfa9a",
+  "userSecretsId": "aspnet-DotNetCoreTestWebProject-0799fe3e-6eaf-4c5f-b40e-7c6bfd5dfa9a",
   "dependencies": {
     "Microsoft.NETCore.App": {
       "version": "1.0.0",
@@ -111,6 +111,6 @@
     ]
   },
   "tooling": {
-    "defaultNamespace": "WebApplication"
+    "defaultNamespace": "DotNetCoreTestWebProject"
   }
 }

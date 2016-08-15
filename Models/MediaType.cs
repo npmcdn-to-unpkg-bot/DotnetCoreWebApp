@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Core.Common.Data;
 
-namespace TestProject.Models
+namespace DotNetCoreTestWebProject.Models
 {
-    public partial class MediaType
+    public partial class MediaType  : BaseObjectWithState, IObjectWithState
     {
         public MediaType()
         {
             Track = new HashSet<Track>();
         }
 
-        public int MediaTypeId { get; set; }
         public string Name { get; set; }
 
         public virtual ICollection<Track> Track { get; set; }

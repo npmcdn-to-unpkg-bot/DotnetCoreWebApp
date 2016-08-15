@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebApplication.ViewComponents
+namespace DotNetCoreTestWebProject.ViewComponents
 {
     public class ListPagerViewComponent : ViewComponent
     {

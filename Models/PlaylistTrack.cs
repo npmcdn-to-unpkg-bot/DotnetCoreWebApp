@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Core.Common.Data;
 
-namespace TestProject.Models
+namespace DotNetCoreTestWebProject.Models
 {
-    public partial class PlaylistTrack
+    public partial class PlaylistTrack  : BaseObjectWithState, IObjectWithState
     {
-        public int PlaylistId { get; set; }
         public int TrackId { get; set; }
 
-        public virtual Playlist Playlist { get; set; }
+        public virtual Playlist IdNavigation { get; set; }
         public virtual Track Track { get; set; }
     }
 }

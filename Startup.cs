@@ -5,14 +5,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using WebApplication.Data;
-using WebApplication.Models;
-using WebApplication.Services;
-using TestProject.Models;
-using WebApplication.Data.Services;
-using WebApplication.Data.Repositories;
+using DotNetCoreTestWebProject.Data;
+using DotNetCoreTestWebProject.Models;
+using DotNetCoreTestWebProject.Services;
+using DotNetCoreTestWebProject.Data.Services;
+using DotNetCoreTestWebProject.Data.Repositories;
 
-namespace WebApplication
+namespace DotNetCoreTestWebProject
 {
     public class Startup
     {
@@ -42,8 +41,8 @@ namespace WebApplication
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDbContext<ChinookDbContext>(options =>
-            options.UseSqlite(Configuration.GetConnectionString("ChinookConnection")));
+           // services.AddDbContext<ChinookDbContext>(options =>
+           // options.UseSqlite(Configuration.GetConnectionString("ChinookConnection")));
 
             services.AddDbContext<ChinookSqlServer2008DbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("ChinookConnectionSqlServer2008"), b => b.UseRowNumberForPaging()));

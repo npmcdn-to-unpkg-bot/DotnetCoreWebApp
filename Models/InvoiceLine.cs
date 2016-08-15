@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Core.Common.Data;
 
-namespace TestProject.Models
+namespace DotNetCoreTestWebProject.Models
 {
-    public partial class InvoiceLine
+    public partial class InvoiceLine  : BaseObjectWithState, IObjectWithState
     {
-        public int InvoiceLineId { get; set; }
         public int InvoiceId { get; set; }
         public int TrackId { get; set; }
         public decimal UnitPrice { get; set; }

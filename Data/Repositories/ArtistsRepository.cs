@@ -3,10 +3,10 @@ using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
 using Common.Data.EntityFramework;
+using DotNetCoreTestWebProject.Models;
 using LinqKit;
-using TestProject.Models;
 
-namespace WebApplication.Data.Repositories
+namespace DotNetCoreTestWebProject.Data.Repositories
 {
     public class ArtistsRepository : EfDataRepositoryBase<Artist, ChinookSqlServer2008DbContext>,
      IArtistsRepository

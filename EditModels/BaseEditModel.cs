@@ -1,4 +1,4 @@
-namespace WebApplication.ViewModels
+namespace DotNetCoreTestWebProject.ViewModels
 {
     public abstract class BaseEditModel
     {
