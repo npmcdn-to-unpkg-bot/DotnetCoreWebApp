@@ -8,9 +8,10 @@ using DotNetCoreTestWebProject.Data;
 namespace DotNetCoreTestWebProject.Migrations
 {
     [DbContext(typeof(ChinookSqlServer2008DbContext))]
-    partial class ChinookSqlServer2008DbContextModelSnapshot : ModelSnapshot
+    [Migration("20160815103209_AllowNullInDeletedColumn")]
+    partial class AllowNullInDeletedColumn
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")

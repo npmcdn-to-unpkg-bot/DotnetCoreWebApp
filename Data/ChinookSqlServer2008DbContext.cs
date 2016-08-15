@@ -36,18 +36,20 @@ namespace DotNetCoreTestWebProject.Data
                 entity.Property(e => e.DateCreated).IsRequired().HasDefaultValue(DateTime.Now);
                 entity.Property(e => e.DateModified).IsRequired().HasDefaultValue(DateTime.Now);
                 entity.Ignore(e => e.ObjectState);
+                entity.Property(e => e.Deleted).IsRequired(false).HasDefaultValue(false);
                 entity.Property(e => e.RowVersion).IsConcurrencyToken();
             });
 
             modelBuilder.Entity<Artist>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
+                entity.Property(e => e.Id).UseSqlServerIdentityColumn();
                 entity.Property(e => e.Name).HasMaxLength(120);
                 entity.Property(e => e.Guid).HasMaxLength(32).IsRequired(false);
                 entity.Property(e => e.DateCreated).IsRequired().HasDefaultValue(DateTime.Now);
                 entity.Property(e => e.DateModified).IsRequired().HasDefaultValue(DateTime.Now);
                 entity.Ignore(e => e.ObjectState);
-                entity.Property(e => e.RowVersion).IsConcurrencyToken();
+                entity.Property(e => e.Deleted).IsRequired(false).HasDefaultValue(false);
+                entity.Property(e => e.RowVersion).IsConcurrencyToken().ValueGeneratedOnAddOrUpdate().ValueGeneratedOnAdd();
             });
 
             modelBuilder.Entity<Customer>(entity =>
@@ -93,6 +95,7 @@ namespace DotNetCoreTestWebProject.Data
                 entity.Property(e => e.DateCreated).IsRequired().HasDefaultValue(DateTime.Now);
                 entity.Property(e => e.DateModified).IsRequired().HasDefaultValue(DateTime.Now);
                 entity.Ignore(e => e.ObjectState);
+                entity.Property(e => e.Deleted).IsRequired(false).HasDefaultValue(false);
                 entity.Property(e => e.RowVersion).IsConcurrencyToken();
             });
 
@@ -141,6 +144,7 @@ namespace DotNetCoreTestWebProject.Data
                 entity.Property(e => e.DateCreated).IsRequired().HasDefaultValue(DateTime.Now);
                 entity.Property(e => e.DateModified).IsRequired().HasDefaultValue(DateTime.Now);
                 entity.Ignore(e => e.ObjectState);
+                entity.Property(e => e.Deleted).IsRequired(false).HasDefaultValue(false);
                 entity.Property(e => e.RowVersion).IsConcurrencyToken();
             });
 
@@ -153,6 +157,7 @@ namespace DotNetCoreTestWebProject.Data
                 entity.Property(e => e.DateCreated).IsRequired().HasDefaultValue(DateTime.Now);
                 entity.Property(e => e.DateModified).IsRequired().HasDefaultValue(DateTime.Now);
                 entity.Ignore(e => e.ObjectState);
+                entity.Property(e => e.Deleted).IsRequired(false).HasDefaultValue(false);
                 entity.Property(e => e.RowVersion).IsConcurrencyToken();
             });
 
@@ -186,6 +191,7 @@ namespace DotNetCoreTestWebProject.Data
                 entity.Property(e => e.DateCreated).IsRequired().HasDefaultValue(DateTime.Now);
                 entity.Property(e => e.DateModified).IsRequired().HasDefaultValue(DateTime.Now);
                 entity.Ignore(e => e.ObjectState);
+                entity.Property(e => e.Deleted).IsRequired(false).HasDefaultValue(false);
                 entity.Property(e => e.RowVersion).IsConcurrencyToken();
             });
 
@@ -216,6 +222,7 @@ namespace DotNetCoreTestWebProject.Data
                 entity.Property(e => e.DateCreated).IsRequired().HasDefaultValue(DateTime.Now);
                 entity.Property(e => e.DateModified).IsRequired().HasDefaultValue(DateTime.Now);
                 entity.Ignore(e => e.ObjectState);
+                entity.Property(e => e.Deleted).IsRequired(false).HasDefaultValue(false);
                 entity.Property(e => e.RowVersion).IsConcurrencyToken();
             });
 
@@ -228,6 +235,7 @@ namespace DotNetCoreTestWebProject.Data
                 entity.Property(e => e.DateCreated).IsRequired().HasDefaultValue(DateTime.Now);
                 entity.Property(e => e.DateModified).IsRequired().HasDefaultValue(DateTime.Now);
                 entity.Ignore(e => e.ObjectState);
+                entity.Property(e => e.Deleted).IsRequired(false).HasDefaultValue(false);
                 entity.Property(e => e.RowVersion).IsConcurrencyToken();
             });
 
@@ -240,6 +248,7 @@ namespace DotNetCoreTestWebProject.Data
                 entity.Property(e => e.DateCreated).IsRequired().HasDefaultValue(DateTime.Now);
                 entity.Property(e => e.DateModified).IsRequired().HasDefaultValue(DateTime.Now);
                 entity.Ignore(e => e.ObjectState);
+                entity.Property(e => e.Deleted).IsRequired(false).HasDefaultValue(false);
                 entity.Property(e => e.RowVersion).IsConcurrencyToken();
             });
 
@@ -266,6 +275,7 @@ namespace DotNetCoreTestWebProject.Data
                 entity.Property(e => e.DateCreated).IsRequired().HasDefaultValue(DateTime.Now);
                 entity.Property(e => e.DateModified).IsRequired().HasDefaultValue(DateTime.Now);
                 entity.Ignore(e => e.ObjectState);
+                entity.Property(e => e.Deleted).IsRequired(false).HasDefaultValue(false);
                 entity.Property(e => e.RowVersion).IsConcurrencyToken();
             });
 
@@ -309,6 +319,7 @@ namespace DotNetCoreTestWebProject.Data
                 entity.Property(e => e.DateCreated).IsRequired().HasDefaultValue(DateTime.Now);
                 entity.Property(e => e.DateModified).IsRequired().HasDefaultValue(DateTime.Now);
                 entity.Ignore(e => e.ObjectState);
+                entity.Property(e => e.Deleted).IsRequired(false).HasDefaultValue(false);
                 entity.Property(e => e.RowVersion).IsConcurrencyToken();
             });
         }

@@ -6,10 +6,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using DotNetCoreTestWebProject.Data;
-using DotNetCoreTestWebProject.Models;
-using DotNetCoreTestWebProject.Services;
 using DotNetCoreTestWebProject.Data.Services;
 using DotNetCoreTestWebProject.Data.Repositories;
+using DotNetCoreTestWebProject.Services;
+using DotNetCoreTestWebProject.Models;
 
 namespace DotNetCoreTestWebProject
 {

@@ -1,4 +1,4 @@
-namespace DotNetCoreTestWebProject.ViewModels
+namespace DotNetCoreTestWebProject.EditModels
 {
     public class ArtistEditModel :BaseEditModel
     {

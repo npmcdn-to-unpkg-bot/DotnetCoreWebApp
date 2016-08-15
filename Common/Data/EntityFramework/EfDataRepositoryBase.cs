@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Core.Common.Data;
 using Core.Common.Utilities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Common.Data.EntityFramework
 {
@@ -30,11 +29,10 @@ namespace Common.Data.EntityFramework
         {
             var result = new OperationResult();
             entity.DateModified = DateTime.Now;
-           // _context.Add(entity);
-            EntityEntry enityentry = AddOrUpdate(entity);
+            AddOrUpdate(entity);
             _context.ApplyStateChanges();
             await _context.SaveChangesAsync();
-            entity.ObjectState = EfExtensions.ConvertState(_context.Entry(entity).State);
+            entity.ObjectState = ObjectState.Unchanged;
             result.MessagesDictionary.Add("PersistedEntity", entity);
             return result;
         }
@@ -76,15 +74,16 @@ namespace Common.Data.EntityFramework
         }
 
 
-        protected virtual EntityEntry AddOrUpdate(TEntity entity)
+        protected virtual void AddOrUpdate(TEntity entity)
         {
-            EntityEntry entityEntry = null;
-            if (entity.Id == default(int))
+            if (entity.Id == default(int) && entity.ObjectState == ObjectState.Added)
             {
-                entityEntry = _context.Set<TEntity>().Add(entity);
+                _context.Add(entity);
             }
-            entityEntry = _context.Set<TEntity>().Attach(entity);
-            return entityEntry;
+            else
+            {
+                _context.Attach(entity);
+            }
         }
         protected virtual TEntity FindEntityById(int id)
         {

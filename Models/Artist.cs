@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Core.Common.Data;
+using Core.Common.Utilities;
 
 namespace DotNetCoreTestWebProject.Models
 {
@@ -8,6 +10,9 @@ namespace DotNetCoreTestWebProject.Models
         public Artist()
         {
             Album = new HashSet<Album>();
+            Guid = StringUtils.GenerateLowercase32DigitsGuid();
+            DateCreated = DateTime.Now;
+            DateModified = DateCreated;
         }
 
         public string Name { get; set; }

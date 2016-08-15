@@ -1,11 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
-using DotNetCoreTestWebProject.Data.Services;
-using DotNetCoreTestWebProject.Data.Repositories;
 using System.Collections.Generic;
-using DotNetCoreTestWebProject.Models;
-using DotNetCoreTestWebProject.ViewModels;
 using System.Threading.Tasks;
 using Core.Common.Data;
+using DotNetCoreTestWebProject.Data.Services;
+using DotNetCoreTestWebProject.Models;
+using DotNetCoreTestWebProject.EditModels;
+using DotNetCoreTestWebProject.Data.Repositories;
+using DotNetCoreTestWebProject.ViewModels;
 
 namespace DotNetCoreTestWebProject.Controllers
 {
