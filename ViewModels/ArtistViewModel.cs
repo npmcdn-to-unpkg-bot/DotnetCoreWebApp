@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace DotNetCoreTestWebProject.ViewModels
 {
-    public  class ArtistViewModel : BaseViewModel
+    public class ArtistViewModel : BaseViewModel
     {
         public ArtistViewModel()
         {
@@ -12,13 +12,16 @@ namespace DotNetCoreTestWebProject.ViewModels
         }
         public IEnumerable<Artist> ArtistsList { get; set; }
 
-        override public  List<SelectListItem> SortColumns {get
+        override public List<SelectListItem> SortColumns
+        {
+            get
             {
                 var list = new List<SelectListItem>();
                 list.Add(new SelectListItem { Text = "Artist Id", Value = "Id" });
                 list.Add(new SelectListItem { Text = "Artist name", Value = "Name" });
                 return list;
-            }} 
-        
+            }
+        }
+
     }
 }
