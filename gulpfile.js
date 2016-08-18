@@ -67,7 +67,7 @@ gulp.task("tsTranspile", function () {
             experimentalDecorators: true,
             suppressImplicitAnyIndexErrors: true
         }))
-        .pipe(gulp.dest(webroot + "app/js"));
+        .pipe(gulp.dest(webroot + "app"));
 });
 
 gulp.task("min", ["min:js", "min:css"]);
