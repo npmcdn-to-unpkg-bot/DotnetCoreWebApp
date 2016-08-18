@@ -8,27 +8,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var browser_1 = require("angular2/platform/browser");
 var core_1 = require("angular2/core");
 var http_1 = require("angular2/http");
-var ArtistsService_1 = require("./ArtistsService");
-var Performers = (function () {
-    function Performers(service) {
-        this.service = service;
-        this.artists = null;
-        this.someValue = 255;
-        this.artists = this.service.getArtists();
+require('rxjs/add/operator/map');
+require('rxjs/add/operator/catch');
+var ArtistsService = (function () {
+    function ArtistsService(http) {
+        this.http = http;
     }
-    Performers = __decorate([
-        core_1.Component({
-            selector: "performers",
-            templateUrl: "/app/components/performers/performersListing.html"
-        }), 
-        __metadata('design:paramtypes', [ArtistsService_1.ArtistsService])
-    ], Performers);
-    return Performers;
+    ArtistsService.prototype.getArtists = function () {
+        return this.http.get('/api/artists').map(function (res) { return res.json(); });
+    };
+    ArtistsService = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [http_1.Http])
+    ], ArtistsService);
+    return ArtistsService;
 }());
-exports.Performers = Performers;
-browser_1.bootstrap(Performers, [
-    http_1.HTTP_PROVIDERS, ArtistsService_1.ArtistsService
-]);
+exports.ArtistsService = ArtistsService;

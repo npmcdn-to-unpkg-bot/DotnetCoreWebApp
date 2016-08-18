@@ -1,1 +1,5 @@
-Some value = {{someValue}}
+<ul>
+    <li *ngFor=" let artist of artists | async">
+        {{artist.name}}
+    </li>
+</ul>
