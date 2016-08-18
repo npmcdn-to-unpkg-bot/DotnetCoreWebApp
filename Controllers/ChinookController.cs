@@ -13,14 +13,11 @@ namespace DotNetCoreTestWebProject.Controllers
 
     public class ChinookController : BaseController
     {
-        private readonly IArtistsRepository _artistsRepository;
         private readonly IArtistEntityService _artistService;
 
         public ChinookController(
-            IArtistsRepository artistsRepository,
             IArtistEntityService artistService)
         {
-            _artistsRepository = artistsRepository;
             _artistService = artistService;
 
         }
