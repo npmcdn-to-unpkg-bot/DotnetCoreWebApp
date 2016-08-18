@@ -5,7 +5,8 @@ var gulp = require("gulp"),
     rimraf = require("rimraf"),
     concat = require("gulp-concat"),
     cssmin = require("gulp-cssmin"),
-    uglify = require("gulp-uglify");
+    uglify = require("gulp-uglify"),
+    tsc = require("gulp-typescript");
 
 var webroot = "./wwwroot/";
 
@@ -42,4 +43,33 @@ gulp.task("min:css", function () {
         .pipe(gulp.dest("."));
 });
 
+gulp.task("ng2", function () {
+    gulp.src([
+        "node_modules/es6-shim/*.*",
+        "node_modules/angular2/bundles/*.*",
+        "node_modules/systemjs/dist/*.*"
+    ]).pipe(gulp.dest(webroot + "lib/ng2"))
+    gulp.src([
+        "node_modules/rxjs/**/*"
+    ]).pipe(gulp.dest(webroot + "lib/ng2/rxjs"))
+});
+
+gulp.task("tsTranspile", function () {
+    gulp.src(['node_modules/angular2/typings/browser.d.ts',
+    webroot + "app/**/*.ts"])
+        .pipe(tsc({
+            noImplicitAny: false,
+            noEmitOnError: true,
+            removeComments: false,
+            sourceMap: true,
+            target: "es5",   
+            emitDecoratorMetadata: true,
+            experimentalDecorators: true,
+            suppressImplicitAnyIndexErrors: true
+        }))
+        .pipe(gulp.dest(webroot + "app/js"));
+});
+
 gulp.task("min", ["min:js", "min:css"]);
+
+gulp.task('runAll', ['ng2', 'tsTranspile', 'min']);

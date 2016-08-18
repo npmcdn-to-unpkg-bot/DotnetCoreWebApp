@@ -85,5 +85,10 @@ namespace DotNetCoreTestWebProject.Controllers
                 return View(model);
             });
         }
+
+        public IActionResult PerformersAngular()
+        {
+            return View();
+        }
     }
 }
