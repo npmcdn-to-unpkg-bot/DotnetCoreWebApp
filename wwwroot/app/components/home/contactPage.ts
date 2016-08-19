@@ -7,7 +7,7 @@ import {Component} from "angular2/core";
     templateUrl : "/app/components/home/contactPage.html"
 })
 export class ContactPage {
-    someValue = 300;
+    someValue: number = 300;
 }
 
 bootstrap(ContactPage, []);

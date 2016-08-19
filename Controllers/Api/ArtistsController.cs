@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Common.Data.Models;
 using DotNetCoreTestWebProject.Data.Services;
 using DotNetCoreTestWebProject.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -18,7 +19,7 @@ namespace DotNetCoreTestWebProject.Controllers.Api
 
 
         [HttpGet]
-        public IEnumerable<Artist> GetAll(
+        public IActionResult GetAll(
             int? pageNumber, int? pageSize, string sortCol,
             string sortDir, string searchTerms)
         {
@@ -32,21 +33,25 @@ namespace DotNetCoreTestWebProject.Controllers.Api
             int offset = 0;
             int offsetUpperBound = 0;
             string[] keywordsList = !string.IsNullOrWhiteSpace(searchTerms) ? searchTerms.Split(',') : new string[] { };
-            IEnumerable<Artist> artists = _artistService.FindAllByCriteria(
+            IEnumerable<Artist> performers = _artistService.FindAllByCriteria(
                  pageIndex, sizeOfPage, out totalNumberOfRecords, sortCol, sortDir, out offset,
-                 out offsetUpperBound, out totalNumberOfPages, keywordsList);
+                 out offsetUpperBound, out totalNumberOfPages, keywordsList);           
 
-            ViewBag.offset = offset;
-            ViewBag.pageIndex = pageIndex;
-            ViewBag.sizeOfPage = sizeOfPage;
-            ViewBag.offsetUpperBound = offsetUpperBound;
-            ViewBag.totalRecords = totalNumberOfRecords;
-            ViewBag.totalNumberOfPages = totalNumberOfPages;
-            ViewBag.searchTerms = searchTerms;
-            ViewBag.sortCol = sortCol;
-            ViewBag.sortDir = sortDir;
-            
-            return artists;
+            var paginationData = new PaginationData
+            {
+                OffsetFromZero = offset,
+                PageNumber = pageIndex,
+                PageSize = sizeOfPage,
+                OffsetUpperBound = offsetUpperBound,
+                TotalNumberOfRecords = totalNumberOfRecords,
+                TotalNumberOfPages = totalNumberOfPages,
+                SearchTermsCommaSeparated = searchTerms,
+                SortColumn = sortCol,
+                SortDirection = sortDir
+            };
+            var toReturn = Json(new {performers, paginationData});
+
+            return toReturn;
         }
     }
 }

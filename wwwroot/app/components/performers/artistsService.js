@@ -10,14 +10,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("angular2/core");
 var http_1 = require("angular2/http");
-require('rxjs/add/operator/map');
-require('rxjs/add/operator/catch');
+require("rxjs/add/operator/map");
+require("rxjs/add/operator/catch");
+var PerformersListing_1 = require("./PerformersListing");
+var Artist_1 = require("../../shared/models/Artist");
+var PaginationData_1 = require("../../shared/models/PaginationData");
 var ArtistsService = (function () {
     function ArtistsService(http) {
         this.http = http;
     }
     ArtistsService.prototype.getArtists = function () {
-        return this.http.get('/api/artists').map(function (res) { return res.json(); });
+        return this.http.get('/api/artists').map(function (responseData) {
+            responseData.json();
+        }).map(function (artists) {
+            var artistsCollection = [];
+            var paginationData = new PaginationData_1.PaginationData();
+            if (artists) {
+                artists.forEach(function (artist) {
+                    artistsCollection.push(new Artist_1.Artist(1, "my artist"));
+                });
+                var result = new PerformersListing_1.PerformersListing(artistsCollection, paginationData);
+                return result;
+            }
+        });
     };
     ArtistsService = __decorate([
         core_1.Injectable(), 

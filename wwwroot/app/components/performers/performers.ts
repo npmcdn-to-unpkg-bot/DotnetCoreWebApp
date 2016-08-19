@@ -2,6 +2,7 @@ import {bootstrap} from "angular2/platform/browser";
 import {Component} from "angular2/core";
 import {HTTP_PROVIDERS} from "angular2/http";
 import {ArtistsService} from "./ArtistsService";
+import {PaginatePipe, PaginationControlsCmp, PaginationService} from 'ng2-pagination';
 
 
 @Component({

@@ -47,7 +47,9 @@ gulp.task("ng2", function () {
     gulp.src([
         "node_modules/es6-shim/*.*",
         "node_modules/angular2/bundles/*.*",
-        "node_modules/systemjs/dist/*.*"
+        "node_modules/systemjs/dist/*.*",
+        "node_modules/ng2-pagination/dist/*.*"
+
     ]).pipe(gulp.dest(webroot + "lib/ng2"))
     gulp.src([
         "node_modules/rxjs/**/*"
