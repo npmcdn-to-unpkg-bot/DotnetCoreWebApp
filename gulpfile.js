@@ -74,4 +74,4 @@ gulp.task("tsTranspile", function () {
 
 gulp.task("min", ["min:js", "min:css"]);
 
-gulp.task('runAll', ['ng2', 'tsTranspile', 'min']);
+gulp.task('default', ['ng2', 'tsTranspile', 'min']);

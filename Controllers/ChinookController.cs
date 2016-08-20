@@ -5,7 +5,6 @@ using Core.Common.Data;
 using DotNetCoreTestWebProject.Data.Services;
 using DotNetCoreTestWebProject.Models;
 using DotNetCoreTestWebProject.EditModels;
-using DotNetCoreTestWebProject.Data.Repositories;
 using DotNetCoreTestWebProject.ViewModels;
 
 namespace DotNetCoreTestWebProject.Controllers
@@ -22,7 +21,7 @@ namespace DotNetCoreTestWebProject.Controllers
 
         }
 
-        public IActionResult Performers(
+        public IActionResult Artists(
             int? pageNumber, int? pageSize, string sortCol,
             string sortDir, string searchTerms)
         {
@@ -83,7 +82,7 @@ namespace DotNetCoreTestWebProject.Controllers
             });
         }
 
-        public IActionResult PerformersAngular()
+        public IActionResult ArtistsAngular()
         {
             return View();
         }
