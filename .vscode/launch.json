@@ -5,7 +5,7 @@
             "name": ".NET Core Launch (web)",
             "type": "coreclr",
             "request": "launch",
-            "preLaunchTask": "runAll",
+            "preLaunchTask": "build",
             "program": "${workspaceRoot}/bin/Debug/netcoreapp1.0/DotNetCoreTestWebProject.dll",
             "args": [],
             "cwd": "${workspaceRoot}",

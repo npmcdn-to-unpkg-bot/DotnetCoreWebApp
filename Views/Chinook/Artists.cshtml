@@ -27,7 +27,7 @@
     {
         <tr>
             <td>
-               @artist.Id
+               @artist.ArtistId
             </td>
             <td>
                @artist.Name
@@ -60,7 +60,7 @@
     @await Component.InvokeAsync("ListPager", 
             new {
                 controllerName = "Chinook", 
-                controllerAction = "Performers", 
+                controllerAction = "Artists", 
                 totalNumberOfItems = ViewBag.totalRecords, 
                 pageNumber = ViewBag.pageIndex,
                 pageSize = ViewBag.sizeOfPage, 

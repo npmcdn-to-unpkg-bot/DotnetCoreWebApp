@@ -76,6 +76,7 @@ namespace Common.Data.EntityFramework
 
         protected virtual void AddOrUpdate(TEntity entity)
         {
+            /*
             if (entity.Id == default(int) && entity.ObjectState == ObjectState.Added)
             {
                 _context.Add(entity);
@@ -84,20 +85,25 @@ namespace Common.Data.EntityFramework
             {
                 _context.Attach(entity);
             }
+            */
         }
+
         protected virtual TEntity FindEntityById(int id)
         {
-            return _context.Set<TEntity>().SingleOrDefault(x => x.Id == id);
+            //return _context.Set<TEntity>().SingleOrDefault(x => x.Id == id);
+            return new TEntity();
         }
 
         protected virtual bool EntityExists(TEntity entity)
         {
-            return _context.Set<TEntity>().Any(x => x.Id == entity.Id);
+            //return _context.Set<TEntity>().Any(x => x.Id == entity.Id);
+            return false;
         }
 
         protected virtual bool EntityExists(int entityId)
         {
-            return _context.Set<TEntity>().Any(x => x.Id == entityId);
+           // return _context.Set<TEntity>().Any(x => x.Id == entityId);
+           return false;
         }
 
         protected virtual IEnumerable<TEntity> FindAllEntities()

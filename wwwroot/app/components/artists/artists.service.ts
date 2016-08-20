@@ -17,7 +17,7 @@ export  class ArtistsService {
     }
     getArtists(): Observable<IArtist[]>  {
         
-        return this.http.get('/api/artists').map((response : Response) => <IArtist[]> response.json())//response.json.data? 
+        return this.http.get('/api/artists').map((response : Response) => <IArtist[]> response.json().data())//response.json.data? 
         .do(data => console.log('All: ' + JSON.stringify(data)))
         .catch(this.handleError); 
     }

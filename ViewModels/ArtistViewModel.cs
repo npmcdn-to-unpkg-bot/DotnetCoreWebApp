@@ -17,7 +17,7 @@ namespace DotNetCoreTestWebProject.ViewModels
             get
             {
                 var list = new List<SelectListItem>();
-                list.Add(new SelectListItem { Text = "Artist Id", Value = "Id" });
+                list.Add(new SelectListItem { Text = "Artist Id", Value = "ArtistId" });
                 list.Add(new SelectListItem { Text = "Artist name", Value = "Name" });
                 return list;
             }

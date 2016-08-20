@@ -19,7 +19,7 @@ var ArtistsService = (function () {
         this.http = http;
     }
     ArtistsService.prototype.getArtists = function () {
-        return this.http.get('/api/artists').map(function (response) { return response.json(); }) //response.json.data? 
+        return this.http.get('/api/artists').map(function (response) { return response.json().data(); }) //response.json.data? 
             .do(function (data) { return console.log('All: ' + JSON.stringify(data)); })
             .catch(this.handleError);
     };

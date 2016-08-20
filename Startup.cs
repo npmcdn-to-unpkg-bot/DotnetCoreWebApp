@@ -43,11 +43,11 @@ namespace DotNetCoreTestWebProject
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
-            // services.AddDbContext<ChinookDbContext>(options =>
-            // options.UseSqlite(Configuration.GetConnectionString("ChinookConnection")));
+             services.AddDbContext<ChinookSqliteDbContext>(options =>
+             options.UseSqlite(Configuration.GetConnectionString("ChinookConnection")));
 
-            services.AddDbContext<ChinookSqlServer2008DbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("ChinookConnectionSqlServer2008"), b => b.UseRowNumberForPaging()));
+           // services.AddDbContext<ChinookSqlServer2008DbContext>(options =>
+          //  options.UseSqlServer(Configuration.GetConnectionString("ChinookConnectionSqlServer2008"), b => b.UseRowNumberForPaging()));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()

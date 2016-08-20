@@ -1,22 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using Core.Common.Data;
+using Core.Common.Utilities;
 
 namespace DotNetCoreTestWebProject.Models
 {
-    public partial class Employee  : BaseObjectWithState, IObjectWithState
+    public partial class Employee : BaseObjectWithState, IObjectWithState
     {
         public Employee()
         {
             Customer = new HashSet<Customer>();
+            Guid = StringUtils.GenerateLowercase32DigitsGuid();
+            DateCreated = DateTime.Now;
+            DateModified = DateCreated;
         }
 
+        public long EmployeeId { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
         public string Title { get; set; }
-        public int? ReportsTo { get; set; }
-        public DateTime? BirthDate { get; set; }
-        public DateTime? HireDate { get; set; }
+        public long? ReportsTo { get; set; }
+        public string BirthDate { get; set; }
+        public string HireDate { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
         public string State { get; set; }

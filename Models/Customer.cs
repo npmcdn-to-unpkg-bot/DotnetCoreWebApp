@@ -1,15 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Core.Common.Data;
+using Core.Common.Utilities;
 
 namespace DotNetCoreTestWebProject.Models
 {
-    public partial class Customer  : BaseObjectWithState, IObjectWithState
+    public partial class Customer : BaseObjectWithState, IObjectWithState
     {
         public Customer()
         {
             Invoice = new HashSet<Invoice>();
+            Guid = StringUtils.GenerateLowercase32DigitsGuid();
+            DateCreated = DateTime.Now;
+            DateModified = DateCreated;
         }
 
+        public long CustomerId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Company { get; set; }
@@ -21,7 +27,7 @@ namespace DotNetCoreTestWebProject.Models
         public string Phone { get; set; }
         public string Fax { get; set; }
         public string Email { get; set; }
-        public int? SupportRepId { get; set; }
+        public long? SupportRepId { get; set; }
 
         public virtual ICollection<Invoice> Invoice { get; set; }
         public virtual Employee SupportRep { get; set; }

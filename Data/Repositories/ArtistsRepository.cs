@@ -3,18 +3,19 @@ using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
 using Common.Data.EntityFramework;
+using Core.Common.Data;
 using DotNetCoreTestWebProject.Models;
 using LinqKit;
 
 namespace DotNetCoreTestWebProject.Data.Repositories
 {
-    public class ArtistsRepository : EfDataRepositoryBase<Artist, ChinookSqlServer2008DbContext>,
+    public class ArtistsRepository : EfDataRepositoryBase<Artist, ChinookSqliteDbContext>,
      IArtistsRepository
     {
         public ArtistsRepository()
         { }
 
-        public ArtistsRepository(ChinookSqlServer2008DbContext context)
+        public ArtistsRepository(ChinookSqliteDbContext context)
         {
             _context = context;
         }
@@ -60,6 +61,18 @@ namespace DotNetCoreTestWebProject.Data.Repositories
                     .ToList();
             return artists;
 
+        }
+
+        protected override void AddOrUpdate(Artist entity)
+        {
+            if (entity.ArtistId == default(int) && entity.ObjectState == ObjectState.Added)
+            {
+                _context.Add(entity);
+            }
+            else
+            {
+                _context.Attach(entity);
+            }
         }
     }
 }
