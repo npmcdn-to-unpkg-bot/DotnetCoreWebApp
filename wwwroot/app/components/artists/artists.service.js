@@ -12,26 +12,20 @@ var core_1 = require("angular2/core");
 var http_1 = require("angular2/http");
 require("rxjs/add/operator/map");
 require("rxjs/add/operator/catch");
-var PerformersListing_1 = require("./PerformersListing");
+require("rxjs/add/operator/do");
+var Observable_1 = require("rxjs/Observable");
 var ArtistsService = (function () {
     function ArtistsService(http) {
         this.http = http;
     }
     ArtistsService.prototype.getArtists = function () {
-        var result = null;
-        return this.http.get('/api/artists').map(function (responseData) {
-            responseData.json();
-        }).map(function (artists) {
-            var artistsCollection = [];
-            var paginationData = null();
-            if (artists) {
-                artists.forEach(function (artist) {
-                    //artistsCollection.push(new IArtist(1, "my artist"));
-                });
-                result = new PerformersListing_1.PerformersListing(artistsCollection, paginationData);
-            }
-            return result;
-        });
+        return this.http.get('/api/artists').map(function (response) { return response.json(); }) //response.json.data? 
+            .do(function (data) { return console.log('All: ' + JSON.stringify(data)); })
+            .catch(this.handleError);
+    };
+    ArtistsService.prototype.handleError = function (error) {
+        console.error(error);
+        return Observable_1.Observable.throw(error.json().error || 'Server error');
     };
     ArtistsService = __decorate([
         core_1.Injectable(), 

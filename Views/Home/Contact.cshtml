@@ -16,16 +16,9 @@
     <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
 </address>
 
-@section scripts
-{
-    <script src="~/lib/ng2/es6-shim.min.js"></script>
-    <script src="~/lib/ng2/system-polyfills.js"></script>
-    <script src="~/lib/ng2/angular2-polyfills.js"></script>
-    <script src="~/lib/ng2/system.src.js"></script>
-    <script src="~/lib/ng2/rxjs/Rx.js"></script>    
-    <script src="~/lib/ng2/angular2.dev.js"></script>
- 
 
+<contact-page> <i class="fa fa-spin fa-circle-o-notch"></i>Loading...</contact-page>
+@section scripts {
     <script>
          System.config({
             map: {
@@ -42,5 +35,3 @@
             .then(null, console.error.bind(console));
     </script>
 }
-
-<contact-page> <i class="fa fa-spin fa-circle-o-notch"></i>Loading...</contact-page>

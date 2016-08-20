@@ -15,6 +15,14 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
+
+    <script src="~/lib/ng2/es6-shim.min.js"></script>
+    <script src="~/lib/ng2/system-polyfills.js"></script>
+    <script src="~/lib/ng2/angular2-polyfills.js"></script>
+    <script src="~/lib/ng2/system.src.js"></script>
+    <script src="~/lib/ng2/rxjs/Rx.js"></script>    
+    <script src="~/lib/ng2/angular2.dev.js"></script>
+    <script src="~/lib/ng2/http.dev.js"></script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -41,7 +49,9 @@
         </div>
     </div>
     <div class="container body-content">
+        <main-app>
         @RenderBody()
+        </main-app>
         <hr />
         <footer>
             <p>&copy; 2016 - ASPNetCore</p>
@@ -64,6 +74,8 @@
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
+
+    
 
     @RenderSection("scripts", required: false)
 </body>

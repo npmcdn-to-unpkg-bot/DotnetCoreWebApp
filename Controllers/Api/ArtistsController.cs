@@ -23,6 +23,7 @@ namespace DotNetCoreTestWebProject.Controllers.Api
             int? pageNumber, int? pageSize, string sortCol,
             string sortDir, string searchTerms)
         {
+            /*
             int pageIndex = pageNumber ?? 1;
             int sizeOfPage = pageSize ?? 10;
             sortCol = sortCol ?? "Name";
@@ -49,7 +50,9 @@ namespace DotNetCoreTestWebProject.Controllers.Api
                 SortColumn = sortCol,
                 SortDirection = sortDir
             };
-            var toReturn = Json(new {performers, paginationData});
+            //var toReturn = Json(new {performers, paginationData});
+*/
+            var toReturn = Json("[{\"id\": 1,\"name\": Hazel},{\"id\": 2,\"name\": Ernest}]");
 
             return toReturn;
         }
