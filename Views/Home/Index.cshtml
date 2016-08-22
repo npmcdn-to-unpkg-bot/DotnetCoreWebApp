@@ -108,19 +108,5 @@
     </div>
 </div>
 @section scripts {
-    <script>
-         System.config({
-            map: {
-                app: "/app",
-                rxjs: '/lib/ng2/rxjs'
-             },
-            packages: {        
-                'app':  { defaultExtension: 'js'},
-                'rxjs': { defaultExtension: 'js'}
-            }
-    
-      });
-      System.import('app/components/app.component')
-            .then(null, console.error.bind(console));
-    </script>
+    @await Html.PartialAsync("_Angular2ScriptsImport.cshtml", "app/components/app.component")      
 }

@@ -2,20 +2,7 @@
 
 <artists> <i class="fa fa-spin fa-circle-o-notch"></i>Loading...</artists>
 
+
 @section scripts {
-    <script>
-         System.config({
-            map: {
-                app: "/app",
-                rxjs: '/lib/ng2/rxjs'
-             },
-            packages: {        
-                'app':  { defaultExtension: 'js'},
-                'rxjs': { defaultExtension: 'js'}
-            }
-    
-      });
-      System.import('app/components/artists/artists-listing.component')
-            .then(null, console.error.bind(console));
-    </script>
+    @await Html.PartialAsync("_Angular2ScriptsImport.cshtml", "app/components/artists/artists-listing.component")      
 }
