@@ -2,6 +2,7 @@ import {bootstrap} from 'angular2/platform/browser';
 import {Component, OnInit} from "angular2/core";
 import {ArtistsService} from "./artists.service";
 import {HTTP_PROVIDERS} from "angular2/http";
+import {IArtist} from "../../shared/interfaces/IArtist"
 
 
 @Component({
@@ -11,7 +12,7 @@ import {HTTP_PROVIDERS} from "angular2/http";
 })
 export  class ArtistsListingComponent implements OnInit {
     
-    artists: any;
+    artists: IArtist[];
     errorMessage: string;
 
     constructor(private artistsService: ArtistsService) {
@@ -19,7 +20,7 @@ export  class ArtistsListingComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.artists = this.artistsService.getArtists()
+        this.artistsService.getArtists()
         .subscribe(
             artists => this.artists = artists,
             error => this.errorMessage = <any>error);

@@ -18,7 +18,7 @@ var ArtistsListingComponent = (function () {
     }
     ArtistsListingComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.artists = this.artistsService.getArtists()
+        this.artistsService.getArtists()
             .subscribe(function (artists) { return _this.artists = artists; }, function (error) { return _this.errorMessage = error; });
     };
     ArtistsListingComponent = __decorate([

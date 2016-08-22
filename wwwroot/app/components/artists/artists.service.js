@@ -13,14 +13,16 @@ var http_1 = require("angular2/http");
 require("rxjs/add/operator/map");
 require("rxjs/add/operator/catch");
 require("rxjs/add/operator/do");
+//import {ArtistsListingComponent} from "./artists-listing.component"
 var Observable_1 = require("rxjs/Observable");
+//import {IPaginationData} from "../../shared/interfaces/IPaginationData"
 var ArtistsService = (function () {
     function ArtistsService(http) {
         this.http = http;
     }
     ArtistsService.prototype.getArtists = function () {
-        return this.http.get('/api/artists').map(function (response) { return response.json().data(); }) //response.json.data? 
-            .do(function (data) { return console.log('All: ' + JSON.stringify(data)); })
+        return this.http.get('/api/artists')
+            .map(function (response) { return response.json().performers; })
             .catch(this.handleError);
     };
     ArtistsService.prototype.handleError = function (error) {
