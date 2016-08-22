@@ -17,7 +17,7 @@ var ContactPage = (function () {
     ContactPage = __decorate([
         core_1.Component({
             selector: "contact-page",
-            templateUrl: "/app/components/home/contactPage.html"
+            templateUrl: "/app/components/home/contact-page.component.html"
         }), 
         __metadata('design:paramtypes', [])
     ], ContactPage);
