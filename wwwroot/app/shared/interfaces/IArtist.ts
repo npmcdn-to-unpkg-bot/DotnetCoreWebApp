@@ -4,8 +4,8 @@ export interface IArtist {
     album: Array<any>;
     guid: string;
     dateCreated: string;
-    dateModifed: string;
-    objectState: string;
+    dateModified: string;
+    objectState: number;
     rowVersion: string;
     deleted: boolean;
 

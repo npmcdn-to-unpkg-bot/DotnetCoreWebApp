@@ -3,6 +3,7 @@ import {Component, OnInit} from "angular2/core";
 import {ArtistsService} from "./artists.service";
 import {HTTP_PROVIDERS} from "angular2/http";
 import {IArtist} from "../../shared/interfaces/IArtist"
+import {IPaginationData} from "../../shared/interfaces/IPaginationData"
 
 
 @Component({
@@ -12,8 +13,10 @@ import {IArtist} from "../../shared/interfaces/IArtist"
 })
 export  class ArtistsListingComponent implements OnInit {
     
-    artists: IArtist[];
+    artists: any;
+    paginationData: IPaginationData;
     errorMessage: string;
+    isLoading: boolean = true;
 
     constructor(private artistsService: ArtistsService) {
 
@@ -22,8 +25,11 @@ export  class ArtistsListingComponent implements OnInit {
     ngOnInit(): void {
         this.artistsService.getArtists()
         .subscribe(
-            artists => this.artists = artists,
-            error => this.errorMessage = <any>error);
+            artists => this.artists = artists,            
+            error => this.errorMessage = <any>error,
+            () => this.isLoading = false);
+            
+
     }
 }
 bootstrap(ArtistsListingComponent, []);

@@ -15,11 +15,12 @@ var http_1 = require("angular2/http");
 var ArtistsListingComponent = (function () {
     function ArtistsListingComponent(artistsService) {
         this.artistsService = artistsService;
+        this.isLoading = true;
     }
     ArtistsListingComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.artistsService.getArtists()
-            .subscribe(function (artists) { return _this.artists = artists; }, function (error) { return _this.errorMessage = error; });
+            .subscribe(function (artists) { return _this.artists = artists; }, function (error) { return _this.errorMessage = error; }, function () { return _this.isLoading = false; });
     };
     ArtistsListingComponent = __decorate([
         core_1.Component({
