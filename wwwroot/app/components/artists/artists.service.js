@@ -13,6 +13,7 @@ var http_1 = require("angular2/http");
 require("rxjs/add/operator/map");
 require("rxjs/add/operator/catch");
 require("rxjs/add/operator/do");
+require("rxjs/add/observable/throw");
 var Observable_1 = require("rxjs/Observable");
 require('rxjs/add/operator/toPromise');
 var ArtistsService = (function () {
@@ -23,11 +24,23 @@ var ArtistsService = (function () {
         return this._http.get('/api/artists')
             .map(function (response) {
             return response.json();
-        }).toPromise();
+        })
+            .toPromise()
+            .then(this.extractData)
+            .catch(this.handleError);
+    };
+    ArtistsService.prototype.extractData = function (res) {
+        // let body = res.json();
+        // return body.data || {};
+        return res;
     };
     ArtistsService.prototype.handleError = function (error) {
-        console.error(error);
-        return Observable_1.Observable.throw(error.json().error || 'Server error');
+        // In a real world app, we might use a remote logging infrastructure
+        // We'd also dig deeper into the error to get a better message
+        var errMsg = (error.message) ? error.message :
+            error.status ? error.status + " - " + error.statusText : 'Server error';
+        console.error(errMsg); // log to console instead
+        return Observable_1.Observable.throw(errMsg);
     };
     ArtistsService = __decorate([
         core_1.Injectable(), 
