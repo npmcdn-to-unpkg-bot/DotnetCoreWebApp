@@ -15,15 +15,37 @@ var artists_service_1 = require("./artists.service");
 var ArtistsListingComponent = (function () {
     function ArtistsListingComponent(artistsService) {
         this.artistsService = artistsService;
+        this.pageNumber = 1;
+        this.pageSize = 20;
+        this.searchTerms = '';
+        this.sortColumn = 'Name';
+        this.sortDirection = 'ASC';
         this.isLoading = true;
     }
     ArtistsListingComponent.prototype.ngOnInit = function () {
+        this.pageData(1, 10, '', 'Name', 'ASC');
+    };
+    ArtistsListingComponent.prototype.pageData = function (pageNumber, pageSize, searchTerms, sortColumn, sortDirection) {
         var _this = this;
-        this.artistsService.getArtists()
+        this.pageNumber = pageNumber;
+        this.pageSize = pageSize;
+        this.searchTerms = searchTerms == null ? '' : searchTerms;
+        this.sortColumn = sortColumn;
+        this.sortDirection = sortDirection;
+        this.artistsService.getArtists(this.pageNumber, this.pageSize, this.searchTerms, this.sortColumn, this.sortDirection)
             .then(function (response) {
             _this.paginationData = response.paginationData;
+            _this.initPagesArray();
             _this.artists = response.performers;
         });
+    };
+    ArtistsListingComponent.prototype.initPagesArray = function () {
+        if (!this.paginationData)
+            return;
+        this.pagesArray = [];
+        for (var i = 1; i <= this.paginationData.totalNumberOfPages; i++) {
+            this.pagesArray.push(i);
+        }
     };
     ArtistsListingComponent = __decorate([
         core_1.Component({

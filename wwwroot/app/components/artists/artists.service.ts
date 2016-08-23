@@ -9,13 +9,20 @@ import {IArtist} from "./artist";
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
-export class ArtistsService {
+export class ArtistsService  {
 
     constructor(private _http: Http) {
     }
 
-    getArtists(): Promise<any> {
-        return this._http.get('/api/artists')
+    getArtists( pageNumber:number = 1,
+                pageSize: number = 20,
+                searchTerms: string = '',
+                sortColumn: string = 'Name',
+                sortDirection: string = 'ASC'): Promise<any> {
+        let paginationData: string = '?pageNumber=' + pageNumber +
+         '&pageSize='+ pageSize +'&searchTerms='+ searchTerms +
+          '&sortCol='+ sortColumn +'&sortDir=' + sortDirection;
+        return this._http.get('/api/artists' + paginationData)
             .map((response) => {
                 return response.json();
             })

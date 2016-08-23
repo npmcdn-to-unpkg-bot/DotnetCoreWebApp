@@ -20,8 +20,16 @@ var ArtistsService = (function () {
     function ArtistsService(_http) {
         this._http = _http;
     }
-    ArtistsService.prototype.getArtists = function () {
-        return this._http.get('/api/artists')
+    ArtistsService.prototype.getArtists = function (pageNumber, pageSize, searchTerms, sortColumn, sortDirection) {
+        if (pageNumber === void 0) { pageNumber = 1; }
+        if (pageSize === void 0) { pageSize = 20; }
+        if (searchTerms === void 0) { searchTerms = ''; }
+        if (sortColumn === void 0) { sortColumn = 'Name'; }
+        if (sortDirection === void 0) { sortDirection = 'ASC'; }
+        var paginationData = '?pageNumber=' + pageNumber +
+            '&pageSize=' + pageSize + '&searchTerms=' + searchTerms +
+            '&sortCol=' + sortColumn + '&sortDir=' + sortDirection;
+        return this._http.get('/api/artists' + paginationData)
             .map(function (response) {
             return response.json();
         })

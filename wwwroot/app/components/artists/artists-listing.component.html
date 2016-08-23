@@ -1,8 +1,24 @@
+
+
 <ul>
-    <li *ngFor=" let artist of artists">
+    <li *ngFor="let artist of artists">
         {{artist.name}}
     </li>
     
 </ul>
+
+
+
+
+<div *ngIf(pagesArray) >
+    <p>Showing {{paginationData.offsetFromZero}} to {{paginationData.offsetUpperBound}} records of {{paginationData.totalNumberOfRecords}}. This is page {{paginationData.pageNumber}} of {{paginationData.totalNumberOfPages}}.</p>
+    <ul class="pagination pagination-sm">
+        <li *ngFor="let page of pagesArray">
+            <a href="#" (click)="pageData(page,paginationData.pageSize,paginationData.searchTermsCommaSeparated,paginationData.sortColumn,paginationData.sortDirection)"  >{{page}}</a>
+
+        </li>
+    </ul>
+</div>
+
 
 
