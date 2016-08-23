@@ -14,20 +14,16 @@ require("rxjs/add/operator/map");
 require("rxjs/add/operator/catch");
 require("rxjs/add/operator/do");
 var Observable_1 = require("rxjs/Observable");
+require('rxjs/add/operator/toPromise');
 var ArtistsService = (function () {
-    function ArtistsService(http) {
-        this.http = http;
+    function ArtistsService(_http) {
+        this._http = _http;
     }
     ArtistsService.prototype.getArtists = function () {
-        return this.http.get('/api/artists')
+        return this._http.get('/api/artists')
             .map(function (response) {
-            // this.paginationData =  <IPaginationData>response.json().paginationData;
             return response.json();
-        })
-            .catch(this.handleError);
-    };
-    ArtistsService.prototype.getPaginationData = function () {
-        return this.paginationData;
+        }).toPromise();
     };
     ArtistsService.prototype.handleError = function (error) {
         console.error(error);

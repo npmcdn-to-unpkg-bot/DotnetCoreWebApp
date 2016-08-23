@@ -20,7 +20,10 @@ var ArtistsListingComponent = (function () {
     ArtistsListingComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.artistsService.getArtists()
-            .subscribe(function (artists) { return _this.artists = artists; }, function (error) { return _this.errorMessage = error; }, function () { return _this.isLoading = false; });
+            .then(function (response) {
+            _this.paginationData = response.paginationData;
+            _this.artists = response.performers;
+        });
     };
     ArtistsListingComponent = __decorate([
         core_1.Component({
