@@ -1,16 +1,15 @@
 import {bootstrap} from 'angular2/platform/browser';
 import {Component, OnInit} from "angular2/core";
-import {ArtistsService} from "./artists.service";
 import {HTTP_PROVIDERS} from "angular2/http";
+import {ArtistsService} from "./artists.service";
 import {IArtist} from "./artist";
-
 import {IPaginationData} from "../../shared/interfaces/IPaginationData"
 
 
 @Component({
     selector: "artists",
     templateUrl: "/app/components/artists/artists-listing.component.html",
-    providers: [HTTP_PROVIDERS, ArtistsService]
+    providers: [ArtistsService,HTTP_PROVIDERS]
 })
 export class ArtistsListingComponent implements OnInit {
 

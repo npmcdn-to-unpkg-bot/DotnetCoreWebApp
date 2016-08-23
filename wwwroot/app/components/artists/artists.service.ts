@@ -1,5 +1,5 @@
 import {Injectable} from "angular2/core";
-import {Http, Response,HTTP_PROVIDERS} from "angular2/http";
+import {Http, Response} from "angular2/http";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 import "rxjs/add/operator/do";

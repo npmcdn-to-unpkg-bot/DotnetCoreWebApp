@@ -10,8 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var browser_1 = require('angular2/platform/browser');
 var core_1 = require("angular2/core");
-var artists_service_1 = require("./artists.service");
 var http_1 = require("angular2/http");
+var artists_service_1 = require("./artists.service");
 var ArtistsListingComponent = (function () {
     function ArtistsListingComponent(artistsService) {
         this.artistsService = artistsService;
@@ -29,7 +29,7 @@ var ArtistsListingComponent = (function () {
         core_1.Component({
             selector: "artists",
             templateUrl: "/app/components/artists/artists-listing.component.html",
-            providers: [http_1.HTTP_PROVIDERS, artists_service_1.ArtistsService]
+            providers: [artists_service_1.ArtistsService, http_1.HTTP_PROVIDERS]
         }), 
         __metadata('design:paramtypes', [artists_service_1.ArtistsService])
     ], ArtistsListingComponent);
