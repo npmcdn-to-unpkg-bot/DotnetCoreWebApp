@@ -30,8 +30,6 @@ var ArtistsService = (function () {
             .catch(this.handleError);
     };
     ArtistsService.prototype.extractData = function (res) {
-        // let body = res.json();
-        // return body.data || {};
         return res;
     };
     ArtistsService.prototype.handleError = function (error) {
