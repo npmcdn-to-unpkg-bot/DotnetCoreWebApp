@@ -26,12 +26,14 @@ export class ArtistsListingComponent implements OnInit {
     errorMessage: string;
     isLoading: boolean = true;
 
+  
+
     constructor(private artistsService: ArtistsService) {
 
     }
 
     ngOnInit(): void {
-        this.pageData(this.pageNumber, this.pageSize, this.searchTerms, this.sortColumn, this.sortDirection);       
+        this.pageData(this.pageNumber, this.pageSize, this.searchTerms, this.sortColumn, this.sortDirection);
     }
 
     pageData(pageNumber: number, pageSize: number, searchTerms: string,
@@ -41,7 +43,7 @@ export class ArtistsListingComponent implements OnInit {
         this.searchTerms = (searchTerms == null ? '' : searchTerms);
         this.sortColumn = sortColumn;
         this.sortDirection = sortDirection;
-        
+
         this.artistsService.getArtists(
             this.pageNumber,
             this.pageSize,
@@ -57,11 +59,16 @@ export class ArtistsListingComponent implements OnInit {
     }
 
     initPagesArray(): void {
-        if(!this.paginationData) return;
+        if (!this.paginationData) return;
         this.pagesArray = [];
-        for(var i = 1; i <= this.paginationData.totalNumberOfPages; i++) {
+        for (var i = 1; i <= this.paginationData.totalNumberOfPages; i++) {
             this.pagesArray.push(i);
         }
+    }
+
+    clearSearch(): void {
+        this.searchTerms = '';
+        this.pageData(this.pageNumber, this.pageSize, this.searchTerms, this.sortColumn, this.sortDirection);
     }
 }
 bootstrap(ArtistsListingComponent, []);

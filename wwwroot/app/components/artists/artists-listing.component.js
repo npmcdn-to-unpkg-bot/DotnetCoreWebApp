@@ -47,6 +47,10 @@ var ArtistsListingComponent = (function () {
             this.pagesArray.push(i);
         }
     };
+    ArtistsListingComponent.prototype.clearSearch = function () {
+        this.searchTerms = '';
+        this.pageData(this.pageNumber, this.pageSize, this.searchTerms, this.sortColumn, this.sortDirection);
+    };
     ArtistsListingComponent = __decorate([
         core_1.Component({
             selector: "artists",
