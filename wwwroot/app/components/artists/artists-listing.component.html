@@ -6,15 +6,20 @@
     </li>
     
 </ul>
-
-
+<p>You searched for {{searchTerms}}</p>
+<form>
+    <label for="searchTerms">Search terms separated by commas:</label>
+    <input type="text" class="form-control" id="searchTerms"
+       [(ngModel)]="searchTerms" name="searchTerms" />
+       <input type="submit" value="Search" class="btn btn-sm" (click)="pageData(page,paginationData.pageSize,searchTerms,paginationData.sortColumn,paginationData.sortDirection)" />
+</form>
 
 
 <div *ngIf(pagesArray) >
     <p>Showing {{paginationData.offsetFromZero}} to {{paginationData.offsetUpperBound}} records of {{paginationData.totalNumberOfRecords}}. This is page {{paginationData.pageNumber}} of {{paginationData.totalNumberOfPages}}.</p>
     <ul class="pagination pagination-sm">
         <li *ngFor="let page of pagesArray">
-            <a href="#" (click)="pageData(page,paginationData.pageSize,paginationData.searchTermsCommaSeparated,paginationData.sortColumn,paginationData.sortDirection)"  >{{page}}</a>
+            <a href="#" (click)="pageData(page,paginationData.pageSize,searchTerms,paginationData.sortColumn,paginationData.sortDirection)"  >{{page}}</a>
 
         </li>
     </ul>

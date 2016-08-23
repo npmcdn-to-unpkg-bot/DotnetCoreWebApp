@@ -23,13 +23,13 @@ var ArtistsListingComponent = (function () {
         this.isLoading = true;
     }
     ArtistsListingComponent.prototype.ngOnInit = function () {
-        this.pageData(1, 10, '', 'Name', 'ASC');
+        this.pageData(this.pageNumber, this.pageSize, this.searchTerms, this.sortColumn, this.sortDirection);
     };
     ArtistsListingComponent.prototype.pageData = function (pageNumber, pageSize, searchTerms, sortColumn, sortDirection) {
         var _this = this;
         this.pageNumber = pageNumber;
         this.pageSize = pageSize;
-        this.searchTerms = searchTerms == null ? '' : searchTerms;
+        this.searchTerms = (searchTerms == null ? '' : searchTerms);
         this.sortColumn = sortColumn;
         this.sortDirection = sortDirection;
         this.artistsService.getArtists(this.pageNumber, this.pageSize, this.searchTerms, this.sortColumn, this.sortDirection)

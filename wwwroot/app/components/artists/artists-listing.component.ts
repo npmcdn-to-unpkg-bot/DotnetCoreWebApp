@@ -31,14 +31,14 @@ export class ArtistsListingComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.pageData(1, 10, '', 'Name', 'ASC');       
+        this.pageData(this.pageNumber, this.pageSize, this.searchTerms, this.sortColumn, this.sortDirection);       
     }
 
     pageData(pageNumber: number, pageSize: number, searchTerms: string,
         sortColumn: string, sortDirection: string): void {
         this.pageNumber = pageNumber;
         this.pageSize = pageSize;
-        this.searchTerms = searchTerms == null? '' : searchTerms;
+        this.searchTerms = (searchTerms == null ? '' : searchTerms);
         this.sortColumn = sortColumn;
         this.sortDirection = sortDirection;
         
