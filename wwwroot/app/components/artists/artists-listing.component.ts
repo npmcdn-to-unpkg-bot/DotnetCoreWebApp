@@ -14,7 +14,7 @@ import { HTTP_PROVIDERS } from 'angular2/http';
 export class ArtistsListingComponent implements OnInit {
 
     pageNumber: number = 1;
-    pageSize: number = 20;
+    pageSize: number = 10;
     searchTerms: string = '';
     sortColumn: string = 'Name';
     sortDirection: string = 'ASC';

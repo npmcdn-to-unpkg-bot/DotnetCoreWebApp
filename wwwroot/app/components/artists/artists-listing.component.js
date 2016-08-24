@@ -15,7 +15,7 @@ var ArtistsListingComponent = (function () {
     function ArtistsListingComponent(artistsService) {
         this.artistsService = artistsService;
         this.pageNumber = 1;
-        this.pageSize = 20;
+        this.pageSize = 10;
         this.searchTerms = '';
         this.sortColumn = 'Name';
         this.sortDirection = 'ASC';
