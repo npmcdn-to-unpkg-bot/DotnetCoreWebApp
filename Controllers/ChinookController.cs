@@ -59,6 +59,13 @@ namespace DotNetCoreTestWebProject.Controllers
             });
         }
 
+    public IActionResult EditArtist(int id)
+        {
+            return  ExecuteExceptionsHandledActionResult( () =>
+            {
+                return View();
+            });
+        }
 
         public IActionResult AddArtist()
         {

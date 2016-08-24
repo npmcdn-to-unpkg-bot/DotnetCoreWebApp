@@ -10,9 +10,8 @@ using DotNetCoreTestWebProject.Data.Services;
 using DotNetCoreTestWebProject.Data.Repositories;
 using DotNetCoreTestWebProject.Services;
 using DotNetCoreTestWebProject.Models;
-using Microsoft.Extensions.FileProviders;
-using Microsoft.AspNetCore.Http;
-using System.IO;
+
+
 namespace DotNetCoreTestWebProject
 {
     public class Startup
@@ -43,11 +42,11 @@ namespace DotNetCoreTestWebProject
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
-             services.AddDbContext<ChinookSqliteDbContext>(options =>
-             options.UseSqlite(Configuration.GetConnectionString("ChinookConnection")));
+            services.AddDbContext<ChinookSqliteDbContext>(options =>
+            options.UseSqlite(Configuration.GetConnectionString("ChinookConnection")));
 
-           // services.AddDbContext<ChinookSqlServer2008DbContext>(options =>
-          //  options.UseSqlServer(Configuration.GetConnectionString("ChinookConnectionSqlServer2008"), b => b.UseRowNumberForPaging()));
+            // services.AddDbContext<ChinookSqlServer2008DbContext>(options =>
+            //  options.UseSqlServer(Configuration.GetConnectionString("ChinookConnectionSqlServer2008"), b => b.UseRowNumberForPaging()));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -91,6 +90,10 @@ namespace DotNetCoreTestWebProject
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute(
+        name: "spa-fallback",
+        template: "{*url}",
+        defaults: new { controller = "Chinook", action = "ArtistsAngular" });
             });
         }
     }

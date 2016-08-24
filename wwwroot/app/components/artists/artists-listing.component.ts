@@ -1,15 +1,16 @@
-import {bootstrap} from 'angular2/platform/browser';
+
 import {Component, OnInit} from "angular2/core";
-import {HTTP_PROVIDERS} from "angular2/http";
 import {ArtistsService} from "./artists.service";
 import {IArtist} from "./artist";
 import {IPaginationData} from "../../shared/interfaces/IPaginationData"
+import { ROUTER_PROVIDERS, RouteConfig, ROUTER_DIRECTIVES } from 'angular2/router';
+import { HTTP_PROVIDERS } from 'angular2/http';
 
 
 @Component({
-    selector: "artists",
     templateUrl: "/app/components/artists/artists-listing.component.html",
-    providers: [ArtistsService, HTTP_PROVIDERS]
+    //providers: [HTTP_PROVIDERS, ROUTER_PROVIDERS, ArtistsService],
+    directives: [ROUTER_DIRECTIVES],
 })
 export class ArtistsListingComponent implements OnInit {
 
@@ -24,9 +25,7 @@ export class ArtistsListingComponent implements OnInit {
     pagesArray: number[];
 
     errorMessage: string;
-    isLoading: boolean = true;
-
-  
+    isLoading: boolean = true;  
 
     constructor(private artistsService: ArtistsService) {
 
@@ -71,5 +70,4 @@ export class ArtistsListingComponent implements OnInit {
         this.pageData(this.pageNumber, this.pageSize, this.searchTerms, this.sortColumn, this.sortDirection);
     }
 }
-bootstrap(ArtistsListingComponent, []);
 

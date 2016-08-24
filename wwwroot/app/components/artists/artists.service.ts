@@ -7,6 +7,7 @@ import "rxjs/add/observable/throw";
 import {Observable} from "rxjs/Observable";
 import {IArtist} from "./artist";
 import 'rxjs/add/operator/toPromise';
+import {Config} from '../../shared/config';
 
 @Injectable()
 export class ArtistsService  {
@@ -22,7 +23,7 @@ export class ArtistsService  {
         let paginationData: string = '?pageNumber=' + pageNumber +
          '&pageSize='+ pageSize +'&searchTerms='+ searchTerms +
           '&sortCol='+ sortColumn +'&sortDir=' + sortDirection;
-        return this._http.get('/api/artists' + paginationData)
+        return this._http.get(Config.apiUrls.artistsListing + paginationData)
             .map((response) => {
                 return response.json();
             })

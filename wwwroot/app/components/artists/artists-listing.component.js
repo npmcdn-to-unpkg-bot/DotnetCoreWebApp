@@ -8,10 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var browser_1 = require('angular2/platform/browser');
 var core_1 = require("angular2/core");
-var http_1 = require("angular2/http");
 var artists_service_1 = require("./artists.service");
+var router_1 = require('angular2/router');
 var ArtistsListingComponent = (function () {
     function ArtistsListingComponent(artistsService) {
         this.artistsService = artistsService;
@@ -53,13 +52,12 @@ var ArtistsListingComponent = (function () {
     };
     ArtistsListingComponent = __decorate([
         core_1.Component({
-            selector: "artists",
             templateUrl: "/app/components/artists/artists-listing.component.html",
-            providers: [artists_service_1.ArtistsService, http_1.HTTP_PROVIDERS]
+            //providers: [HTTP_PROVIDERS, ROUTER_PROVIDERS, ArtistsService],
+            directives: [router_1.ROUTER_DIRECTIVES],
         }), 
         __metadata('design:paramtypes', [artists_service_1.ArtistsService])
     ], ArtistsListingComponent);
     return ArtistsListingComponent;
 }());
 exports.ArtistsListingComponent = ArtistsListingComponent;
-browser_1.bootstrap(ArtistsListingComponent, []);

@@ -16,6 +16,7 @@ require("rxjs/add/operator/do");
 require("rxjs/add/observable/throw");
 var Observable_1 = require("rxjs/Observable");
 require('rxjs/add/operator/toPromise');
+var config_1 = require('../../shared/config');
 var ArtistsService = (function () {
     function ArtistsService(_http) {
         this._http = _http;
@@ -29,7 +30,7 @@ var ArtistsService = (function () {
         var paginationData = '?pageNumber=' + pageNumber +
             '&pageSize=' + pageSize + '&searchTerms=' + searchTerms +
             '&sortCol=' + sortColumn + '&sortDir=' + sortDirection;
-        return this._http.get('/api/artists' + paginationData)
+        return this._http.get(config_1.Config.apiUrls.artistsListing + paginationData)
             .map(function (response) {
             return response.json();
         })
