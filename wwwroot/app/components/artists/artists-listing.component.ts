@@ -9,7 +9,7 @@ import { HTTP_PROVIDERS } from 'angular2/http';
 
 @Component({
     templateUrl: "/app/components/artists/artists-listing.component.html",
-    directives: [ROUTER_DIRECTIVES],
+    directives: [ROUTER_DIRECTIVES]
 })
 export class ArtistsListingComponent implements OnInit {
 

@@ -53,7 +53,7 @@ var ArtistsListingComponent = (function () {
     ArtistsListingComponent = __decorate([
         core_1.Component({
             templateUrl: "/app/components/artists/artists-listing.component.html",
-            directives: [router_1.ROUTER_DIRECTIVES],
+            directives: [router_1.ROUTER_DIRECTIVES]
         }), 
         __metadata('design:paramtypes', [artists_service_1.ArtistsService])
     ], ArtistsListingComponent);

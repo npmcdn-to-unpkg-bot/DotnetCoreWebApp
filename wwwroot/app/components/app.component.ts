@@ -1,13 +1,27 @@
-import {bootstrap} from 'angular2/platform/browser';
-import {Component, OnInit} from 'angular2/core';
+import { Component } from 'angular2/core';
+import { HTTP_PROVIDERS } from 'angular2/http';
+import 'rxjs/Rx';   // Load all features
+import { ROUTER_PROVIDERS, RouteConfig, ROUTER_DIRECTIVES } from 'angular2/router';
 
+import { ArtistsListingComponent } from './artists/artists-listing.component';
+import {ArtistsService} from "./artists/artists.service";
+import { ArtistEditComponent } from './artists/artist-edit.component';
+import {WelcomeComponent} from './home/welcome.component';
 
 @Component({
     selector: 'main-app',
-    templateUrl: '/app/components/app.component.html'
+    templateUrl: '/app/components/app.component.html',
+    directives: [ROUTER_DIRECTIVES],
+    providers: [ArtistsService,
+        HTTP_PROVIDERS,
+        ROUTER_PROVIDERS]
 })
+@RouteConfig([
+    { path: '/home', name: 'Home', component: WelcomeComponent, useAsDefault: true },
+    { path: '/artists-list', name: 'ArtiststList', component: ArtistsListingComponent },
+    { path: '/artist-edit/:id', name: 'ArtistEdit', component: ArtistEditComponent }
+])
 export class AppComponent {
-    pageTitle: string = 'My dot net core angular2 application';
+    pageTitle: string = 'My  Application';
 }
 
-bootstrap(AppComponent, []);
