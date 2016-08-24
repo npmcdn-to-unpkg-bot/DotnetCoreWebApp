@@ -11,32 +11,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('angular2/core');
 var router_1 = require('angular2/router');
 var ArtistEditComponent = (function () {
-    function ArtistEditComponent(_routeParams) {
+    function ArtistEditComponent(_routeParams, _router) {
         this._routeParams = _routeParams;
-        this.pageTitle = 'Edit artist';
-        /**
-    * Get the value of a querystring
-    * @param  {String} field The field to get the value of
-    * @param  {String} url   The URL to get the value from (optional)
-    * @return {String}       The field value
-    */
-        this.getQueryString = function (field, url) {
-            var href = url ? url : window.location.href;
-            var reg = new RegExp('[?&]' + field + '=([^&#]*)', 'i');
-            var string = reg.exec(href);
-            return string ? string[1] : null;
-        };
-        var artId = this.getQueryString("id", null);
-        console.log('ROUTE PARAMS = ' + _routeParams.toString());
+        this._router = _router;
+        this.pageTitle = 'Edit artist with ID ';
+        var id = +this._routeParams.get('id');
+        this.pageTitle += " " + id;
     }
     ArtistEditComponent.prototype.ngOnInit = function () {
     };
+    ArtistEditComponent.prototype.onBack = function () {
+        this._router.navigate(['ArtiststList']);
+    };
     ArtistEditComponent = __decorate([
         core_1.Component({
-            templateUrl: '/app/components/artists/artist-edit.component.html',
-            providers: [router_1.RouteParams]
+            templateUrl: '/app/components/artists/artist-edit.component.html'
         }), 
-        __metadata('design:paramtypes', [router_1.RouteParams])
+        __metadata('design:paramtypes', [router_1.RouteParams, router_1.Router])
     ], ArtistEditComponent);
     return ArtistEditComponent;
 }());
