@@ -20,7 +20,7 @@ var ArtistEditComponent = (function () {
     }
     ArtistEditComponent.prototype.ngOnInit = function () {
     };
-    ArtistEditComponent.prototype.onBack = function () {
+    ArtistEditComponent.prototype.cancel = function () {
         this._router.navigate(['ArtiststList']);
     };
     ArtistEditComponent = __decorate([

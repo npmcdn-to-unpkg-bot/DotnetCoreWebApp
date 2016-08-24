@@ -20,7 +20,7 @@ export class ArtistEditComponent implements OnInit {
 
     }
 
-    onBack(): void {
+    cancel(): void {
         this._router.navigate(['ArtiststList']);
     }
 
