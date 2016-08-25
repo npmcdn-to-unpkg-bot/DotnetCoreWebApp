@@ -32,6 +32,16 @@ export class ArtistsService  {
             .catch(this.handleError);
     }
 
+    getArtistById(id: number): Promise<any> {
+        let url: string = Config.apiUrls.findArtistById.replace('{id}', id.toString());
+         return this._http.get(url)
+            .map((response) => {
+                return response.json();
+            })
+            .toPromise();
+
+    }
+
     private extractData(res: Response) {
        return res;
     }

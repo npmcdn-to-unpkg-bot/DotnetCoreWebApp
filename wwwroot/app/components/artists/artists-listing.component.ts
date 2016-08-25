@@ -24,7 +24,7 @@ export class ArtistsListingComponent implements OnInit {
     errorMessage: string;
     isLoading: boolean = true;  
 
-    constructor(private artistsService: ArtistsService) {
+    constructor(private _artistsService: ArtistsService) {
 
     }
 
@@ -40,7 +40,7 @@ export class ArtistsListingComponent implements OnInit {
         this.sortColumn = sortColumn;
         this.sortDirection = sortDirection;
 
-        this.artistsService.getArtists(
+        this._artistsService.getArtists(
             this.pageNumber,
             this.pageSize,
             this.searchTerms,

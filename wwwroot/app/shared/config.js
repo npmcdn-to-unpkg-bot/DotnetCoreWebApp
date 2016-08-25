@@ -7,7 +7,8 @@ exports.Config = {
         add: 3
     },
     apiUrls: {
-        artistsListing: '/api/artists'
+        artistsListing: '/api/artists',
+        findArtistById: '/api/artists/{id}'
     },
     entityFrameworkEntityState: {
         Unchanged: 0,

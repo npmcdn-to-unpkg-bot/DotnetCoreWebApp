@@ -38,6 +38,14 @@ var ArtistsService = (function () {
             .then(this.extractData)
             .catch(this.handleError);
     };
+    ArtistsService.prototype.getArtistById = function (id) {
+        var url = config_1.Config.apiUrls.findArtistById.replace('{id}', id.toString());
+        return this._http.get(url)
+            .map(function (response) {
+            return response.json();
+        })
+            .toPromise();
+    };
     ArtistsService.prototype.extractData = function (res) {
         return res;
     };

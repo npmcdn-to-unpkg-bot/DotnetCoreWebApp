@@ -10,15 +10,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('angular2/core');
 var router_1 = require('angular2/router');
+var artists_service_1 = require("./artists.service");
 var ArtistEditComponent = (function () {
-    function ArtistEditComponent(_routeParams, _router) {
+    function ArtistEditComponent(_routeParams, _router, _artistsService) {
         this._routeParams = _routeParams;
         this._router = _router;
+        this._artistsService = _artistsService;
         this.pageTitle = 'Edit artist with ID ';
-        var id = +this._routeParams.get('id');
-        this.pageTitle += " " + id;
+        this.artistId = +this._routeParams.get('id');
     }
     ArtistEditComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this._artistsService.getArtistById(this.artistId)
+            .then(function (response) {
+            _this.artist = response;
+            _this.pageTitle += " " + _this.artist.name;
+        });
     };
     ArtistEditComponent.prototype.cancel = function () {
         this._router.navigate(['ArtiststList']);
@@ -27,7 +34,7 @@ var ArtistEditComponent = (function () {
         core_1.Component({
             templateUrl: '/app/components/artists/artist-edit.component.html'
         }), 
-        __metadata('design:paramtypes', [router_1.RouteParams, router_1.Router])
+        __metadata('design:paramtypes', [router_1.RouteParams, router_1.Router, artists_service_1.ArtistsService])
     ], ArtistEditComponent);
     return ArtistEditComponent;
 }());

@@ -12,8 +12,8 @@ var core_1 = require("angular2/core");
 var artists_service_1 = require("./artists.service");
 var router_1 = require('angular2/router');
 var ArtistsListingComponent = (function () {
-    function ArtistsListingComponent(artistsService) {
-        this.artistsService = artistsService;
+    function ArtistsListingComponent(_artistsService) {
+        this._artistsService = _artistsService;
         this.pageNumber = 1;
         this.pageSize = 10;
         this.searchTerms = '';
@@ -31,7 +31,7 @@ var ArtistsListingComponent = (function () {
         this.searchTerms = (searchTerms == null ? '' : searchTerms);
         this.sortColumn = sortColumn;
         this.sortDirection = sortDirection;
-        this.artistsService.getArtists(this.pageNumber, this.pageSize, this.searchTerms, this.sortColumn, this.sortDirection)
+        this._artistsService.getArtists(this.pageNumber, this.pageSize, this.searchTerms, this.sortColumn, this.sortDirection)
             .then(function (response) {
             _this.paginationData = response.paginationData;
             _this.initPagesArray();
