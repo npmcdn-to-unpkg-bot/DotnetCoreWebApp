@@ -16,6 +16,7 @@ var artists_listing_component_1 = require('./artists/artists-listing.component')
 var artists_service_1 = require("./artists/artists.service");
 var artist_edit_component_1 = require('./artists/artist-edit.component');
 var welcome_component_1 = require('./home/welcome.component');
+var contact_page_component_1 = require('./home/contact-page.component');
 var AppComponent = (function () {
     function AppComponent() {
         this.pageTitle = 'My  Application';
@@ -32,7 +33,8 @@ var AppComponent = (function () {
         router_1.RouteConfig([
             { path: '/home', name: 'Home', component: welcome_component_1.WelcomeComponent, useAsDefault: true },
             { path: '/artists-list', name: 'ArtiststList', component: artists_listing_component_1.ArtistsListingComponent },
-            { path: '/artist-edit/:id', name: 'ArtistEdit', component: artist_edit_component_1.ArtistEditComponent }
+            { path: '/artist-edit/:id', name: 'ArtistEdit', component: artist_edit_component_1.ArtistEditComponent },
+            { path: '/contact', name: 'ContactPage', component: contact_page_component_1.ContactPageComponent },
         ]), 
         __metadata('design:paramtypes', [])
     ], AppComponent);

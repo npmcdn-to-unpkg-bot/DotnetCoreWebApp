@@ -9,16 +9,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("angular2/core");
-var ContactPage = (function () {
-    function ContactPage() {
+var ContactPageComponent = (function () {
+    function ContactPageComponent() {
         this.someValue = 300;
     }
-    ContactPage = __decorate([
+    ContactPageComponent = __decorate([
         core_1.Component({
             templateUrl: "/app/components/home/contact-page.component.html"
         }), 
         __metadata('design:paramtypes', [])
-    ], ContactPage);
-    return ContactPage;
+    ], ContactPageComponent);
+    return ContactPageComponent;
 }());
-exports.ContactPage = ContactPage;
+exports.ContactPageComponent = ContactPageComponent;

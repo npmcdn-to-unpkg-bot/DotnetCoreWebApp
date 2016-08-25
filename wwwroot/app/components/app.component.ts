@@ -7,6 +7,7 @@ import { ArtistsListingComponent } from './artists/artists-listing.component';
 import {ArtistsService} from "./artists/artists.service";
 import { ArtistEditComponent } from './artists/artist-edit.component';
 import {WelcomeComponent} from './home/welcome.component';
+import {ContactPageComponent} from './home/contact-page.component';
 
 @Component({
     selector: 'main-app',
@@ -19,7 +20,8 @@ import {WelcomeComponent} from './home/welcome.component';
 @RouteConfig([
     { path: '/home', name: 'Home', component: WelcomeComponent, useAsDefault: true },
     { path: '/artists-list', name: 'ArtiststList', component: ArtistsListingComponent },
-    { path: '/artist-edit/:id', name: 'ArtistEdit', component: ArtistEditComponent }
+    { path: '/artist-edit/:id', name: 'ArtistEdit', component: ArtistEditComponent },
+    { path: '/contact', name: 'ContactPage', component: ContactPageComponent },
 ])
 export class AppComponent {
     pageTitle: string = 'My  Application';

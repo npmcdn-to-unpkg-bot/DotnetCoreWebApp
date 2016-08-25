@@ -3,9 +3,7 @@ import {Component, OnInit} from "angular2/core";
 import {ArtistsService} from "./artists.service";
 import {IArtist} from "./artist";
 import {IPaginationData} from "../../shared/interfaces/IPaginationData"
-import { ROUTER_PROVIDERS, RouteConfig, ROUTER_DIRECTIVES } from 'angular2/router';
-import { HTTP_PROVIDERS } from 'angular2/http';
-
+import {ROUTER_DIRECTIVES } from 'angular2/router';
 
 @Component({
     templateUrl: "/app/components/artists/artists-listing.component.html",
