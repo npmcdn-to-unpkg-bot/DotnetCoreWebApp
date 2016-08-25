@@ -10,7 +10,7 @@ namespace Core.Common.Data.Services
      where TEntity : BaseObjectWithState, IObjectWithState, new()
     {
         protected IDataRepository<TEntity> _repository;
-        public virtual IEnumerable<TEntity> FindAllByCriteria(                    
+        public virtual IEnumerable<TEntity> FindAllEntitiesByCriteria(                    
                     int? pageNumber,
                     int? pageSize,
                     out int totalRecords,
@@ -28,7 +28,7 @@ namespace Core.Common.Data.Services
             int pageIndex = pageNumber ?? 1;
             int sizeOfPage = pageSize ?? 10;
 
-            var items = _repository.FindAllByCriteria(
+            var items = _repository.FindAllEntitiesByCriteria(
                  pageIndex, sizeOfPage, out totalRecords, sortColumn, sortDirection, keywords);
             totalNumberOfPages = (int)Math.Ceiling((double)totalRecords / sizeOfPage);
 
@@ -39,9 +39,9 @@ namespace Core.Common.Data.Services
             return items;
         }
 
-        public async Task<OperationResult> Persist(TEntity entity)
+        public async Task<bool> PersistEntity(TEntity entity)
         {
-            return await _repository.Persist(entity);
+            return await _repository.PersistEntity(entity);
         }
     }
 }

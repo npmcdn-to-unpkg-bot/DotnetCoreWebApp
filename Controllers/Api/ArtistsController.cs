@@ -34,7 +34,7 @@ namespace DotNetCoreTestWebProject.Controllers.Api
             int offset = 0;
             int offsetUpperBound = 0;
             string[] keywordsList = !string.IsNullOrWhiteSpace(searchTerms) ? searchTerms.Split(',') : new string[] { };
-            IEnumerable<Artist> performers = _artistService.FindAllByCriteria(
+            IEnumerable<Artist> performers = _artistService.FindAllEntitiesByCriteria(
                  pageIndex, sizeOfPage, out totalNumberOfRecords, sortCol, sortDir, out offset,
                  out offsetUpperBound, out totalNumberOfPages, keywordsList);           
 

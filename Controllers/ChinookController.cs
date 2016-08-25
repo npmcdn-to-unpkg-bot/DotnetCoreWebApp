@@ -38,7 +38,7 @@ namespace DotNetCoreTestWebProject.Controllers
                 int offset = 0;
                 int offsetUpperBound = 0;
                 string[] keywordsList = !string.IsNullOrWhiteSpace(searchTerms) ? searchTerms.Split(',') : new string[] { };
-                IEnumerable<Artist> artists = _artistService.FindAllByCriteria(
+                IEnumerable<Artist> artists = _artistService.FindAllEntitiesByCriteria(
                      pageIndex, sizeOfPage, out totalNumberOfRecords, sortCol, sortDir, out offset,
                      out offsetUpperBound, out totalNumberOfPages, keywordsList);
 
@@ -84,7 +84,7 @@ namespace DotNetCoreTestWebProject.Controllers
             return await ExecuteExceptionsHandledAsyncActionResult(async () =>
             {
                 var artist = new Artist { Name = model.Name , ObjectState = ObjectState.Added };
-                await _artistService.Persist(artist);
+                await _artistService.PersistEntity(artist);
                 return View(model);
             });
         }

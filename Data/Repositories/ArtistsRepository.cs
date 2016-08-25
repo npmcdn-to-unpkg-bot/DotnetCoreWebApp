@@ -20,7 +20,7 @@ namespace DotNetCoreTestWebProject.Data.Repositories
             _context = context;
         }
 
-        protected override IEnumerable<Artist> FindAllEntitiesByCriteria(            
+        protected override IEnumerable<Artist> FindAllByCriteria(            
             int? pageNumber,
             int? pageSize,
             out int totalRecords,

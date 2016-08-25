@@ -34,6 +34,7 @@ namespace DotNetCoreTestWebProject.Data
             modelBuilder.Entity<Artist>(entity =>
             {
                 entity.Property(e => e.Name).HasColumnType("NVARCHAR(120)");
+                modelBuilder.Entity<Artist>().Ignore(b => b.Id);
             });
 
             modelBuilder.Entity<Customer>(entity =>

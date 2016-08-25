@@ -4,7 +4,7 @@ namespace Core.Common.Data
 {
     public abstract class BaseObjectWithState
     {
-       // public int Id { get; set; }
+        public int Id { get; set; }
         public string Guid { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime DateModified { get; set; }

@@ -53,8 +53,8 @@ namespace Common.Data.EntityFramework
 
 
         /// <summary>
-        /// This method must be called be called after attaching an entity just before calling DbContext.SaveChanges().
-        /// It is the mechanism by which EF knows aht state each object is in and can then know explicitly what to do with each object.
+        /// This method must be called after attaching an entity just before calling DbContext.SaveChanges().
+        /// It is the mechanism by which the DbContext knows the state each object is in and can then know explicitly what to do with each object.
         /// </summary>
         /// <param name="context">The DbContext class.</param>
         public static void ApplyStateChanges(this DbContext context)

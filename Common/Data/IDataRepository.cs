@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Core.Common.Utilities;
 
 namespace Core.Common.Data
 {
@@ -14,53 +13,45 @@ namespace Core.Common.Data
         where TEntity : BaseObjectWithState, IObjectWithState, new()
     {
         /// <summary>
-        /// Attmpts to save an entity into the database and returns an OperationResult indicating success or failure.
+        /// Attempts to save an entity into the database and returns a boolean indicating success or failure.
         /// </summary>
         /// <param name="entity">The entity to save into the database.</param>
-        /// <returns>OperationResult object indicating the outcome of the operation. Note, if you want to return the object which 
-        /// was saved you can add it to the MessagesDictionary property of the OperationResult object.
-        /// </returns>
-        Task<OperationResult> Persist(TEntity entity);
+        /// <returns>True if persistence succeeded, throws Exception otherwise </returns>
+        Task<bool> PersistEntity(TEntity entity);
 
         /// <summary>
         /// Finds an entity by its id.
         /// </summary>
         /// <param name="id">The ID of the entity to search for.</param>
         /// <returns>The entity if found, it's up to the implementer what to return if the entity was not found. They can throw a NotFoundException if needed.</returns>
-        TEntity FindById(int id);
-
-        /// <summary>
-        ///  Checks if an entity exists in the repository.
-        /// </summary>
-        /// <param name="entity">The entity to search for. </param>
-        /// <returns>True if entity exists, false otherwise.</returns>
-        bool Exists(TEntity entity);
+        TEntity FindEntityById(int id);
+    
 
         /// <summary>
         /// Checks if an entity exists in the repository by its ID.
         /// </summary>
         /// <param name="entityId">The ID of the entity to search for.</param>
         /// <returns>True if the entity was found, false otherwise.</returns>
-        bool Exists(int entityId);
+        bool EntityExists(int entityId);
 
         /// <summary>
         /// Returns all entities of type TEntity from the repository. 
         /// </summary>
         /// <returns>A collection of T entities.</returns>
-        IEnumerable<TEntity> FindAll();
+        IEnumerable<TEntity> FindAllEntities();
 
 
         /// <summary>
         /// Returns entity of type TEntity from the repository based on predicate. 
         /// </summary>
         /// <returns>The entity if found.</returns>
-        TEntity FindBy(Expression<Func<TEntity, bool>> predicate);
+        TEntity FindEntityByPredicate(Expression<Func<TEntity, bool>> predicate);
 
         /// <summary>
         /// Returns all entities of type TEntity from the repository based on predicate. 
         /// </summary>
         /// <returns>A collection of TEntity entities if found.</returns>
-        IEnumerable<TEntity> FindAllBy(Expression<Func<TEntity, bool>> predicate);
+        IEnumerable<TEntity> FindAllEntitiesByPredicate(Expression<Func<TEntity, bool>> predicate);
   
         /// <summary>
         ///  Returns a collection of TEntity entity in chunks. The client can also specify search and paging requirements criteria.
@@ -72,7 +63,7 @@ namespace Core.Common.Data
         /// <param name="sortColumn">The sort column in the underlying data store. Should be indexed or performance could be severly reduced.</param>
         /// <param name="sortDirection">Either ASC or DESC.</param>
         /// <returns>A collection of TEntity entities.</returns>
-        IEnumerable<TEntity> FindAllByCriteria(
+        IEnumerable<TEntity> FindAllEntitiesByCriteria(
             int? pageNumber,
             int? pageSize,
             out int totalRecords,
