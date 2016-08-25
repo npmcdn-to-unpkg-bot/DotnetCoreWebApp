@@ -33,41 +33,49 @@ namespace Common.Data.EntityFramework
             return true;
         }
 
-        public TEntity FindEntityById(int id)
+        public async Task<TEntity> FindEntityById(int id)
         {
-            return FindSingleEntityById(id);
+            return await FindSingleEntityById(id);
         }
 
-        public virtual TEntity FindEntityByPredicate(Expression<Func<TEntity, bool>> predicate)
+        public virtual async Task<TEntity> FindEntityByPredicate(
+            Expression<Func<TEntity, bool>> predicate)
         {
-            return _context.Set<TEntity>().SingleOrDefault(predicate);
+            return await _context.Set<TEntity>().SingleOrDefaultAsync(predicate);
         }
 
-        public virtual IEnumerable<TEntity> FindAllEntitiesByPredicate(Expression<Func<TEntity, bool>> predicate)
+        public virtual async Task<IEnumerable<TEntity>> FindAllEntitiesByPredicate(
+            Expression<Func<TEntity, bool>> predicate)
         {
-            return _context.Set<TEntity>().Where(predicate).ToList();
+            return await Task.FromResult(_context.Set<TEntity>()
+            .Where(predicate).ToList());
         }
 
-        public bool EntityExists(int entityId)
+        public async Task<bool> EntityExists(int entityId)
         {
-            return SingleEntityExists(entityId);
+            return await SingleEntityExists(entityId);
         }
 
-        public IEnumerable<TEntity> FindAllEntities()
+        public async Task<IEnumerable<TEntity>> FindAllEntities()
         {
-            return FindAllEntities().ToList();
+            return await Task.FromResult(_context.Set<TEntity>().ToList());
         }
 
-        public IEnumerable<TEntity> FindAllEntitiesByCriteria(int? pageNumber, int? pageSize, out int totalRecords, string sortColumn,
+        public IEnumerable<TEntity> FindAllEntitiesByCriteria(
+            int? pageNumber, int? pageSize,
+            out int totalRecords, string sortColumn,
             string sortDirection, params string[] keywords)
         {
-            return FindAllByCriteria(pageNumber, pageSize, out totalRecords, sortColumn, sortDirection, keywords);
+            return FindAllByCriteria(
+                pageNumber, pageSize, out totalRecords,
+                 sortColumn, sortDirection, keywords);
         }
 
 
-        ///Note, if the PK of the entity you are persisting is not called Id then override this method in your own derived repository
+        ///Note, if the PK of the entity you are persisting is not called Id then override this
+        // method in your own derived repository
         protected virtual void AddOrUpdate(TEntity entity)
-        {            
+        {
             if (entity.Id == default(int) && entity.ObjectState == ObjectState.Added)
             {
                 _context.Add(entity);
@@ -76,23 +84,24 @@ namespace Common.Data.EntityFramework
             {
                 _context.Attach(entity);
             }
-            
         }
 
-        protected virtual TEntity FindSingleEntityById(int id)
+        protected virtual async Task<TEntity> FindSingleEntityById(int id)
         {
-            return _context.Set<TEntity>().SingleOrDefault(x => x.Id == id);
+            return await Task.FromResult(_context.Set<TEntity>()
+            .SingleOrDefault(x => x.Id == id));
         }
 
 
-        protected virtual bool SingleEntityExists(int entityId)
+        protected virtual async Task<bool> SingleEntityExists(int entityId)
         {
-            return _context.Set<TEntity>().Any(x => x.Id == entityId);
+            return await Task.FromResult(_context.Set<TEntity>()
+            .Any(x => x.Id == entityId));
         }
 
-        protected virtual IEnumerable<TEntity> FindEntities()
+        protected virtual async Task<IEnumerable<TEntity>> FindEntities()
         {
-            return _context.Set<TEntity>().ToList();
+            return await Task.FromResult(_context.Set<TEntity>().ToList());
         }
 
         protected virtual IEnumerable<TEntity> FindAllByCriteria(

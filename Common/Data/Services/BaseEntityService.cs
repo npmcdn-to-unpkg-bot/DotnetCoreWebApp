@@ -39,9 +39,16 @@ namespace Core.Common.Data.Services
             return items;
         }
 
+        public async Task<TEntity> FindEntityById(int id)
+        {
+            return await _repository.FindEntityById(id);
+        }
+
         public async Task<bool> PersistEntity(TEntity entity)
         {
             return await _repository.PersistEntity(entity);
         }
+
+      
     }
 }

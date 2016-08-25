@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Common.Data.EntityFramework;
 using Core.Common.Data;
 using DotNetCoreTestWebProject.Models;
@@ -61,6 +62,11 @@ namespace DotNetCoreTestWebProject.Data.Repositories
                     .ToList();
             return artists;
 
+        }
+
+        override protected async  Task<Artist> FindSingleEntityById(int id)
+        {
+            return await  Task.FromResult(_context.Set<Artist>().SingleOrDefault(x => x.ArtistId == id));
         }
 
         protected override void AddOrUpdate(Artist entity)

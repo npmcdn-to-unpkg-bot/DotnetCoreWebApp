@@ -83,7 +83,8 @@ namespace DotNetCoreTestWebProject.Controllers
 
             return await ExecuteExceptionsHandledAsyncActionResult(async () =>
             {
-                var artist = new Artist { Name = model.Name , ObjectState = ObjectState.Added };
+                var artist = new DotNetCoreTestWebProject.Models.Artist { 
+                    Name = model.Name , ObjectState = ObjectState.Added , Deleted = false };
                 await _artistService.PersistEntity(artist);
                 return View(model);
             });

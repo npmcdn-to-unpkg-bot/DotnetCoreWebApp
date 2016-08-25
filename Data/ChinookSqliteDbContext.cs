@@ -14,12 +14,15 @@ namespace DotNetCoreTestWebProject.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            modelBuilder.Entity<Artist>().Ignore(b => b.Id);
+            modelBuilder.Entity<Artist>().Ignore(b => b.ObjectState);
+            modelBuilder.Entity<Artist>().Ignore(b => b.RowVersion);
+
             modelBuilder.Entity<Album>(entity =>
             {
                 entity.HasIndex(e => e.ArtistId)
-                    .HasName("IFK_AlbumArtistId");
-
-                   modelBuilder.Entity<Artist>().Ignore(b => b.ObjectState);
+                    .HasName("IFK_AlbumArtistId");                   
 
                 entity.Property(e => e.Title)
                     .IsRequired()
@@ -33,8 +36,8 @@ namespace DotNetCoreTestWebProject.Data
 
             modelBuilder.Entity<Artist>(entity =>
             {
-                entity.Property(e => e.Name).HasColumnType("NVARCHAR(120)");
-                modelBuilder.Entity<Artist>().Ignore(b => b.Id);
+                entity.Property(e => e.Name).HasColumnType("NVARCHAR(120)");   
+                entity.Property(e => e.Deleted).HasColumnType("TINYINT");             
             });
 
             modelBuilder.Entity<Customer>(entity =>

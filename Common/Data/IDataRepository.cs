@@ -24,7 +24,7 @@ namespace Core.Common.Data
         /// </summary>
         /// <param name="id">The ID of the entity to search for.</param>
         /// <returns>The entity if found, it's up to the implementer what to return if the entity was not found. They can throw a NotFoundException if needed.</returns>
-        TEntity FindEntityById(int id);
+        Task<TEntity> FindEntityById(int id);
     
 
         /// <summary>
@@ -32,26 +32,26 @@ namespace Core.Common.Data
         /// </summary>
         /// <param name="entityId">The ID of the entity to search for.</param>
         /// <returns>True if the entity was found, false otherwise.</returns>
-        bool EntityExists(int entityId);
+        Task<bool> EntityExists(int entityId);
 
         /// <summary>
         /// Returns all entities of type TEntity from the repository. 
         /// </summary>
         /// <returns>A collection of T entities.</returns>
-        IEnumerable<TEntity> FindAllEntities();
+        Task<IEnumerable<TEntity>> FindAllEntities();
 
 
         /// <summary>
         /// Returns entity of type TEntity from the repository based on predicate. 
         /// </summary>
         /// <returns>The entity if found.</returns>
-        TEntity FindEntityByPredicate(Expression<Func<TEntity, bool>> predicate);
+        Task<TEntity> FindEntityByPredicate(Expression<Func<TEntity, bool>> predicate);
 
         /// <summary>
         /// Returns all entities of type TEntity from the repository based on predicate. 
         /// </summary>
         /// <returns>A collection of TEntity entities if found.</returns>
-        IEnumerable<TEntity> FindAllEntitiesByPredicate(Expression<Func<TEntity, bool>> predicate);
+        Task<IEnumerable<TEntity>> FindAllEntitiesByPredicate(Expression<Func<TEntity, bool>> predicate);
   
         /// <summary>
         ///  Returns a collection of TEntity entity in chunks. The client can also specify search and paging requirements criteria.

@@ -9,6 +9,8 @@ namespace Core.Common.Data.Services
 
         Task<bool> PersistEntity(TEntity entity);
 
+        Task<TEntity> FindEntityById(int id);
+
         IEnumerable<TEntity> FindAllEntitiesByCriteria(                   
                     int? pageNumber,
                     int? pageSize,

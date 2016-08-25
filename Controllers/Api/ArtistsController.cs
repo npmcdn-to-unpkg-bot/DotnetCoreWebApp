@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Common.Data.Models;
 using DotNetCoreTestWebProject.Data.Services;
 using DotNetCoreTestWebProject.Models;
@@ -17,13 +18,22 @@ namespace DotNetCoreTestWebProject.Controllers.Api
             _artistService = artistService;
         }
 
+        [HttpGet]
+        [Route("{id:int}")]
+        public async Task<IActionResult> FindById(int id)
+        {
+            var artist = await _artistService.FindEntityById(id);
+            return Json(artist);
+        }
+
 
         [HttpGet]
+        [Route("")]
         public IActionResult GetAll(
             int? pageNumber, int? pageSize, string sortCol,
             string sortDir, string searchTerms)
         {
-            
+
             int pageIndex = pageNumber ?? 1;
             int sizeOfPage = pageSize ?? 10;
             sortCol = sortCol ?? "Name";
@@ -36,7 +46,7 @@ namespace DotNetCoreTestWebProject.Controllers.Api
             string[] keywordsList = !string.IsNullOrWhiteSpace(searchTerms) ? searchTerms.Split(',') : new string[] { };
             IEnumerable<Artist> performers = _artistService.FindAllEntitiesByCriteria(
                  pageIndex, sizeOfPage, out totalNumberOfRecords, sortCol, sortDir, out offset,
-                 out offsetUpperBound, out totalNumberOfPages, keywordsList);           
+                 out offsetUpperBound, out totalNumberOfPages, keywordsList);
 
             var paginationData = new PaginationData
             {
@@ -50,7 +60,7 @@ namespace DotNetCoreTestWebProject.Controllers.Api
                 SortColumn = sortCol,
                 SortDirection = sortDir
             };
-            var toReturn = Json(new {performers, paginationData});
+            var toReturn = Json(new { performers, paginationData });
 
             return toReturn;
         }
