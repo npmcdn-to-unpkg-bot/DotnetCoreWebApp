@@ -9,6 +9,8 @@ var gulp = require("gulp"),
     tsc = require("gulp-typescript");
 
 var webroot = "./wwwroot/";
+var nodeModulesDirectory = 'node_modules/';
+
 
 var paths = {
     js: webroot + "js/**/*.js",
@@ -16,7 +18,8 @@ var paths = {
     css: webroot + "css/**/*.css",
     minCss: webroot + "css/**/*.min.css",
     concatJsDest: webroot + "js/site.min.js",
-    concatCssDest: webroot + "css/site.min.css"
+    concatCssDest: webroot + "css/site.min.css",
+    angular2MinJs: webroot + "js/angular.app.min.js"
 };
 
 gulp.task("clean:js", function (cb) {
@@ -50,10 +53,27 @@ gulp.task("ng2", function () {
         "node_modules/systemjs/dist/*.*",
         "node_modules/ng2-pagination/dist/*.*"
 
-    ]).pipe(gulp.dest(webroot + "lib/ng2"))
+    ]).pipe(gulp.dest(webroot + "lib/ng2"));
     gulp.src([
         "node_modules/rxjs/**/*"
     ]).pipe(gulp.dest(webroot + "lib/ng2/rxjs"))
+
+
+ gulp.src([
+        nodeModulesDirectory + "es6-shim/es6-shim.min.js",
+        nodeModulesDirectory + "systemjs/dist/system-polyfills.js",
+        nodeModulesDirectory + "angular2/bundles/angular2-polyfills.min.js",
+        nodeModulesDirectory + "systemjs/dist/system.src.js",
+        nodeModulesDirectory + "rxjs/bundles/Rx.umd.min.js",
+        nodeModulesDirectory + "angular2/bundles/angular2.min.js",
+        nodeModulesDirectory + "angular2/bundles/http.min.js",
+        nodeModulesDirectory + "angular2/bundles/router.min.js"
+    ]).pipe(uglify())
+    .pipe(concat(paths.angular2MinJs))
+    .pipe(gulp.dest("."));
+
+
+
 });
 
 gulp.task("tsTranspile", function () {
