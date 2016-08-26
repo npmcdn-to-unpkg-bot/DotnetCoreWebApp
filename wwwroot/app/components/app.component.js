@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('angular2/core');
+var core_2 = require('angular2/core');
 var http_1 = require('angular2/http');
 require('rxjs/Rx'); // Load all features
 var router_1 = require('angular2/router');
@@ -17,6 +18,7 @@ var artists_service_1 = require("./artists/artists.service");
 var artist_edit_component_1 = require('./artists/artist-edit.component');
 var welcome_component_1 = require('./home/welcome.component');
 var contact_page_component_1 = require('./home/contact-page.component');
+core_2.enableProdMode();
 var AppComponent = (function () {
     function AppComponent() {
         this.pageTitle = 'My  Application';
