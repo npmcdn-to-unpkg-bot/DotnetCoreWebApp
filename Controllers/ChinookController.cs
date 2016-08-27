@@ -19,7 +19,7 @@ namespace DotNetCoreTestWebProject.Controllers
             IArtistEntityService artistService, IHostingEnvironment hostingEnvironment)
         {
             _artistService = artistService;
-            _hostingEnvironment = hostingEnvironment;
+            base.hostingEnvironment = hostingEnvironment;
 
         }
 
@@ -99,8 +99,8 @@ namespace DotNetCoreTestWebProject.Controllers
 
         public ActionResult AppPath()
         {
-            string webRootPath = _hostingEnvironment.WebRootPath;
-            string contentRootPath = _hostingEnvironment.ContentRootPath;
+            string webRootPath = hostingEnvironment.WebRootPath;
+            string contentRootPath = hostingEnvironment.ContentRootPath;
 
             return Content(webRootPath + "\n" + contentRootPath);
         }
