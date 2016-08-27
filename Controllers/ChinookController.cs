@@ -6,6 +6,7 @@ using DotNetCoreTestWebProject.Data.Services;
 using DotNetCoreTestWebProject.Models;
 using DotNetCoreTestWebProject.EditModels;
 using DotNetCoreTestWebProject.ViewModels;
+using Microsoft.AspNetCore.Hosting;
 
 namespace DotNetCoreTestWebProject.Controllers
 {
@@ -15,9 +16,10 @@ namespace DotNetCoreTestWebProject.Controllers
         private readonly IArtistEntityService _artistService;
 
         public ChinookController(
-            IArtistEntityService artistService)
+            IArtistEntityService artistService, IHostingEnvironment hostingEnvironment)
         {
             _artistService = artistService;
+            _hostingEnvironment = hostingEnvironment;
 
         }
 
@@ -93,6 +95,14 @@ namespace DotNetCoreTestWebProject.Controllers
         public IActionResult ArtistsAngular()
         {
             return View();
+        }
+
+        public ActionResult AppPath()
+        {
+            string webRootPath = _hostingEnvironment.WebRootPath;
+            string contentRootPath = _hostingEnvironment.ContentRootPath;
+
+            return Content(webRootPath + "\n" + contentRootPath);
         }
     }
 }

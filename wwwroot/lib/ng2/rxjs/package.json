@@ -1,67 +1,4 @@
 {
-  "_args": [
-    [
-      {
-        "raw": "rxjs@~5.0.0-beta.11",
-        "scope": null,
-        "escapedName": "rxjs",
-        "name": "rxjs",
-        "rawSpec": "~5.0.0-beta.11",
-        "spec": ">=5.0.0-beta.11 <5.1.0",
-        "type": "range"
-      },
-      "c:\\data\\knowledge_base\\dotNet\\Core\\projects\\DotNetCoreTestWebProject"
-    ]
-  ],
-  "_from": "rxjs@>=5.0.0-beta.11 <5.1.0",
-  "_id": "rxjs@5.0.0-beta.11",
-  "_inCache": true,
-  "_installable": true,
-  "_location": "/rxjs",
-  "_nodeVersion": "5.0.0",
-  "_npmOperationalInternal": {
-    "host": "packages-12-west.internal.npmjs.com",
-    "tmp": "tmp/rxjs-5.0.0-beta.11.tgz_1470762149276_0.8274131978396326"
-  },
-  "_npmUser": {
-    "name": "blesh",
-    "email": "ben@benlesh.com"
-  },
-  "_npmVersion": "3.7.3",
-  "_phantomChildren": {},
-  "_requested": {
-    "raw": "rxjs@~5.0.0-beta.11",
-    "scope": null,
-    "escapedName": "rxjs",
-    "name": "rxjs",
-    "rawSpec": "~5.0.0-beta.11",
-    "spec": ">=5.0.0-beta.11 <5.1.0",
-    "type": "range"
-  },
-  "_requiredBy": [
-    "/"
-  ],
-  "_resolved": "https://registry.npmjs.org/rxjs/-/rxjs-5.0.0-beta.11.tgz",
-  "_shasum": "abac447d6f801c1bf066b7f0e49c65d2fee36ca2",
-  "_shrinkwrap": null,
-  "_spec": "rxjs@~5.0.0-beta.11",
-  "_where": "c:\\data\\knowledge_base\\dotNet\\Core\\projects\\DotNetCoreTestWebProject",
-  "author": {
-    "name": "Ben Lesh",
-    "email": "blesh@netflix.com"
-  },
-  "bugs": {
-    "url": "https://github.com/ReactiveX/RxJS/issues"
-  },
-  "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog"
-    },
-    "ghooks": {
-      "commit-msg": "node ./node_modules/validate-commit-msg/index.js",
-      "pre-commit": "npm run lint_staged"
-    }
-  },
   "contributors": [
     {
       "name": "Ben Lesh",
@@ -88,10 +25,10 @@
       "email": "andre@staltz.com"
     }
   ],
-  "dependencies": {
-    "symbol-observable": "^1.0.1"
+  "author": {
+    "name": "Ben Lesh",
+    "email": "blesh@netflix.com"
   },
-  "description": "Reactive Extensions for modern JavaScript",
   "devDependencies": {
     "babel-polyfill": "6.9.1",
     "benchmark": "^2.1.0",
@@ -142,51 +79,11 @@
     "webpack": "^1.13.1",
     "xmlhttprequest": "1.8.0"
   },
-  "directories": {},
-  "dist": {
-    "shasum": "abac447d6f801c1bf066b7f0e49c65d2fee36ca2",
-    "tarball": "https://registry.npmjs.org/rxjs/-/rxjs-5.0.0-beta.11.tgz"
-  },
-  "engines": {
-    "npm": ">=2.0.0"
-  },
-  "homepage": "https://github.com/ReactiveX/RxJS",
-  "keywords": [
-    "Rx",
-    "RxJS",
-    "ReactiveX",
-    "ReactiveExtensions",
-    "Streams",
-    "Observables",
-    "Observable",
-    "Stream",
-    "ES6",
-    "ES2015"
-  ],
-  "license": "Apache-2.0",
-  "lint-staged": {
-    "eslint": "*.@(js)",
-    "tslint": "*.@(ts)"
+  "typings": "Rx.d.ts",
+  "bugs": {
+    "url": "https://github.com/ReactiveX/RxJS/issues"
   },
   "main": "Rx.js",
-  "maintainers": [
-    {
-      "name": "blesh",
-      "email": "ben@benlesh.com"
-    },
-    {
-      "name": "jeffbcross",
-      "email": "middlefloor@gmail.com"
-    }
-  ],
-  "name": "rxjs",
-  "optionalDependencies": {},
-  "readme": "ERROR: No README data found!",
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/ReactiveX/RxJS.git"
-  },
-  "scripts": {},
   "scripts-info": {
     "info": "List available script",
     "build_all": "Build all packages(ES6, CJS, AMD, Global) and generate packages",
@@ -223,6 +120,75 @@
     "tests2png": "Generate marble diagram image from test spec",
     "watch": "Watch codebase, trigger compile when source code changes"
   },
-  "typings": "Rx.d.ts",
-  "version": "5.0.0-beta.11"
+  "name": "rxjs",
+  "engines": {
+    "npm": ">=2.0.0"
+  },
+  "version": "5.0.0-beta.11",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/ReactiveX/RxJS.git"
+  },
+  "description": "Reactive Extensions for modern JavaScript",
+  "homepage": "https://github.com/ReactiveX/RxJS",
+  "lint-staged": {
+    "eslint": "*.@(js)",
+    "tslint": "*.@(ts)"
+  },
+  "dependencies": {
+    "symbol-observable": "^1.0.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    },
+    "ghooks": {
+      "commit-msg": "node ./node_modules/validate-commit-msg/index.js",
+      "pre-commit": "npm run lint_staged"
+    }
+  },
+  "keywords": [
+    "Rx",
+    "RxJS",
+    "ReactiveX",
+    "ReactiveExtensions",
+    "Streams",
+    "Observables",
+    "Observable",
+    "Stream",
+    "ES6",
+    "ES2015"
+  ],
+  "license": "Apache-2.0",
+  "_id": "rxjs@5.0.0-beta.11",
+  "scripts": {},
+  "_shasum": "abac447d6f801c1bf066b7f0e49c65d2fee36ca2",
+  "_from": "rxjs@5.0.0-beta.11",
+  "_npmVersion": "3.7.3",
+  "_nodeVersion": "5.0.0",
+  "_npmUser": {
+    "name": "blesh",
+    "email": "ben@benlesh.com"
+  },
+  "dist": {
+    "shasum": "abac447d6f801c1bf066b7f0e49c65d2fee36ca2",
+    "tarball": "https://registry.npmjs.org/rxjs/-/rxjs-5.0.0-beta.11.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "blesh",
+      "email": "ben@benlesh.com"
+    },
+    {
+      "name": "jeffbcross",
+      "email": "middlefloor@gmail.com"
+    }
+  ],
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/rxjs-5.0.0-beta.11.tgz_1470762149276_0.8274131978396326"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/rxjs/-/rxjs-5.0.0-beta.11.tgz",
+  "readme": "ERROR: No README data found!"
 }
