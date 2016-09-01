@@ -6,11 +6,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using DotNetCoreTestWebProject.Data;
-using DotNetCoreTestWebProject.Data.Services;
-using DotNetCoreTestWebProject.Data.Repositories;
 using DotNetCoreTestWebProject.Services;
 using DotNetCoreTestWebProject.Models;
-
+using DotNetCoreTestWebProject.Business.Interfaces;
+using DotNetCoreTestWebProject.Business.Repositories;
+using DotNetCoreTestWebProject.Business;
 
 namespace DotNetCoreTestWebProject
 {
@@ -59,7 +59,7 @@ namespace DotNetCoreTestWebProject
             services.AddTransient<ISmsSender, AuthMessageSender>();
 
             services.AddScoped<IArtistsRepository, ArtistsRepository>();
-            services.AddScoped<IArtistEntityService, ArtistEntityService>();
+            services.AddScoped<IArtistEntityBusiness, ArtistEntityBusiness>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

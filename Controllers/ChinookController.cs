@@ -2,23 +2,24 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Core.Common.Data;
-using DotNetCoreTestWebProject.Data.Services;
 using DotNetCoreTestWebProject.Models;
 using DotNetCoreTestWebProject.EditModels;
 using DotNetCoreTestWebProject.ViewModels;
 using Microsoft.AspNetCore.Hosting;
+using DotNetCoreTestWebProject.Business.Interfaces;
+using Core.Common.Utilities;
 
 namespace DotNetCoreTestWebProject.Controllers
 {
 
     public class ChinookController : BaseController
     {
-        private readonly IArtistEntityService _artistService;
+        private readonly IArtistEntityBusiness _artistEntityBusiness;
 
         public ChinookController(
-            IArtistEntityService artistService, IHostingEnvironment hostingEnvironment)
+             IArtistEntityBusiness artistEntityBusiness, IHostingEnvironment hostingEnvironment)
         {
-            _artistService = artistService;
+            _artistEntityBusiness = artistEntityBusiness;
             base.hostingEnvironment = hostingEnvironment;
 
         }
@@ -27,56 +28,45 @@ namespace DotNetCoreTestWebProject.Controllers
             int? pageNumber, int? pageSize, string sortCol,
             string sortDir, string searchTerms)
         {
-
             return ExecuteExceptionsHandledActionResult(() =>
             {
-                int pageIndex = pageNumber ?? 1;
-                int sizeOfPage = pageSize ?? 10;
-                sortCol = sortCol ?? "Name";
-                sortDir = sortDir ?? "ASC";
+                OperationResult result = _artistEntityBusiness.ListItems(
+                pageNumber, pageSize, sortCol, sortDir, searchTerms);
 
-                int totalNumberOfRecords = 0;
-                int totalNumberOfPages = 0;
-                int offset = 0;
-                int offsetUpperBound = 0;
-                string[] keywordsList = !string.IsNullOrWhiteSpace(searchTerms) ? searchTerms.Split(',') : new string[] { };
-                IEnumerable<Artist> artists = _artistService.FindAllEntitiesByCriteria(
-                     pageIndex, sizeOfPage, out totalNumberOfRecords, sortCol, sortDir, out offset,
-                     out offsetUpperBound, out totalNumberOfPages, keywordsList);
-
-                ViewBag.offset = offset;
-                ViewBag.pageIndex = pageIndex;
-                ViewBag.sizeOfPage = sizeOfPage;
-                ViewBag.offsetUpperBound = offsetUpperBound;
-                ViewBag.totalRecords = totalNumberOfRecords;
-                ViewBag.totalNumberOfPages = totalNumberOfPages;
-                ViewBag.searchTerms = searchTerms;
-                ViewBag.sortCol = sortCol;
-                ViewBag.sortDir = sortDir;
+                ViewBag.offset = result.MessagesDictionary["offset"];
+                ViewBag.pageIndex = result.MessagesDictionary["pageIndex"];
+                ViewBag.sizeOfPage = result.MessagesDictionary["sizeOfPage"];
+                ViewBag.offsetUpperBound = result.MessagesDictionary["offsetUpperBound"];
+                ViewBag.totalRecords = result.MessagesDictionary["totalNumberOfRecords"];
+                ViewBag.totalNumberOfPages = result.MessagesDictionary["totalNumberOfPages"];
+                ViewBag.searchTerms = result.MessagesDictionary["searchTerms"];
+                ViewBag.sortCol = result.MessagesDictionary["sortCol"];
+                ViewBag.sortDir = result.MessagesDictionary["sortDir"];
 
                 var model = new ArtistViewModel();
-                model.ArtistsList = artists;
+                model.ArtistsList = result.MessagesDictionary["list"] as IEnumerable<Artist>;
 
                 return View(model);
             });
         }
 
-    public IActionResult EditArtist(int id)
+        public IActionResult EditArtist(int id)
         {
-            return  ExecuteExceptionsHandledActionResult( () =>
-            {
-                return View();
-            });
+            return ExecuteExceptionsHandledActionResult(() =>
+          {
+              return View();
+          });
         }
 
         public IActionResult AddArtist()
         {
-            return  ExecuteExceptionsHandledActionResult( () =>
-            {
-                return View();
-            });
+            return ExecuteExceptionsHandledActionResult(() =>
+          {
+              return View();
+          });
         }
 
+/*
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddArtist(ArtistEditModel model)
@@ -85,13 +75,17 @@ namespace DotNetCoreTestWebProject.Controllers
 
             return await ExecuteExceptionsHandledAsyncActionResult(async () =>
             {
-                var artist = new DotNetCoreTestWebProject.Models.Artist { 
-                    Name = model.Name , ObjectState = ObjectState.Added , Deleted = false };
+                var artist = new DotNetCoreTestWebProject.Models.Artist
+                {
+                    Name = model.Name,
+                    ObjectState = ObjectState.Added,
+                    Deleted = false
+                };
                 await _artistService.PersistEntity(artist);
                 return View(model);
             });
         }
-
+*/
         public IActionResult ArtistsAngular()
         {
             return View();

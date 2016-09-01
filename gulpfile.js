@@ -18,8 +18,8 @@ var paths = {
     css: webroot + "css/**/*.css",
     minCss: webroot + "css/**/*.min.css",
     concatJsDest: webroot + "js/site.min.js",
-    concatCssDest: webroot + "css/site.min.css",
-    angular2MinJs: webroot + "js/angular.app.min.js"
+    concatCssDest: webroot + "css/site.min.css"
+
 };
 
 gulp.task("clean:js", function (cb) {
@@ -59,18 +59,19 @@ gulp.task("ng2", function () {
     ]).pipe(gulp.dest(webroot + "lib/ng2/rxjs"))
 
 
- gulp.src([
+    gulp.src([
         nodeModulesDirectory + "es6-shim/es6-shim.min.js",
         nodeModulesDirectory + "systemjs/dist/system-polyfills.js",
         nodeModulesDirectory + "angular2/bundles/angular2-polyfills.min.js",
-        nodeModulesDirectory + "systemjs/dist/system.src.js",
-        nodeModulesDirectory + "rxjs/bundles/Rx.umd.min.js",
+        nodeModulesDirectory + "systemjs/dist/system.js",
+
+        // nodeModulesDirectory + "rxjs/bundles/Rx.umd.min.js",
         nodeModulesDirectory + "angular2/bundles/angular2.min.js",
         nodeModulesDirectory + "angular2/bundles/http.min.js",
         nodeModulesDirectory + "angular2/bundles/router.min.js"
     ]).pipe(uglify())
-    .pipe(concat(paths.angular2MinJs))
-    .pipe(gulp.dest("."));
+        .pipe(concat(webroot + "js/angular.app.min.js"))
+        .pipe(gulp.dest("."));
 
 
 
@@ -78,13 +79,13 @@ gulp.task("ng2", function () {
 
 gulp.task("tsTranspile", function () {
     gulp.src(['node_modules/angular2/typings/browser.d.ts',
-    webroot + "app/**/*.ts"])
+        webroot + "app/**/*.ts"])
         .pipe(tsc({
             noImplicitAny: false,
             noEmitOnError: true,
             removeComments: false,
             sourceMap: true,
-            target: "es5",   
+            target: "es5",
             emitDecoratorMetadata: true,
             experimentalDecorators: true,
             suppressImplicitAnyIndexErrors: true

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Common.Data.Models;
-using DotNetCoreTestWebProject.Data.Services;
+
 using DotNetCoreTestWebProject.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,6 +10,7 @@ namespace DotNetCoreTestWebProject.Controllers.Api
     [Route("api/[controller]")]
     public sealed class ArtistsController : BaseApiController
     {
+        /*
         private readonly IArtistEntityService _artistService;
 
         public ArtistsController(
@@ -64,5 +65,6 @@ namespace DotNetCoreTestWebProject.Controllers.Api
 
             return toReturn;
         }
+        */
     }
 }
